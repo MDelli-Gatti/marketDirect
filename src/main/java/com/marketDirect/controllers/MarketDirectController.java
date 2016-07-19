@@ -1,10 +1,51 @@
 package com.marketDirect.controllers;
 
+import com.marketDirect.entities.User;
+import com.marketDirect.services.ItemRepository;
+import com.marketDirect.services.UserRepository;
+import com.marketDirect.services.VendorRepository;
+import com.marketDirect.utilities.PasswordStorage;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 
 /**
  * Created by michaeldelli-gatti on 7/19/16.
  */
-@Controller
+@RestController
 public class MarketDirectController {
+    @Autowired
+    UserRepository users;
+
+    @Autowired
+    VendorRepository vendors;
+
+    @Autowired
+    ItemRepository items;
+
+    @RequestMapping(path = "/login", method = RequestMethod.POST)
+    public void login(HttpSession session, @RequestBody User user) throws Exception {
+        User userFromDb = users.findByUsername(user.getUsername());
+        if (userFromDb == null) {
+            user.setPassword(PasswordStorage.createHash(user.getPassword()));
+            users.save(user);
+        }
+        else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
+            throw new Exception("Incorrect password");
+        }
+        session.setAttribute("username", user.getUsername());
+    }
+
+    @RequestMapping(path = "/logout", method = RequestMethod.POST)
+    public void logout(HttpSession session, HttpServletResponse response) throws Exception {
+        session.invalidate();
+        response.sendRedirect("/");
+    }
 }
