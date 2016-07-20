@@ -63,8 +63,8 @@ public class MarketDirectController {
         response.sendRedirect("/");
     }
 
-    /*@RequestMapping(path = "/create-vendor", method = RequestMethod.POST)
-    public void createVendor(HttpSession session, MultipartFile file, String name, String description, String category, String price, Integer quantity) throws Exception {
+    @RequestMapping(path = "/create-vendor", method = RequestMethod.POST)
+    public void createVendor(HttpSession session, MultipartFile file, String name, String fileName, String phone, String email, String website, String location, String date) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -86,9 +86,10 @@ public class MarketDirectController {
         FileOutputStream fos = new FileOutputStream(uploadedFile);
         fos.write(file.getBytes());
 
+        Vendor vendor = new Vendor(name, fileName, phone, email, website, location, date);
+        vendors.save(vendor);
 
-
-    }*/
+    }
 
     @RequestMapping(path = "/create-item", method = RequestMethod.POST)
     public void createItem(HttpSession session, String category, MultipartFile file, String description, String price, int quantity) throws Exception {
