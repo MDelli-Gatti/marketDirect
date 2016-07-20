@@ -22,7 +22,6 @@ app.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'templates/explore.html',
     })
 
-
 }])
 
 //controllers
