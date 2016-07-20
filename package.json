@@ -1,0 +1,28 @@
+{
+  "name": "marketdirect",
+  "version": "1.0.0",
+  "description": "",
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MarketDirect/marketDirect.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MarketDirect/marketDirect/issues"
+  },
+  "homepage": "https://github.com/MarketDirect/marketDirect#readme",
+  "dependencies": {
+    "babel": "^6.5.2",
+    "browserify": "^13.0.1",
+    "gulp": "^3.9.1",
+    "gulp-sass": "^2.3.2",
+    "minify": "^2.0.11",
+    "sass": "^0.5.0",
+    "watch": "^0.19.1"
+  }
+}
