@@ -7,7 +7,7 @@ module.exports = function (app) {
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
             loginService.userLogin($scope.name, $scope.password);
-            $location.path('/explore');
+            // $location.path('/explore');
         };
     }]);
 }
@@ -52,13 +52,14 @@ module.exports = function(app) {
 
         return {
             userLogin: function(name, password) {
+              console.log("login might be working")
                 username = name;
                 return $http({
                     method: 'POST',
                     url: '/login',
                     data: {
-                        name: name,
-                        password: password,
+                        username: name,
+                        password: password
                     }
                 }).then(function(response) {
                     console.log('getting the response', response);
