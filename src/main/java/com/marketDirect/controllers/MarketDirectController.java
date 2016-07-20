@@ -40,7 +40,7 @@ public class MarketDirectController {
     ItemRepository items;
 
     @PostConstruct
-    public void init() throws SQLException, FileNotFoundException {
+    public void init() throws SQLException {
         Server.createWebServer().start();
     }
 
