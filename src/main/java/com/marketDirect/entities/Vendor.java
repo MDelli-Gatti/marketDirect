@@ -14,7 +14,7 @@ public class Vendor {
     int id;
 
     @Column
-    String creator;
+    String name;
 
     @Column
     String fileName;
@@ -34,8 +34,8 @@ public class Vendor {
     @Column
     String date;
 
-    public Vendor(String creator, String fileName, String phone, String email, String website, String location, String date) {
-        this.creator = creator;
+    public Vendor(String name, String fileName, String phone, String email, String website, String location, String date) {
+        this.name = name;
         this.fileName = fileName;
         this.phone = phone;
         this.email = email;
@@ -52,12 +52,12 @@ public class Vendor {
         this.id = id;
     }
 
-    public String getCreator() {
-        return creator;
+    public String getName() {
+        return name;
     }
 
-    public void setCreator(String creator) {
-        this.creator = creator;
+    public void setName(String creator) {
+        this.name = name;
     }
 
     public String getFileName() {
