@@ -15,23 +15,31 @@ public class Item {
     @Column(nullable = false)
     String name;
 
-    @Column
+    @Column(nullable = false)
     String description;
 
     @Column(nullable = false)
     String category;
 
-    @Column
+    @Column(nullable = false)
     String filename;
+
+    @Column(nullable = false)
+    String price;
+
+    @Column(nullable = false)
+    int quantity;
 
     @ManyToOne
     Vendor vendor;
 
-    public Item(String name, String description, String category, String filename, Vendor vendor) {
+    public Item(String name, String description, String category, String filename, String price, int quantity, Vendor vendor) {
         this.name = name;
         this.description = description;
         this.category = category;
         this.filename = filename;
+        this.price = price;
+        this.quantity = quantity;
         this.vendor = vendor;
     }
 
@@ -81,5 +89,21 @@ public class Item {
 
     public void setVendor(Vendor vendor) {
         this.vendor = vendor;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
