@@ -78,4 +78,54 @@ public class MarketDirectController {
         Item item = new Item(username, description, category, uploadedFile.getName(), price, quantity, vendor);
         items.save(item);
     }
+
+    @RequestMapping(path = "get-items", method = RequestMethod.GET)
+    public Iterable<Item> getItems(HttpSession session) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        return items.findAll();
+    }
+
+    @RequestMapping(path = "get-item", method = RequestMethod.GET)
+    public Item getItem(HttpSession session, int id) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        return items.findOne(id);
+    }
+
+    @RequestMapping(path = "delete-item", method = RequestMethod.POST)
+    public void deleteItem(HttpSession session, int id) throws Exception {
+        String username = (String) session.getAttribute("username");
+        Item item = items.findOne(id);
+        Vendor vendor = vendors.findByName(username);
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        else if (vendor != item.getVendor()){
+            throw new Exception("logged in user and item creator do not match");
+        }
+
+        items.delete(item);
+    }
 }
