@@ -78,4 +78,64 @@ public class MarketDirectController {
         Item item = new Item(username, description, category, uploadedFile.getName(), price, quantity, vendor);
         items.save(item);
     }
+
+    @RequestMapping(path = "edit-item", method = RequestMethod.POST)
+    public void editItem(int id, HttpSession session, MultipartFile file, String name, String description, String category, String price, Integer quantity) throws Exception {
+        Item item = items.findOne(id);
+
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        Vendor vendor = vendors.findByName(username);
+        if (vendor == null) {
+            throw new Exception("Vendor not in database!");
+        }
+        else if (vendor != item.getVendor()){
+            throw new Exception("Logged in vendor can not delete this!");
+        }
+
+        if (name != null) {
+            item.setName(name);
+        }
+
+        if (description != null) {
+            item.setDescription(description);
+        }
+
+        if (category != null) {
+            item.setCategory(category);
+        }
+
+        if (price != null) {
+            item.setPrice(price);
+        }
+
+        if (quantity != null) {
+            item.setQuantity(quantity);
+        }
+
+        if (file != null) {
+
+            if (!file.getContentType().contains("image")){
+                throw new Exception("Only images allowed!");
+            }
+
+            File f = new File("public/files/" + item.getFilename());
+            f.delete();
+
+            File dir = new File("public/files");
+            dir.mkdirs();
+
+            File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
+            FileOutputStream fos = new FileOutputStream(uploadedFile);
+            fos.write(file.getBytes());
+
+            item.setFilename(uploadedFile.getName());
+        }
+
+        items.save(item);
+
+    }
 }
