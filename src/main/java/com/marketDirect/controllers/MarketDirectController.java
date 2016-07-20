@@ -125,7 +125,8 @@ public class MarketDirectController {
         else if (vendor != item.getVendor()){
             throw new Exception("logged in user and item creator do not match");
         }
-
+        File f = new File("public/files/" + item.getFilename());
+        f.delete();
         items.delete(item);
     }
 }
