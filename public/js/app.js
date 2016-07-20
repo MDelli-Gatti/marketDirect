@@ -57,7 +57,7 @@ module.exports = function(app) {
                     method: 'POST',
                     url: '/login',
                     data: {
-                        name: name,
+                        username: name,
                         password: password,
                     }
                 }).then(function(response) {

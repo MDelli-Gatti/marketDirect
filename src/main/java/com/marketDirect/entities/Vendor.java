@@ -34,6 +34,9 @@ public class Vendor {
     @Column
     String date;
 
+    @ManyToOne
+    User user;
+
     public Vendor(String name, String fileName, String phone, String email, String website, String location, String date) {
         this.name = name;
         this.fileName = fileName;

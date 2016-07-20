@@ -21,6 +21,9 @@ public class User {
     @Column(nullable = false)
     boolean isVendor;
 
+    public User() {
+    }
+
     public User(String username, String password, boolean isVendor) {
         this.username = username;
         this.password = password;
