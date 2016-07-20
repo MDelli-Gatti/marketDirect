@@ -3,7 +3,6 @@
 var gulp = require('gulp');
 var sass = require('gulp-sass');
 var watch = require('gulp-watch');
-var babel = require('gulp-babel');
 var minify = require('gulp-minify');
 var browserify = require('gulp-browserify');
 
@@ -30,9 +29,6 @@ gulp.task('css', function(){
 //js
 gulp.task('js', function(){
   gulp.src('./js/app.js')
-   .pipe(babel({
-     presets:['es2015']
-   }))
    .pipe(browserify())
    .pipe(gulp.dest('./public/js'));
 });

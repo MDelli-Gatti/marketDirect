@@ -7,45 +7,62 @@ module.exports = function (app) {
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
             loginService.userLogin($scope.name, $scope.password);
-            // $location.path('/explore');
+            $location.path('/newuser');
         };
     }]);
 }
 
 },{}],2:[function(require,module,exports){
-'use strict';
+module.exports = function (app) {
+    app.controller('NewUserController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
-var app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
-angular.module('MarketControllers', []); // create empty module
-angular.module('MarketServices', []); // create empty module
+        //
+        // $scope.login = function () {
+        //     console.log(`${$scope.name} in as we speak`);
+        //     loginService.userLogin($scope.name, $scope.password);
+        //     $location.path('/newuser');
+        // };
+    }]);
+};
+
+},{}],3:[function(require,module,exports){
+let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
+angular.module('MarketControllers', []);       // create empty module
+angular.module('MarketServices', []);          // create empty module
 angular.module('MarketDirectives', []);
 
 app.config(['$routeProvider', function ($routeProvider) {
-  $routeProvider.when('/', {
-    controller: 'LoginController',
-    templateUrl: 'templates/login.html'
-  }).when('/login', {
-    controller: 'LoginController',
-    templateUrl: 'templates/login.html'
-  }).when('/newuser', {
-    controller: 'NewUserController',
-    templateUrl: 'templates/newuser.html'
-  }).when('/explore', {
-    controller: 'ExploreController',
-    templateUrl: 'templates/explore.html'
-  });
-}]);
+  $routeProvider
+    .when('/', {
+      controller: 'LoginController',
+      templateUrl: 'templates/login.html',
+    })
+    .when('/login', {
+      controller: 'LoginController',
+      templateUrl: 'templates/login.html',
+    })
+    .when('/newuser', {
+      controller: 'NewUserController',
+      templateUrl: 'templates/newuser.html',
+    })
+    .when('/explore', {
+      controller: 'ExploreController',
+      templateUrl: 'templates/explore.html',
+    })
+
+}])
 
 //controllers
 // require('./controllers/LibraryController.js')(app);
 require('./controllers/LoginController.js')(app);
-// require('./controllers/headerController.js')(app);
+require('./controllers/NewUserController.js')(app);
 // require('./controllers/playlistController.js')(app);
 
 // services
 // require('./services/libraryService.js')(app);
 require('./services/login.js')(app);
-},{"./controllers/LoginController.js":1,"./services/login.js":3}],3:[function(require,module,exports){
+
+},{"./controllers/LoginController.js":1,"./controllers/NewUserController.js":2,"./services/login.js":4}],4:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', ['$http', function($http) {
         let username = "";
@@ -59,11 +76,7 @@ module.exports = function(app) {
                     url: '/login',
                     data: {
                         username: name,
-<<<<<<< HEAD
                         password: password
-=======
-                        password: password,
->>>>>>> 8a4fd6f385f6ac685744415c654f8dbc597bea2d
                     }
                 }).then(function(response) {
                     console.log('getting the response', response);
@@ -78,4 +91,4 @@ module.exports = function(app) {
     }])
 }
 
-},{}]},{},[2])
+},{}]},{},[3])
