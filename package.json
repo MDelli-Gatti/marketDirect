@@ -24,5 +24,9 @@
     "minify": "^2.0.11",
     "sass": "^0.5.0",
     "watch": "^0.19.1"
+  },
+  "devDependencies": {
+    "gulp-minify": "0.0.13",
+    "gulp-watch": "^4.3.8"
   }
 }
