@@ -62,7 +62,7 @@ public class Vendor {
         return name;
     }
 
-    public void setName(String creator) {
+    public void setName(String name) {
         this.name = name;
     }
 
