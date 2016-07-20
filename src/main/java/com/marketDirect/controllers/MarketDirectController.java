@@ -224,6 +224,35 @@ public class MarketDirectController {
         }
 
         items.save(item);
+    }
 
+    @RequestMapping(path = "/get-vendors", method = RequestMethod.GET)
+    public Iterable<Vendor> getVendors(HttpSession session) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        return vendors.findAll();
+    }
+
+    @RequestMapping(path = "/get-vendor", method = RequestMethod.GET)
+    public Vendor getVendors(HttpSession session, int id) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        return vendors.findOne(id);
     }
 }
