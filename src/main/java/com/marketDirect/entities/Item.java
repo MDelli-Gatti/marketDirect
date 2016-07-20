@@ -33,6 +33,9 @@ public class Item {
     @ManyToOne
     Vendor vendor;
 
+    public Item() {
+    }
+
     public Item(String name, String description, String category, String filename, String price, int quantity, Vendor vendor) {
         this.name = name;
         this.description = description;

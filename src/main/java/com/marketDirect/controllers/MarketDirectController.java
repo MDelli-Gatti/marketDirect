@@ -91,11 +91,6 @@ public class MarketDirectController {
 
     }
 
-    @RequestMapping(path = "/get-vendor", method = RequestMethod.GET)
-    public Vendor getVendor(HttpSession session, int id) {
-        return vendors.findOne(id);
-    }
-
     @RequestMapping(path = "/create-item", method = RequestMethod.POST)
     public void createItem(HttpSession session, String category, MultipartFile file, String description, String price, int quantity) throws Exception {
         String username = (String) session.getAttribute("username");
@@ -247,7 +242,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/get-vendor", method = RequestMethod.GET)
-    public Vendor getVendors(HttpSession session, int id) throws Exception {
+    public Vendor getVendor(HttpSession session, int id) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
