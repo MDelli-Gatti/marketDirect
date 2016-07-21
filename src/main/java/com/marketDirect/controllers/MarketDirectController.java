@@ -48,13 +48,26 @@ public class MarketDirectController {
     public void login(HttpSession session, @RequestBody User user) throws Exception {
         User userFromDb = users.findByUsername(user.getUsername());
         if (userFromDb == null) {
-            user.setPassword(PasswordStorage.createHash(user.getPassword()));
-            users.save(user);
+            throw new Exception("User does not exist. Please create account.");
+//            user.setPassword(PasswordStorage.createHash(user.getPassword()));
+//            users.save(user);
         }
         else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
             throw new Exception("Incorrect password");
         }
         session.setAttribute("username", user.getUsername());
+    }
+
+    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
+    public void createUser(HttpSession session, @RequestBody User user) throws Exception {
+        User userFromDb = users.findByUsername(user.getUsername());
+        if (userFromDb == null){
+            user.setPassword(PasswordStorage.createHash(user.getPassword()));
+            users.save(user);
+        }
+        else {
+            throw new Exception("User already exists");
+        }
     }
 
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
@@ -330,5 +343,17 @@ public class MarketDirectController {
             items.delete(item);
         }
         vendors.delete(vendor);
+    }
+
+    @RequestMapping(path = "/search-item", method = RequestMethod.GET)
+    public Iterable<Item> searchItem(String search){
+        Iterable<Item> searchItems = items.findByNameLike("%" + search + "%");
+        return searchItems;
+    }
+
+    @RequestMapping(path = "/search-vendor", method = RequestMethod.GET)
+    public Iterable<Vendor> searchVendors(String search){
+        Iterable<Vendor> searchVendors = vendors.findByNameLike( "%" + search + "%");
+        return searchVendors;
     }
 }
