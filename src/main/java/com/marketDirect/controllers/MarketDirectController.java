@@ -48,13 +48,26 @@ public class MarketDirectController {
     public void login(HttpSession session, @RequestBody User user) throws Exception {
         User userFromDb = users.findByUsername(user.getUsername());
         if (userFromDb == null) {
-            user.setPassword(PasswordStorage.createHash(user.getPassword()));
-            users.save(user);
+            throw new Exception("User does not exist. Please create account.");
+//            user.setPassword(PasswordStorage.createHash(user.getPassword()));
+//            users.save(user);
         }
         else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
             throw new Exception("Incorrect password");
         }
         session.setAttribute("username", user.getUsername());
+    }
+
+    @RequestMapping(path = "/create-user", method = RequestMethod.POST)
+    public void createUser(HttpSession session, @RequestBody User user) throws Exception {
+        User userFromDb = users.findByUsername(user.getUsername());
+        if (userFromDb == null){
+            user.setPassword(PasswordStorage.createHash(user.getPassword()));
+            users.save(user);
+        }
+        else {
+            throw new Exception("User already exists");
+        }
     }
 
     @RequestMapping(path = "/logout", method = RequestMethod.POST)
@@ -88,7 +101,6 @@ public class MarketDirectController {
 
         Vendor vendor = new Vendor(name, fileName, phone, email, website, location, date);
         vendors.save(vendor);
-
     }
 
     @RequestMapping(path = "/create-item", method = RequestMethod.POST)
@@ -254,5 +266,94 @@ public class MarketDirectController {
         }
 
         return vendors.findOne(id);
+    }
+
+    @RequestMapping(path = "/edit-vendor", method = RequestMethod.POST)
+    public void editVendor(int id,HttpSession session, MultipartFile file, String name, String phone, String email, String website, String location, String date) throws Exception {
+        String username = (String) session.getAttribute("username");
+        Vendor vendor = vendors.findOne(id);
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("Username not in database!");
+        }
+
+        if (!file.getContentType().contains("image")){
+            throw new Exception("Only images allowed!");
+        }
+
+        if (name != null){
+            vendor.setName(name);
+        }
+
+        if(phone != null){
+            vendor.setPhone(phone);
+        }
+
+        if (email != null){
+            vendor.setEmail(email);
+        }
+
+        if (website != null){
+            vendor.setWebsite(website);
+        }
+
+        if (location != null){
+            vendor.setLocation(location);
+        }
+
+        if (date != null){
+            vendor.setDate(date);
+        }
+
+        if(file != null) {
+            File f = new File("public/files/" + vendor.getFileName());
+            f.delete();
+
+            File dir = new File("public/files");
+            dir.mkdirs();
+
+            File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
+            FileOutputStream fos = new FileOutputStream(uploadedFile);
+            fos.write(file.getBytes());
+
+            vendor.setFileName(uploadedFile.getName());
+        }
+        vendors.save(vendor);
+    }
+
+    @RequestMapping(path = "/delete-vendor", method = RequestMethod.POST)
+    public void deleteVendor(HttpSession session) throws Exception {
+        String username = (String) session.getAttribute("username");
+        Vendor vendor = vendors.findByName(username);
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        Iterable<Item> i = items.findByVendor(vendor);
+        for (Item item : i){
+            items.delete(item);
+        }
+        vendors.delete(vendor);
+    }
+
+    @RequestMapping(path = "/search-item", method = RequestMethod.GET)
+    public Iterable<Item> searchItem(String search){
+        Iterable<Item> searchItems = items.findByNameLike("%" + search + "%");
+        return searchItems;
+    }
+
+    @RequestMapping(path = "/search-vendor", method = RequestMethod.GET)
+    public Iterable<Vendor> searchVendors(String search){
+        Iterable<Vendor> searchVendors = vendors.findByNameLike( "%" + search + "%");
+        return searchVendors;
     }
 }
