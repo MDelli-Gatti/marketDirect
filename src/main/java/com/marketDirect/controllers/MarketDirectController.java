@@ -46,11 +46,12 @@ public class MarketDirectController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public void login(HttpSession session, @RequestBody User user) throws Exception {
+        if (user.getUsername() == "" || user.getPassword() == ""){
+            throw new Exception("name and password fields may not be blank");
+        }
         User userFromDb = users.findByUsername(user.getUsername());
         if (userFromDb == null) {
             throw new Exception("User does not exist. Please create account.");
-//            user.setPassword(PasswordStorage.createHash(user.getPassword()));
-//            users.save(user);
         }
         else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
             throw new Exception("Incorrect password");
@@ -60,6 +61,9 @@ public class MarketDirectController {
 
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
     public void createUser(HttpSession session, @RequestBody User user) throws Exception {
+        if (user.getUsername() == "" || user.getPassword() == ""){
+            throw new Exception("name and password fields may not be blank");
+        }
         User userFromDb = users.findByUsername(user.getUsername());
         if (userFromDb == null){
             user.setPassword(PasswordStorage.createHash(user.getPassword()));
@@ -347,13 +351,11 @@ public class MarketDirectController {
 
     @RequestMapping(path = "/search-item", method = RequestMethod.GET)
     public Iterable<Item> searchItem(String search){
-        Iterable<Item> searchItems = items.findByNameLike("%" + search + "%");
-        return searchItems;
+        return items.findByNameLike("%" + search + "%");
     }
 
     @RequestMapping(path = "/search-vendor", method = RequestMethod.GET)
     public Iterable<Vendor> searchVendors(String search){
-        Iterable<Vendor> searchVendors = vendors.findByNameLike( "%" + search + "%");
-        return searchVendors;
+        return vendors.findByNameLike( "%" + search + "%");
     }
 }
