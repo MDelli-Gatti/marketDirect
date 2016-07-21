@@ -9,4 +9,5 @@ import org.springframework.data.repository.CrudRepository;
  */
 public interface ItemRepository extends CrudRepository<Item, Integer> {
     Iterable<Item> findByVendor(Vendor vendor);
+    Iterable<Item> findByNameLike(String search);
 }
