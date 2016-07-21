@@ -1,11 +1,28 @@
 
+.has-form {
+  position: absolute;
+  top: 0;
+  left: 6rem; // adjust distance from left here
+  min-width: 14rem; // adjust width here
+
+  @media only screen and (max-width: 40em) {
+    min-width: 10rem;
+    top: 0.5rem;
+
+    .button {
+      height: 1.85rem;
+    }
+  }
+}
+
+
 //STYLING FOR PROFILE PAGES
 // .bump{
 //   margin-top: 50px;
 //   padding-right: 30px;
 //   padding-left:30px;
 // }
-// 
+//
 // .profile-card{
 //   padding-top: 15px;
 //   padding-bottom: 0px;
