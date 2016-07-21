@@ -59,11 +59,7 @@ module.exports = function(app) {
                     url: '/login',
                     data: {
                         username: name,
-<<<<<<< HEAD
                         password: password
-=======
-                        password: password,
->>>>>>> 8a4fd6f385f6ac685744415c654f8dbc597bea2d
                     }
                 }).then(function(response) {
                     console.log('getting the response', response);
