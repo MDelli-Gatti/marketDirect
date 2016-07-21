@@ -331,4 +331,16 @@ public class MarketDirectController {
         }
         vendors.delete(vendor);
     }
+
+    @RequestMapping(path = "/search-item", method = RequestMethod.GET)
+    public Iterable<Item> searchItem(String search){
+        Iterable<Item> searchItems = items.findByNameLike(search);
+        return searchItems;
+    }
+
+    @RequestMapping(path = "/search-vendor", method = RequestMethod.GET)
+    public Iterable<Vendor> searchVendors(String search){
+        Iterable<Vendor> searchVendors = vendors.findByNameLike(search);
+        return searchVendors;
+    }
 }
