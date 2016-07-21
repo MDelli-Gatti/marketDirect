@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html ng-app="MarketApp">
-  <head>
+
+<head>
     <meta charset="utf-8">
     <title>Market Direct</title>
     <link rel="normalize" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.1.1/normalize.css">
@@ -10,12 +11,14 @@
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.1/foundation.min.css">
     <script src="js/app.js"></script>
-  </head>
-  <body>
+</head>
 
-<h1>Market Direct!</h1>
+<!-- <body id = "blah"> -->
 
+
+<div ng-include="templates/nav.html"></div>
 <main ng-view></main>
 
-  </body>
+<!-- </body> -->
+
 </html>
