@@ -37,6 +37,9 @@ public class Vendor {
     @ManyToOne
     User user;
 
+    public Vendor() {
+    }
+
     public Vendor(String name, String fileName, String phone, String email, String website, String location, String date) {
         this.name = name;
         this.fileName = fileName;
@@ -59,7 +62,7 @@ public class Vendor {
         return name;
     }
 
-    public void setName(String creator) {
+    public void setName(String name) {
         this.name = name;
     }
 
