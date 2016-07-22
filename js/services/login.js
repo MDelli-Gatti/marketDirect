@@ -13,10 +13,6 @@ module.exports = function(app) {
                         username: name,
                         password: password
                     }
-                }).then(function(response) {
-                    console.log('getting the response', response);
-                    // username = name;
-                    console.log(username);
                 })
             },
             getUserName: function() {
