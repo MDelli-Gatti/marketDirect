@@ -23,6 +23,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -362,5 +364,53 @@ public class MarketDirectController {
     @RequestMapping(path = "/search-vendor", method = RequestMethod.GET)
     public Iterable<Vendor> searchVendors(String search){
         return vendors.findByNameLike( "%" + search + "%");
+    }
+
+    @RequestMapping(path = "add-shopping-list-item", method = RequestMethod.POST)
+    public void createShoppingList(HttpSession session, @RequestBody Item item) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        List<Item> sl = user.getShoppingList();
+        sl.add(item);
+        user.setShoppingList(sl);
+        users.save(user);
+    }
+
+    @RequestMapping(path = "remove-shopping-list-item", method = RequestMethod.POST)
+    public void removeShoppingListItem(HttpSession session, @RequestBody Item item) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        List<Item> sl = user.getShoppingList();
+        sl.remove(item);
+        user.setShoppingList(sl);
+        users.save(user);
+    }
+
+    @RequestMapping(path = "get-shopping-list", method = RequestMethod.GET)
+        public Iterable<Item> getShoppingList(HttpSession session) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        return user.getShoppingList();
     }
 }

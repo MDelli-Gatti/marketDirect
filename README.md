@@ -46,3 +46,12 @@ route = "GET" path = "search-item" data = "String search"
 Search By Vendor Name:
 route = "GET" path = "search-vendor" data = "String search"
 
+Add Shopping List Item:
+route = "POST" path = "add-shopping-list-item" data = Item object
+
+Remove Shopping List Item:
+route = "POST" path = "remove-shopping-list-item" data = Item object
+
+Get Shopping List
+route = "GET" path = "get-shopping-list"
+
