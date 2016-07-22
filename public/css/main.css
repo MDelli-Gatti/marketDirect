@@ -20,6 +20,9 @@ p {
   position: relative;
   bottom: -23%; }
 
+.blah {
+  color: red; }
+
 .exploreContainer {
   background-color: #E6E1E8;
   height: 1000px;
