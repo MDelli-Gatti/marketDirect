@@ -24,7 +24,10 @@ gulp.task('css', function(){
   gulp.src('./sass/main.scss')
    .pipe(sass())
    .pipe(gulp.dest('./public/css'));
+
 });
+
+
 
 //js
 gulp.task('js', function(){

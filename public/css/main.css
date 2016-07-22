@@ -57,3 +57,19 @@ body {
 
 .MainContainer {
   background-color: #B1CFCD; }
+.has-form {
+  position: absolute;
+  top: 0;
+  left: 6rem;
+  min-width: 14rem; }
+  @media only screen and (max-width: 40em) {
+    .has-form {
+      min-width: 10rem;
+      top: 0.5rem; }
+      .has-form .button {
+        height: 1.85rem; } }
+
+.actual-bar {
+  height: 4.8rem;
+  background-color: blue; }
+>>>>>>> 9035a025b1a2c253bc9bc128ce205d5a534a1927

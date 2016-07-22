@@ -46,11 +46,12 @@ public class MarketDirectController {
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public void login(HttpSession session, @RequestBody User user) throws Exception {
+        if (user.getUsername() == "" || user.getPassword() == ""){
+            throw new Exception("name and password fields may not be blank");
+        }
         User userFromDb = users.findByUsername(user.getUsername());
         if (userFromDb == null) {
             throw new Exception("User does not exist. Please create account.");
-//            user.setPassword(PasswordStorage.createHash(user.getPassword()));
-//            users.save(user);
         }
         else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
             throw new Exception("Incorrect password");
@@ -60,6 +61,9 @@ public class MarketDirectController {
 
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
     public void createUser(HttpSession session, @RequestBody User user) throws Exception {
+        if (user.getUsername() == "" || user.getPassword() == ""){
+            throw new Exception("name and password fields may not be blank");
+        }
         User userFromDb = users.findByUsername(user.getUsername());
         if (userFromDb == null){
             user.setPassword(PasswordStorage.createHash(user.getPassword()));
@@ -77,7 +81,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/create-vendor", method = RequestMethod.POST)
-    public void createVendor(HttpSession session, MultipartFile file, String name, String fileName, String phone, String email, String website, String location, String date) throws Exception {
+    public void createVendor(HttpSession session, MultipartFile file, String name, String phone, String email, String website, String location, String date) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -99,7 +103,7 @@ public class MarketDirectController {
         FileOutputStream fos = new FileOutputStream(uploadedFile);
         fos.write(file.getBytes());
 
-        Vendor vendor = new Vendor(name, fileName, phone, email, website, location, date);
+        Vendor vendor = new Vendor(name, uploadedFile.getName(), phone, email, website, location, date);
         vendors.save(vendor);
     }
 
@@ -156,6 +160,11 @@ public class MarketDirectController {
         }
 
         return items.findOne(id);
+    }
+
+    @RequestMapping(path = "/items-by-category", method = RequestMethod.GET)
+    public Iterable<Item> itemsByCategory(String category){
+        return items.findByCategory(category);
     }
 
     @RequestMapping(path = "/delete-item", method = RequestMethod.POST)
@@ -326,9 +335,9 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/delete-vendor", method = RequestMethod.POST)
-    public void deleteVendor(HttpSession session) throws Exception {
+    public void deleteVendor(HttpSession session, int id) throws Exception {
         String username = (String) session.getAttribute("username");
-        Vendor vendor = vendors.findByName(username);
+        Vendor vendor = vendors.findOne(id);
         if (username == null) {
             throw new Exception("Not logged in!");
         }
@@ -347,13 +356,11 @@ public class MarketDirectController {
 
     @RequestMapping(path = "/search-item", method = RequestMethod.GET)
     public Iterable<Item> searchItem(String search){
-        Iterable<Item> searchItems = items.findByNameLike("%" + search + "%");
-        return searchItems;
+        return items.findByNameLike("%" + search + "%");
     }
 
     @RequestMapping(path = "/search-vendor", method = RequestMethod.GET)
     public Iterable<Vendor> searchVendors(String search){
-        Iterable<Vendor> searchVendors = vendors.findByNameLike( "%" + search + "%");
-        return searchVendors;
+        return vendors.findByNameLike( "%" + search + "%");
     }
 }
