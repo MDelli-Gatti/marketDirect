@@ -47,18 +47,21 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
-    public void login(HttpSession session, @RequestBody User user) throws Exception {
+    public void login(HttpSession session, @RequestBody User user, HttpServletResponse response) throws Exception {
         if (user.getUsername() == "" || user.getPassword() == ""){
             throw new Exception("name and password fields may not be blank");
         }
         User userFromDb = users.findByUsername(user.getUsername());
         if (userFromDb == null) {
+            response.sendRedirect("/#/login");
             throw new Exception("User does not exist. Please create account.");
+
         }
         else if (!PasswordStorage.verifyPassword(user.getPassword(), userFromDb.getPassword())) {
             throw new Exception("Incorrect password");
         }
         session.setAttribute("username", user.getUsername());
+        response.sendRedirect("/#/explore");
     }
 
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
