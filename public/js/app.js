@@ -14,14 +14,16 @@ module.exports = function (app) {
 
 },{}],2:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('NewUserController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+    app.controller('NewUserController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
+      $scope.name = '';
+      $scope.password = '';
 
-        //
-        // $scope.login = function () {
-        //     console.log(`${$scope.name} in as we speak`);
-        //     loginService.userLogin($scope.name, $scope.password);
-        //     $location.path('/newuser');
-        // };
+      $scope.createUser = function () {
+          console.log(`${$scope.name} is a new user`);
+          newUserService.userLogin($scope.name, $scope.password);
+          $location.path('/explore');
+      };
+
     }]);
 };
 
@@ -77,8 +79,9 @@ require('./controllers/NewUserController.js')(app);
 // services
 // require('./services/libraryService.js')(app);
 require('./services/login.js')(app);
+require('./services/newUser.js')(app);
 
-},{"./controllers/LoginController.js":1,"./controllers/NewUserController.js":2,"./services/login.js":4}],4:[function(require,module,exports){
+},{"./controllers/LoginController.js":1,"./controllers/NewUserController.js":2,"./services/login.js":4,"./services/newUser.js":5}],4:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', ['$http', function($http) {
         let username = "";
@@ -90,6 +93,31 @@ module.exports = function(app) {
                 return $http({
                     method: 'POST',
                     url: '/login',
+                    data: {
+                        username: name,
+                        password: password
+                    }
+                })
+            },
+            getUserName: function() {
+                return username;
+            },
+        }
+    }])
+}
+
+},{}],5:[function(require,module,exports){
+module.exports = function(app) {
+    app.factory('newUserService', ['$http', function($http) {
+        let username = "";
+
+        return {
+            userLogin: function(name, password) {
+              console.log("login might be working")
+                username = name;
+                return $http({
+                    method: 'POST',
+                    url: '/create-user',
                     data: {
                         username: name,
                         password: password
