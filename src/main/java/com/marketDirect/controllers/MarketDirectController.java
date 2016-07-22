@@ -81,7 +81,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/create-vendor", method = RequestMethod.POST)
-    public void createVendor(HttpSession session, MultipartFile file, String name, String fileName, String phone, String email, String website, String location, String date) throws Exception {
+    public void createVendor(HttpSession session, MultipartFile file, String name, String phone, String email, String website, String location, String date) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -103,7 +103,7 @@ public class MarketDirectController {
         FileOutputStream fos = new FileOutputStream(uploadedFile);
         fos.write(file.getBytes());
 
-        Vendor vendor = new Vendor(name, fileName, phone, email, website, location, date);
+        Vendor vendor = new Vendor(name, uploadedFile.getName(), phone, email, website, location, date);
         vendors.save(vendor);
     }
 
@@ -160,6 +160,11 @@ public class MarketDirectController {
         }
 
         return items.findOne(id);
+    }
+
+    @RequestMapping(path = "/items-by-category", method = RequestMethod.GET)
+    public Iterable<Item> itemsByCategory(String category){
+        return items.findByCategory(category);
     }
 
     @RequestMapping(path = "/delete-item", method = RequestMethod.POST)
@@ -330,9 +335,9 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/delete-vendor", method = RequestMethod.POST)
-    public void deleteVendor(HttpSession session) throws Exception {
+    public void deleteVendor(HttpSession session, int id) throws Exception {
         String username = (String) session.getAttribute("username");
-        Vendor vendor = vendors.findByName(username);
+        Vendor vendor = vendors.findOne(id);
         if (username == null) {
             throw new Exception("Not logged in!");
         }
