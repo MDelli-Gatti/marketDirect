@@ -8,7 +8,7 @@ var browserify = require('gulp-browserify');
 
 
 //Specify Dependencies
-gulp.task('default', ['html', 'css', 'js', 'vendor']);
+gulp.task('default', ['html', 'css', 'js','images', 'vendor']);
 
 //html
 gulp.task('html', function(){
@@ -31,6 +31,12 @@ gulp.task('js', function(){
   gulp.src('./js/app.js')
    .pipe(browserify())
    .pipe(gulp.dest('./public/js'));
+});
+
+gulp.task('images', function(){
+  gulp.src('./images')
+  gulp.src('./images/*.jpg')
+   .pipe(gulp.dest('./public/images'));
 });
 
 

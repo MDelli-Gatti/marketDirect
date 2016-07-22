@@ -1,0 +1,59 @@
+.LoginContainer {
+  background-image: url("../images/green-crop.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 670px; }
+
+p {
+  font-family: 'Lato', sans-serif;
+  color: white; }
+
+.text-center {
+  font-family: 'Lato', sans-serif;
+  color: white; }
+
+.forgetPassword {
+  font-family: 'Lato', sans-serif;
+  color: white; }
+
+#loginBox {
+  position: relative;
+  bottom: -23%; }
+
+.exploreContainer {
+  background-color: #E6E1E8;
+  height: 1000px;
+  margin: 0px;
+  text-align: center; }
+
+body {
+  background-color: #B1CFCD; }
+
+.produce {
+  width: 35%;
+  border: 2px solid black;
+  height: 300px;
+  display: inline-block; }
+
+.handcrafted {
+  width: 35%;
+  border: 2px solid black;
+  height: 300px;
+  display: inline-block;
+  margin-left: 66px; }
+
+.art {
+  width: 35%;
+  border: 2px solid black;
+  height: 300px;
+  display: inline-block; }
+
+.misc {
+  width: 35%;
+  border: 2px solid black;
+  height: 300px;
+  display: inline-block;
+  margin-left: 66px; }
+
+.MainContainer {
+  background-color: #B1CFCD; }
