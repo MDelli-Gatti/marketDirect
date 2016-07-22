@@ -6,8 +6,23 @@ module.exports = function (app) {
 
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
-            loginService.userLogin($scope.name, $scope.password);
-            $location.path('/explore');
+            loginService.userLogin($scope.name, $scope.password)
+            .then(function(response) {
+              
+                console.log('getting the response', response);
+                // username = name;
+                console.log(username);
+            });
+            // $location.path('/explore');
+            // if {
+            //   $scope.name = username
+            // }
+            // .then {
+            //   location.path('/explore');
+            // }
+            // else {
+            //   console.popup("IMPOSTOR")
+            // }
         };
     }]);
 }
@@ -81,10 +96,6 @@ module.exports = function(app) {
                         username: name,
                         password: password
                     }
-                }).then(function(response) {
-                    console.log('getting the response', response);
-                    // username = name;
-                    console.log(username);
                 })
             },
             getUserName: function() {
