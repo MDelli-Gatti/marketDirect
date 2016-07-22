@@ -1,36 +1,32 @@
-.exploreContainer{
-  background-color: #E6E1E8;
-  height: 1000px;
-        margin: 0px;
-        text-align: center;
-}
-body{
-  background-color: #B1CFCD;
-}
-.produce{
-  width: 35%;
-  border: 2px solid black;
-  height: 300px;
-display: inline-block;
-}
-.handcrafted{
-  width: 35%;
-  border: 2px solid black;
-  height: 300px;
-  display: inline-block;
-      margin-left: 66px;
-}
-.art{
-  width: 35%;
-  border: 2px solid black;
-  height: 300px;
-  display: inline-block;
 
-}
-.misc{
-  width: 35%;
+#artContainer{
   border: 2px solid black;
-  height: 300px;
+  width: 30%;
+  // float: left;
   display: inline-block;
-    margin-left: 66px;
+  margin: auto;
+}
+
+#produceContainer{
+  width: 30%;
+  // float: right;
+  display: inline-block;
+  border: 2px solid black;
+}
+#craftContainer{
+  width: 30%;
+  // float: right;
+  display: inline-block;
+  border: 2px solid black;
+}
+#miscContainer{
+  width: 30%;
+  // float: right;
+  display: inline-block;
+  border: 2px solid black;
+}
+
+.large-6{
+  display: inline-block;
+  margin: auto;
 }

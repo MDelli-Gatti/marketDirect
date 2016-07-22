@@ -39,6 +39,7 @@ gulp.task('js', function(){
 gulp.task('images', function(){
   gulp.src('./images')
   gulp.src('./images/*.jpg')
+  gulp.src('./images/*.svg')
    .pipe(gulp.dest('./public/images'));
 });
 
