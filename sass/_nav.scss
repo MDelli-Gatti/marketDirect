@@ -1,10 +1,5 @@
-// #blah{
-//   background-color: blue;
-// }
-//
 
 .has-form {
-  background-color: blue;
   position: absolute;
   top: 0;
   left: 6rem; // adjust distance from left here
@@ -18,4 +13,8 @@
       height: 1.85rem;
     }
   }
+}
+.actual-bar {
+  height: 4.8rem;
+  background-color: blue;
 }

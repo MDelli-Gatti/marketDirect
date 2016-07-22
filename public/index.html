@@ -9,16 +9,17 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.7/angular-route.js"></script>
     <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.1/foundation.min.css">
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/foundation/6.2.3/foundation.min.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.3/css/foundation.min.css">
     <script src="js/app.js"></script>
 </head>
 
-<!-- <body id = "blah"> -->
+<body>
 
+    <div ng-include src="'templates/nav.html'"></div>
 
-<div ng-include="templates/nav.html"></div>
-<main ng-view></main>
+    <main ng-view></main>
 
-<!-- </body> -->
+</body>
 
 </html>
