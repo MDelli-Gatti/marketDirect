@@ -20,6 +20,9 @@ p {
   position: relative;
   bottom: -23%; }
 
+.blah {
+  color: red; }
+
 .exploreContainer {
   background-color: #E6E1E8;
   height: 1000px;
@@ -57,6 +60,7 @@ body {
 
 .MainContainer {
   background-color: #B1CFCD; }
+
 .has-form {
   position: absolute;
   top: 0;
@@ -68,8 +72,3 @@ body {
       top: 0.5rem; }
       .has-form .button {
         height: 1.85rem; } }
-
-.actual-bar {
-  height: 4.8rem;
-  background-color: blue; }
->>>>>>> 9035a025b1a2c253bc9bc128ce205d5a534a1927

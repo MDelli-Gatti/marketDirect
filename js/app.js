@@ -33,3 +33,4 @@ require('./controllers/NewUserController.js')(app);
 // services
 // require('./services/libraryService.js')(app);
 require('./services/login.js')(app);
+require('./services/newUser.js')(app);
