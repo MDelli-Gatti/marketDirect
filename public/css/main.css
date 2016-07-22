@@ -1,5 +1,63 @@
+.LoginContainer {
+  background-image: url("../images/green-crop.jpg");
+  background-repeat: no-repeat;
+  background-size: 100%;
+  height: 670px; }
+
+p {
+  font-family: 'Lato', sans-serif;
+  color: white; }
+
+.text-center {
+  font-family: 'Lato', sans-serif;
+  color: white; }
+
+.forgetPassword {
+  font-family: 'Lato', sans-serif;
+  color: white; }
+
+#loginBox {
+  position: relative;
+  bottom: -23%; }
+
+.exploreContainer {
+  background-color: #E6E1E8;
+  height: 1000px;
+  margin: 0px;
+  text-align: center; }
+
+body {
+  background-color: #B1CFCD; }
+
+.produce {
+  width: 35%;
+  border: 2px solid black;
+  height: 300px;
+  display: inline-block; }
+
+.handcrafted {
+  width: 35%;
+  border: 2px solid black;
+  height: 300px;
+  display: inline-block;
+  margin-left: 66px; }
+
+.art {
+  width: 35%;
+  border: 2px solid black;
+  height: 300px;
+  display: inline-block; }
+
+.misc {
+  width: 35%;
+  border: 2px solid black;
+  height: 300px;
+  display: inline-block;
+  margin-left: 66px; }
+
+.MainContainer {
+  background-color: #B1CFCD; }
 .has-form {
-  background-color: blue;
   position: absolute;
   top: 0;
   left: 6rem;
@@ -10,3 +68,8 @@
       top: 0.5rem; }
       .has-form .button {
         height: 1.85rem; } }
+
+.actual-bar {
+  height: 4.8rem;
+  background-color: blue; }
+>>>>>>> 9035a025b1a2c253bc9bc128ce205d5a534a1927
