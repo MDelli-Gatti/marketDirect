@@ -24,6 +24,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -365,7 +366,7 @@ public class MarketDirectController {
         return vendors.findByNameLike( "%" + search + "%");
     }
 
-    @RequestMapping(path = "create-shopping-list", method = RequestMethod.POST)
+    @RequestMapping(path = "add-shopping-list-item", method = RequestMethod.POST)
     public void createShoppingList(HttpSession session, @RequestBody Item item) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -376,7 +377,7 @@ public class MarketDirectController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
-        ArrayList<Item> sl = user.getShoppingList();
+        List<Item> sl = user.getShoppingList();
         sl.add(item);
         user.setShoppingList(sl);
         users.save(user);
@@ -393,7 +394,7 @@ public class MarketDirectController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
-        ArrayList<Item> sl = user.getShoppingList();
+        List<Item> sl = user.getShoppingList();
         sl.remove(item);
         user.setShoppingList(sl);
         users.save(user);
