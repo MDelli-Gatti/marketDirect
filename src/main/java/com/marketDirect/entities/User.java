@@ -1,6 +1,8 @@
 package com.marketDirect.entities;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by michaeldelli-gatti on 7/19/16.
@@ -20,6 +22,10 @@ public class User {
 
     @Column(nullable = false)
     boolean isVendor;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "shopping_list", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "item_id"))
+    List<Item> shoppingList;
 
     public User() {
     }
@@ -60,5 +66,13 @@ public class User {
 
     public void setVendor(boolean vendor) {
         isVendor = vendor;
+    }
+
+    public List<Item> getShoppingList() {
+        return shoppingList;
+    }
+
+    public void setShoppingList(List<Item> shoppingList) {
+        this.shoppingList = shoppingList;
     }
 }

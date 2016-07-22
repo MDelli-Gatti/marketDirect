@@ -33,6 +33,7 @@ public class Item {
     @ManyToOne
     Vendor vendor;
 
+
     public Item() {
     }
 
