@@ -67,6 +67,14 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'MiscController',
       templateUrl: 'templates/misc.html',
     })
+    .when('/inventory', {
+      controller: 'InventoryController',
+      templateUrl: 'templates/inventory.html',
+    })
+    .when('/shoppinglist', {
+      controller: 'InventoryController',
+      templateUrl: 'templates/inventory.html',
+    })
 
 }])
 
