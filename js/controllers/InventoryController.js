@@ -1,5 +1,5 @@
 module.exports = function (app) {
-    app.controller('ShoppinglisteController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+    app.controller('InventoryController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
 
         // $scope.login = function () {

@@ -18,7 +18,7 @@ p {
 
 #loginBox {
   position: relative;
-  bottom: 4%; }
+  bottom: -2%; }
 
 .logo {
   width: 300px;
@@ -66,3 +66,9 @@ p {
       top: 0.5rem; }
       .has-form .button {
         height: 1.85rem; } }
+
+#icon {
+  width: 78px;
+  position: relative;
+  right: -127%;
+  top: -15px; }
