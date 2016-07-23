@@ -51,6 +51,22 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ExploreController',
       templateUrl: 'templates/explore.html',
     })
+    .when('/art', {
+      controller: 'ArtController',
+      templateUrl: 'templates/art.html',
+    })
+    .when('/produce', {
+      controller: 'ProduceController',
+      templateUrl: 'templates/produce.html',
+    })
+    .when('/handCrafted', {
+      controller: 'CraftedController',
+      templateUrl: 'templates/handCrafted.html',
+    })
+    .when('/misc', {
+      controller: 'MiscController',
+      templateUrl: 'templates/misc.html',
+    })
 
 }])
 
