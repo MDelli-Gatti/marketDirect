@@ -13,6 +13,10 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'LoginController',
       templateUrl: 'templates/login.html',
     })
+    .when('/profile', {
+      controller: 'ProfileController',
+      templateUrl: 'templates/profile.html',
+    })
     .when('/newuser', {
       controller: 'NewUserController',
       templateUrl: 'templates/newuser.html',
@@ -47,6 +51,27 @@ app.config(['$routeProvider', function ($routeProvider) {
     })
 
 }])
+
+document.getElementById('getval').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("getval").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
+
+
+
+
+
+
+
+
 
 //controllers
 // require('./controllers/LibraryController.js')(app);
