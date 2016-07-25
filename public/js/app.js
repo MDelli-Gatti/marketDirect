@@ -108,24 +108,14 @@ module.exports = function (app) {
 };
 
 },{}],10:[function(require,module,exports){
-let nugget = angular.module('MarketControllers');
 
-nugget.controller('AvailableController', ['$scope', 'ShoppingListService', function ($scope, ShoppingListService) {
-    // Get some booooooookie crisp
-    $scope.slItems = ShoppingListService.getSLItems();
-}]);
+module.exports = function (app) {
+    app.controller('ShoppinglistController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
-// module.exports = function (app) {
-//     app.controller('ShoppinglisteController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
-//
-//
-//         // $scope.login = function () {
-//         //     console.log(`${$scope.name} in as we speak`);
-//         //     loginService.userLogin($scope.name, $scope.password);
-//         //     $location.path('/explore');
-//         // };
-//     }]);
-// }
+
+
+    }]);
+}
 
 },{}],11:[function(require,module,exports){
 let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
@@ -214,21 +204,10 @@ require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
 require('./controllers/MiscController.js')(app);
 // require('./controllers/VideoController.js')(app);
-<<<<<<< HEAD
-=======
-
-
-
-
-// require('./controllers/playlistController.js')(app);
-
->>>>>>> a6449cd6266bae041cab376d60b4f3a4cb832b69
 // services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
-require('./services/shoppinglist.js')(app);
 
-<<<<<<< HEAD
 
 
 document.getElementById('getval').addEventListener('change', readURL, true);
@@ -243,11 +222,9 @@ function readURL(){
     }else{
     }
 }
+require('./services/shoppinglist.js')(app);
 
-},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13}],12:[function(require,module,exports){
-=======
 },{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
->>>>>>> a6449cd6266bae041cab376d60b4f3a4cb832b69
 module.exports = function(app) {
     app.factory('loginService', ['$http', function($http) {
         let username = "";
@@ -301,8 +278,6 @@ module.exports = function(app) {
     }])
 }
 
-<<<<<<< HEAD
-=======
 },{}],14:[function(require,module,exports){
 let current = angular.module('MarketServices');
 
@@ -335,5 +310,4 @@ current.factory('ShoppingListService', ['$http', function ($http) {
 
 // testing
 
->>>>>>> a6449cd6266bae041cab376d60b4f3a4cb832b69
 },{}]},{},[11])
