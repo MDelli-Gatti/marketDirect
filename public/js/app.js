@@ -58,6 +58,15 @@ module.exports = function (app) {
 
 },{}],6:[function(require,module,exports){
 module.exports = function (app) {
+    app.controller('MiscController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+
+
+
+    }]);
+}
+
+},{}],7:[function(require,module,exports){
+module.exports = function (app) {
     app.controller('NewUserController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
       $scope.name = '';
       $scope.password = '';
@@ -71,7 +80,7 @@ module.exports = function (app) {
     }]);
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ProduceController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
@@ -80,7 +89,7 @@ module.exports = function (app) {
     }]);
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
       $scope.name = '';
@@ -95,7 +104,7 @@ module.exports = function (app) {
     }]);
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ShoppinglisteController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
@@ -108,7 +117,7 @@ module.exports = function (app) {
     }]);
 }
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
@@ -181,26 +190,6 @@ function onSignIn(googleUser) {
      var id_token = googleUser.getAuthResponse().id_token;
      console.log("ID Token: " + id_token);
    };
-// document.getElementById('getval').addEventListener('change', readURL, true);
-// function readURL(){
-//     var file = document.getElementById("getval").files[0];
-//     var reader = new FileReader();
-//     reader.onloadend = function(){
-//         document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
-//     }
-//     if(file){
-//         reader.readAsDataURL(file);
-//     }else{
-//     }
-// }
-
-
-
-
-
-
-
-
 
 //controllers
 // require('./controllers/LibraryController.js')(app);
@@ -213,21 +202,28 @@ require('./controllers/ShoppinglistController.js')(app);
 require('./controllers/ProfileController.js')(app);
 require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
-
-
-
-
-
-
-
-// require('./controllers/playlistController.js')(app);
-
+require('./controllers/MiscController.js')(app);
+// require('./controllers/VideoController.js')(app);
 // services
-// require('./services/libraryService.js')(app);
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
 
-},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/NewUserController.js":6,"./controllers/ProduceController.js":7,"./controllers/ProfileController.js":8,"./controllers/ShoppinglistController.js":9,"./services/login.js":11,"./services/newUser.js":12}],11:[function(require,module,exports){
+
+
+document.getElementById('getval').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("getval").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
+
+},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13}],12:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', ['$http', function($http) {
         let username = "";
@@ -252,7 +248,7 @@ module.exports = function(app) {
     }])
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('newUserService', ['$http', function($http) {
         let username = "";
@@ -281,4 +277,4 @@ module.exports = function(app) {
     }])
 }
 
-},{}]},{},[10])
+},{}]},{},[11])
