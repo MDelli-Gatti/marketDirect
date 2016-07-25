@@ -46,7 +46,7 @@ app.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'templates/inventory.html',
     })
     .when('/shoppinglist', {
-      controller: 'InventoryController',
+      controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
 
@@ -87,7 +87,7 @@ require('./controllers/MiscController.js')(app);
 // services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
-// require('./services/shoppinglist.js')(app);
+require('./services/shoppinglist.js')(app);
 
 
 

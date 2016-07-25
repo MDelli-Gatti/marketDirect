@@ -1,13 +1,13 @@
-let current = angular.module('MarketServices');
+let current = angular.module('MarketApp');
 
-current.factory('ShoppingListService', ['$http', function ($http) {
+current.factory('ShoppinglistService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
         /* GET request for book list */
         getSLItems: function () {
             $http({
-                method: 'get',
+                method: 'GET',
                 url: 'get-items'
             }).then(function (response) {
                 console.log(response);

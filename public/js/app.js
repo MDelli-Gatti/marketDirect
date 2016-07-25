@@ -73,8 +73,9 @@ module.exports = function (app) {
 
       $scope.createUser = function () {
           console.log(`${$scope.name} is a new user`);
-          newUserService.userLogin($scope.name, $scope.password);
-          $location.path('/explore');
+          newUserService.userLogin($scope.name, $scope.password, "/explore");
+          alert ("Thanks for creating an account")
+          // $location.path('/explore');
       };
 
     }]);
@@ -109,16 +110,14 @@ module.exports = function (app) {
 
 },{}],10:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppingListService', function ($scope, $http, $location,ShoppingListService) {
-      $scope.ShopItems = ShoppingListService.getSLItems();
-
-
-
+    app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppinglistService', function ($scope, $http, $location, ShoppinglistService) {
+  console.log("hey bro whats up?")
+      $scope.ShopItems = ShoppinglistService.getSLItems();
     }]);
 }
 
 },{}],11:[function(require,module,exports){
-let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives','ShoppingListService']);
+let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
 angular.module('MarketDirectives', []);
@@ -166,7 +165,7 @@ app.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'templates/inventory.html',
     })
     .when('/shoppinglist', {
-      controller: 'InventoryController',
+      controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
 
@@ -207,7 +206,7 @@ require('./controllers/MiscController.js')(app);
 // services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
-// require('./services/shoppinglist.js')(app);
+require('./services/shoppinglist.js')(app);
 
 
 
@@ -261,44 +260,49 @@ module.exports = function(app) {
 
 },{}],13:[function(require,module,exports){
 module.exports = function(app) {
-    app.factory('newUserService', ['$http', function($http) {
+    app.factory('newUserService', function($http, $location) {
         let username = "";
 
         return {
-            userLogin: function(name, password) {
-              console.log("login might be working")
+            userLogin: function(name, password, url, scope) {
+              console.log("newuser might be working with", name, password, url);
+              console.log($location)
                 username = name;
-                return $http({
+                 $http({
                     method: 'POST',
                     url: '/create-user',
                     data: {
                         username: name,
                         password: password
                     }
-                }).then(function(response) {
-                    console.log('getting the response', response);
-                    // username = name;
-                    console.log(username);
                 })
+                .success(function (response) {
+                  console.log(response);
+                  $location.path(url);
+                  return;
+                })
+                // .error (function (){
+                //   alert("user does not exist!");
+                // })
             },
             getUserName: function() {
                 return username;
             },
         }
-    }])
+    })
 }
 
 },{}],14:[function(require,module,exports){
-let current = angular.module('MarketServices');
+let current = angular.module('MarketApp');
 
-current.factory('ShoppingListService', ['$http', function ($http) {
+current.factory('ShoppinglistService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
         /* GET request for book list */
         getSLItems: function () {
             $http({
-                method: 'get',
+                method: 'GET',
                 url: 'get-items'
             }).then(function (response) {
                 console.log(response);
