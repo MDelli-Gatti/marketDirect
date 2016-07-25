@@ -74,7 +74,7 @@ function onSignIn(googleUser) {
 //controllers
 // require('./controllers/LibraryController.js')(app);
 require('./controllers/LoginController.js')(app);
-require('./controllers/NewUserController.js')(app);
+require('./controllers/NewuserController.js')(app);
 require('./controllers/ExploreController.js')(app);
 require('./controllers/CraftedController.js')(app);
 require('./controllers/InventoryController.js')(app);

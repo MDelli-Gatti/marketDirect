@@ -20,9 +20,9 @@ module.exports = function(app) {
                   $location.path(url);
                   return;
                 })
-                // .error (function (){
-                //   alert("user does not exist!");
-                // })
+                .error (function (){
+                  alert("newuser is fucking up again");
+                })
             },
             getUserName: function() {
                 return username;
