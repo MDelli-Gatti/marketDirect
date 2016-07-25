@@ -70,26 +70,6 @@ function onSignIn(googleUser) {
      var id_token = googleUser.getAuthResponse().id_token;
      console.log("ID Token: " + id_token);
    };
-// document.getElementById('getval').addEventListener('change', readURL, true);
-// function readURL(){
-//     var file = document.getElementById("getval").files[0];
-//     var reader = new FileReader();
-//     reader.onloadend = function(){
-//         document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
-//     }
-//     if(file){
-//         reader.readAsDataURL(file);
-//     }else{
-//     }
-// }
-
-
-
-
-
-
-
-
 
 //controllers
 // require('./controllers/LibraryController.js')(app);
@@ -104,14 +84,22 @@ require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
 require('./controllers/MiscController.js')(app);
 // require('./controllers/VideoController.js')(app);
-
-
-
-
-// require('./controllers/playlistController.js')(app);
-
 // services
-// require('./services/libraryService.js')(app);
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
+
+
+
+document.getElementById('getval').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("getval").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
 require('./services/shoppinglist.js')(app);

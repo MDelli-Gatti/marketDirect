@@ -108,24 +108,14 @@ module.exports = function (app) {
 };
 
 },{}],10:[function(require,module,exports){
-let nugget = angular.module('MarketControllers');
 
-nugget.controller('AvailableController', ['$scope', 'ShoppingListService', function ($scope, ShoppingListService) {
-    // Get some booooooookie crisp
-    $scope.slItems = ShoppingListService.getSLItems();
-}]);
+module.exports = function (app) {
+    app.controller('ShoppinglistController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
 
-// module.exports = function (app) {
-//     app.controller('ShoppinglisteController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
-//
-//
-//         // $scope.login = function () {
-//         //     console.log(`${$scope.name} in as we speak`);
-//         //     loginService.userLogin($scope.name, $scope.password);
-//         //     $location.path('/explore');
-//         // };
-//     }]);
-// }
+
+
+    }]);
+}
 
 },{}],11:[function(require,module,exports){
 let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
@@ -200,26 +190,6 @@ function onSignIn(googleUser) {
      var id_token = googleUser.getAuthResponse().id_token;
      console.log("ID Token: " + id_token);
    };
-// document.getElementById('getval').addEventListener('change', readURL, true);
-// function readURL(){
-//     var file = document.getElementById("getval").files[0];
-//     var reader = new FileReader();
-//     reader.onloadend = function(){
-//         document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
-//     }
-//     if(file){
-//         reader.readAsDataURL(file);
-//     }else{
-//     }
-// }
-
-
-
-
-
-
-
-
 
 //controllers
 // require('./controllers/LibraryController.js')(app);
@@ -234,16 +204,24 @@ require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
 require('./controllers/MiscController.js')(app);
 // require('./controllers/VideoController.js')(app);
-
-
-
-
-// require('./controllers/playlistController.js')(app);
-
 // services
-// require('./services/libraryService.js')(app);
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
+
+
+
+document.getElementById('getval').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("getval").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
 require('./services/shoppinglist.js')(app);
 
 },{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
