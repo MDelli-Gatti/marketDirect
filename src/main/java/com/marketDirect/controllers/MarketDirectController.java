@@ -1,8 +1,10 @@
 package com.marketDirect.controllers;
 
+import com.marketDirect.entities.Comment;
 import com.marketDirect.entities.Item;
 import com.marketDirect.entities.User;
 import com.marketDirect.entities.Vendor;
+import com.marketDirect.services.CommentRepository;
 import com.marketDirect.services.ItemRepository;
 import com.marketDirect.services.UserRepository;
 import com.marketDirect.services.VendorRepository;
@@ -42,8 +44,11 @@ public class MarketDirectController {
     @Autowired
     ItemRepository items;
 
+    @Autowired
+    CommentRepository comments;
+
     @PostConstruct
-    public void init() throws SQLException, PasswordStorage.CannotPerformOperationException {
+    public void init() throws SQLException, PasswordStorage.CannotPerformOperationException, FileNotFoundException {
 
         User testUser = new User("FarmerJohn", PasswordStorage.createHash("password1"), true);
         if (users.findByUsername(testUser.getUsername()) == null) {
@@ -437,5 +442,89 @@ public class MarketDirectController {
             throw new Exception("User not in database!");
         }
         return user.getShoppingList();
+    }
+
+    @RequestMapping(path = "create-comment", method = RequestMethod.POST)
+    public void createComment(HttpSession session, @RequestBody Vendor vendor, @RequestBody Comment comment) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        Comment c = new Comment(comment.getText(),comment.getRating(), user, vendor);
+        comments.save(c);
+    }
+
+    @RequestMapping(path = "get-comments", method = RequestMethod.GET)
+    public Iterable<Comment> getComments(HttpSession session, @RequestBody Vendor vendor) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        return comments.findByVendorId(vendor.getId());
+    }
+
+    @RequestMapping(path = "edit-comment", method = RequestMethod.POST)
+    public void editComment(HttpSession session, @RequestBody Comment comment, String text) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        if (user != comment.getUser()){
+            throw new Exception("This is not your comment");
+        }
+        else {
+            comment.setText(text);
+            comments.save(comment);
+        }
+    }
+
+    @RequestMapping(path = "delete-comment", method = RequestMethod.POST)
+    public void deleteComment(HttpSession session, @RequestBody Comment comment) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        if (user != comment.getUser()){
+            throw new Exception("This is not your comment");
+        }
+        else {
+            comments.delete(comment);
+        }
+    }
+
+    @RequestMapping(path = "find-by-location", method = RequestMethod.GET)
+    public Iterable<Vendor> findByLocation(HttpSession session, String location) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        return vendors.findByLocation(location);
     }
 }
