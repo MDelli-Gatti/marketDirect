@@ -1,29 +1,29 @@
 let current = angular.module('MarketServices');
 
 current.factory('ShoppingListService', ['$http', function ($http) {
-    let slItems = [];
+    let shoppinglistItems = [];
 
     return {
         /* GET request for book list */
         getSLItems: function () {
             $http({
                 method: 'get',
-                url: 'get-shopping-list'
+                url: 'get-items'
             }).then(function (response) {
-                console.table(response.data.Item);
-                angular.copy(response.data.Item, slItems);
+                console.log(response);
+                // angular.copy(response., slItems);
             });
 
-            return slItems;
+            return shoppinglistItems;
         },
-        /* POST request to update one book */
-        borrowBook: function (book) {
-
-        },
-        /* POST request to update one book */
-        returnBook: function (book) {
-
-        },
+        // /* POST request to update one book */
+        // borrowBook: function (book) {
+        //
+        // },
+        // /* POST request to update one book */
+        // returnBook: function (book) {
+        //
+        // },
     };
 }]);
 

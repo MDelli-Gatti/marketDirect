@@ -1,4 +1,4 @@
-let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
+let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives');
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
 angular.module('MarketDirectives', []);
@@ -87,6 +87,7 @@ require('./controllers/MiscController.js')(app);
 // services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
+// require('./services/shoppinglist.js')(app);
 
 
 

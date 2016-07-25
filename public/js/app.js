@@ -110,7 +110,8 @@ module.exports = function (app) {
 },{}],10:[function(require,module,exports){
 
 module.exports = function (app) {
-    app.controller('ShoppinglistController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
+    app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppingListService', function ($scope, $http, $location,ShoppingListService) {
+      $scope.ShopItems = ShoppingListService.getSLItems();
 
 
 
@@ -118,7 +119,7 @@ module.exports = function (app) {
 }
 
 },{}],11:[function(require,module,exports){
-let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
+let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives','ShoppingListService']);
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
 angular.module('MarketDirectives', []);
@@ -207,6 +208,7 @@ require('./controllers/MiscController.js')(app);
 // services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
+// require('./services/shoppinglist.js')(app);
 
 
 
@@ -282,29 +284,29 @@ module.exports = function(app) {
 let current = angular.module('MarketServices');
 
 current.factory('ShoppingListService', ['$http', function ($http) {
-    let slItems = [];
+    let shoppinglistItems = [];
 
     return {
         /* GET request for book list */
         getSLItems: function () {
             $http({
                 method: 'get',
-                url: 'get-shopping-list'
+                url: 'get-items'
             }).then(function (response) {
-                console.table(response.data.Item);
-                angular.copy(response.data.Item, slItems);
+                console.log(response);
+                // angular.copy(response., slItems);
             });
 
-            return slItems;
+            return shoppinglistItems;
         },
-        /* POST request to update one book */
-        borrowBook: function (book) {
-
-        },
-        /* POST request to update one book */
-        returnBook: function (book) {
-
-        },
+        // /* POST request to update one book */
+        // borrowBook: function (book) {
+        //
+        // },
+        // /* POST request to update one book */
+        // returnBook: function (book) {
+        //
+        // },
     };
 }]);
 
