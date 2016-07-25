@@ -108,17 +108,24 @@ module.exports = function (app) {
 };
 
 },{}],10:[function(require,module,exports){
-module.exports = function (app) {
-    app.controller('ShoppinglisteController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+let nugget = angular.module('MarketControllers');
 
+nugget.controller('AvailableController', ['$scope', 'ShoppingListService', function ($scope, ShoppingListService) {
+    // Get some booooooookie crisp
+    $scope.slItems = ShoppingListService.getSLItems();
+}]);
 
-        // $scope.login = function () {
-        //     console.log(`${$scope.name} in as we speak`);
-        //     loginService.userLogin($scope.name, $scope.password);
-        //     $location.path('/explore');
-        // };
-    }]);
-}
+// module.exports = function (app) {
+//     app.controller('ShoppinglisteController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+//
+//
+//         // $scope.login = function () {
+//         //     console.log(`${$scope.name} in as we speak`);
+//         //     loginService.userLogin($scope.name, $scope.password);
+//         //     $location.path('/explore');
+//         // };
+//     }]);
+// }
 
 },{}],11:[function(require,module,exports){
 let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
@@ -307,14 +314,13 @@ current.factory('ShoppingListService', ['$http', function ($http) {
         getSLItems: function () {
             $http({
                 method: 'get',
-                url: 'add-shopping-list-item'
+                url: 'get-shopping-list'
             }).then(function (response) {
-                console.table(response.data.books);
-
-                angular.copy(response.data.books, books);
+                console.table(response.data.Item);
+                angular.copy(response.data.Item, slItems);
             });
 
-            return books;
+            return slItems;
         },
         /* POST request to update one book */
         borrowBook: function (book) {
