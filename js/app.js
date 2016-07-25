@@ -52,18 +52,18 @@ app.config(['$routeProvider', function ($routeProvider) {
 
 }])
 
-document.getElementById('getval').addEventListener('change', readURL, true);
-function readURL(){
-    var file = document.getElementById("getval").files[0];
-    var reader = new FileReader();
-    reader.onloadend = function(){
-        document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
-    }
-    if(file){
-        reader.readAsDataURL(file);
-    }else{
-    }
-}
+// document.getElementById('getval').addEventListener('change', readURL, true);
+// function readURL(){
+//     var file = document.getElementById("getval").files[0];
+//     var reader = new FileReader();
+//     reader.onloadend = function(){
+//         document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
+//     }
+//     if(file){
+//         reader.readAsDataURL(file);
+//     }else{
+//     }
+// }
 
 
 
@@ -77,6 +77,16 @@ function readURL(){
 // require('./controllers/LibraryController.js')(app);
 require('./controllers/LoginController.js')(app);
 require('./controllers/NewUserController.js')(app);
+require('./controllers/ExploreController.js')(app);
+require('./controllers/CraftedController.js')(app);
+require('./controllers/InventoryController.js')(app);
+require('./controllers/ShoppinglistController.js')(app);
+require('./controllers/ProfileController.js')(app);
+
+
+
+
+
 // require('./controllers/playlistController.js')(app);
 
 // services
