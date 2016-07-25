@@ -8,14 +8,14 @@ current.factory('ShoppingListService', ['$http', function ($http) {
         getSLItems: function () {
             $http({
                 method: 'get',
-                url: 'add-shopping-list-item'
+                url: 'get-shopping-list'
             }).then(function (response) {
-                console.table(response.data.books);
+                console.table(response.data.slItems);
 
-                angular.copy(response.data.books, books);
+                angular.copy(response.data.slItems, slItems);
             });
 
-            return books;
+            return slItems;
         },
         /* POST request to update one book */
         borrowBook: function (book) {
