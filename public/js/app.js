@@ -193,7 +193,7 @@ function onSignIn(googleUser) {
 //controllers
 // require('./controllers/LibraryController.js')(app);
 require('./controllers/LoginController.js')(app);
-require('./controllers/NewUserController.js')(app);
+require('./controllers/NewuserController.js')(app);
 require('./controllers/ExploreController.js')(app);
 require('./controllers/CraftedController.js')(app);
 require('./controllers/InventoryController.js')(app);
@@ -224,7 +224,7 @@ function readURL(){
 }
 require('./services/shoppinglist.js')(app);
 
-},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
+},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewuserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', function($http, $location) {
         let username = "";
@@ -281,9 +281,9 @@ module.exports = function(app) {
                   $location.path(url);
                   return;
                 })
-                // .error (function (){
-                //   alert("user does not exist!");
-                // })
+                .error (function (){
+                  alert("newuser is fucking up again");
+                })
             },
             getUserName: function() {
                 return username;
