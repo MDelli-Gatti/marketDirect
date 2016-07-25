@@ -10,9 +10,8 @@ current.factory('ShoppingListService', ['$http', function ($http) {
                 method: 'get',
                 url: 'get-shopping-list'
             }).then(function (response) {
-                console.table(response.data.slItems);
-
-                angular.copy(response.data.slItems, slItems);
+                console.table(response.data.Item);
+                angular.copy(response.data.Item, slItems);
             });
 
             return slItems;
