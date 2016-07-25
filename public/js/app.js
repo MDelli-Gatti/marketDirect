@@ -73,8 +73,9 @@ module.exports = function (app) {
 
       $scope.createUser = function () {
           console.log(`${$scope.name} is a new user`);
-          newUserService.userLogin($scope.name, $scope.password);
-          $location.path('/explore');
+          newUserService.userLogin($scope.name, $scope.password, "/explore");
+          alert ("Thanks for creating an account")
+          // $location.path('/explore');
       };
 
     }]);
@@ -194,7 +195,7 @@ function onSignIn(googleUser) {
 //controllers
 // require('./controllers/LibraryController.js')(app);
 require('./controllers/LoginController.js')(app);
-require('./controllers/NewUserController.js')(app);
+require('./controllers/NewuserController.js')(app);
 require('./controllers/ExploreController.js')(app);
 require('./controllers/CraftedController.js')(app);
 require('./controllers/InventoryController.js')(app);
@@ -224,7 +225,7 @@ function readURL(){
     }
 }
 
-},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
+},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewuserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', function($http, $location) {
         let username = "";
@@ -260,31 +261,36 @@ module.exports = function(app) {
 
 },{}],13:[function(require,module,exports){
 module.exports = function(app) {
-    app.factory('newUserService', ['$http', function($http) {
+    app.factory('newUserService', function($http, $location) {
         let username = "";
 
         return {
-            userLogin: function(name, password) {
-              console.log("login might be working")
+            userLogin: function(name, password, url, scope) {
+              console.log("newuser might be working with", name, password, url);
+              console.log($location)
                 username = name;
-                return $http({
+                 $http({
                     method: 'POST',
                     url: '/create-user',
                     data: {
                         username: name,
                         password: password
                     }
-                }).then(function(response) {
-                    console.log('getting the response', response);
-                    // username = name;
-                    console.log(username);
+                })
+                .success(function (response) {
+                  console.log(response);
+                  $location.path(url);
+                  return;
+                })
+                .error (function (){
+                  alert("newuser is fucking up again");
                 })
             },
             getUserName: function() {
                 return username;
             },
         }
-    }])
+    })
 }
 
 },{}],14:[function(require,module,exports){
