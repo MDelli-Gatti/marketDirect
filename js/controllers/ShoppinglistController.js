@@ -1,7 +1,5 @@
 module.exports = function (app) {
-    app.controller('ShoppinglistController', ['$scope', '$http', '$location', function ($scope, $http, $location) {
-
-
-
+    app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppingListService', function ($scope, $http, $location, ShoppingListService) {
+      $scope.ShopItems = ShoppingListService.getSLItems();
     }]);
 }
