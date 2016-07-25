@@ -102,9 +102,8 @@ require('./controllers/ShoppinglistController.js')(app);
 require('./controllers/ProfileController.js')(app);
 require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
-
-
-
+require('./controllers/MiscController.js')(app);
+// require('./controllers/VideoController.js')(app);
 
 
 
