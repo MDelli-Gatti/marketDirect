@@ -3,4 +3,6 @@ module.exports = function (app) {
   console.log("hey bro whats up?")
       $scope.ShopItems = ShoppinglistService.getSLItems();
     }]);
+
+
 }
