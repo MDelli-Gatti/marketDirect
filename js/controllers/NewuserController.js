@@ -5,8 +5,9 @@ module.exports = function (app) {
 
       $scope.createUser = function () {
           console.log(`${$scope.name} is a new user`);
-          newUserService.userLogin($scope.name, $scope.password);
-          $location.path('/explore');
+          newUserService.userLogin($scope.name, $scope.password, "/explore");
+          alert ("Thanks for creating an account")
+          // $location.path('/explore');
       };
 
     }]);
