@@ -27,3 +27,5 @@ current.factory('ShoppingListService', ['$http', function ($http) {
         },
     };
 }]);
+
+// testing
