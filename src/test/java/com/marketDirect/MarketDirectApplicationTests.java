@@ -55,5 +55,15 @@ public class MarketDirectApplicationTests {
 		Assert.assertTrue(users.count() == 1);
 	}
 
+	@Test
+	public void testCreateUser() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-user")
+						.param("username", "bob@gmail.com")
+						.param("password", "password")
+		);
+		Assert.assertTrue(users.count() == 1);
+	}
+
 
 }
