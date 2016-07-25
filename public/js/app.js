@@ -1,6 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('CraftedController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+    app.controller('ArtController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
 
       
@@ -8,6 +8,15 @@ module.exports = function (app) {
 }
 
 },{}],2:[function(require,module,exports){
+module.exports = function (app) {
+    app.controller('CraftedController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+
+
+      
+    }]);
+}
+
+},{}],3:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ExploreController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
@@ -20,7 +29,7 @@ module.exports = function (app) {
     }]);
 }
 
-},{}],3:[function(require,module,exports){
+},{}],4:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('InventoryController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
@@ -33,7 +42,7 @@ module.exports = function (app) {
     }]);
 }
 
-},{}],4:[function(require,module,exports){
+},{}],5:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('LoginController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
         $scope.name = '';
@@ -47,7 +56,16 @@ module.exports = function (app) {
     }]);
 }
 
-},{}],5:[function(require,module,exports){
+},{}],6:[function(require,module,exports){
+module.exports = function (app) {
+    app.controller('MiscController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+
+
+
+    }]);
+}
+
+},{}],7:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('NewUserController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
       $scope.name = '';
@@ -62,7 +80,16 @@ module.exports = function (app) {
     }]);
 };
 
-},{}],6:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
+module.exports = function (app) {
+    app.controller('ProduceController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+
+
+
+    }]);
+}
+
+},{}],9:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
       $scope.name = '';
@@ -77,7 +104,7 @@ module.exports = function (app) {
     }]);
 };
 
-},{}],7:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ShoppinglisteController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
@@ -90,7 +117,7 @@ module.exports = function (app) {
     }]);
 }
 
-},{}],8:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
@@ -175,7 +202,10 @@ require('./controllers/CraftedController.js')(app);
 require('./controllers/InventoryController.js')(app);
 require('./controllers/ShoppinglistController.js')(app);
 require('./controllers/ProfileController.js')(app);
-
+require('./controllers/ArtController.js')(app);
+require('./controllers/MiscController.js')(app);
+require('./controllers/ProduceController.js')(app);
+// require('./controllers/VideoController.js')(app);
 
 
 
@@ -187,7 +217,7 @@ require('./controllers/ProfileController.js')(app);
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
 
-},{"./controllers/CraftedController.js":1,"./controllers/ExploreController.js":2,"./controllers/InventoryController.js":3,"./controllers/LoginController.js":4,"./controllers/NewUserController.js":5,"./controllers/ProfileController.js":6,"./controllers/ShoppinglistController.js":7,"./services/login.js":9,"./services/newUser.js":10}],9:[function(require,module,exports){
+},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13}],12:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', ['$http', function($http) {
         let username = "";
@@ -212,7 +242,7 @@ module.exports = function(app) {
     }])
 }
 
-},{}],10:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('newUserService', ['$http', function($http) {
         let username = "";
@@ -241,4 +271,4 @@ module.exports = function(app) {
     }])
 }
 
-},{}]},{},[8])
+},{}]},{},[11])
