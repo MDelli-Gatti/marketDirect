@@ -1,21 +1,21 @@
-let current = angular.module('MarketApp');
-
-current.factory('ShoppinglistService', ['$http', function ($http) {
+module.exports=function(app){
+app.factory('ShoppinglistService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
         /* GET request for book list */
         getSLItems: function () {
-            $http({
+          var promise = $http({
                 method: 'GET',
                 url: 'get-items'
             }).then(function (response) {
-                console.log(response);
+                console.log(response.data);
                 // angular.copy(response., slItems);
             });
 
-            return shoppinglistItems;
+            return promise;
         },
+
         // /* POST request to update one book */
         // borrowBook: function (book) {
         //
@@ -26,5 +26,5 @@ current.factory('ShoppinglistService', ['$http', function ($http) {
         // },
     };
 }]);
-
+}
 // testing

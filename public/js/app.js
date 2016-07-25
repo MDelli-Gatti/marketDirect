@@ -113,6 +113,8 @@ module.exports = function (app) {
   console.log("hey bro whats up?")
       $scope.ShopItems = ShoppinglistService.getSLItems();
     }]);
+
+
 }
 
 },{}],11:[function(require,module,exports){
@@ -221,7 +223,6 @@ function readURL(){
     }else{
     }
 }
-require('./services/shoppinglist.js')(app);
 
 },{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
 module.exports = function(app) {
@@ -287,24 +288,24 @@ module.exports = function(app) {
 }
 
 },{}],14:[function(require,module,exports){
-let current = angular.module('MarketApp');
-
-current.factory('ShoppinglistService', ['$http', function ($http) {
+module.exports=function(app){
+app.factory('ShoppinglistService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
         /* GET request for book list */
         getSLItems: function () {
-            $http({
+          var promise = $http({
                 method: 'GET',
                 url: 'get-items'
             }).then(function (response) {
-                console.log(response);
+                console.log(response.data);
                 // angular.copy(response., slItems);
             });
 
-            return shoppinglistItems;
+            return promise;
         },
+
         // /* POST request to update one book */
         // borrowBook: function (book) {
         //
@@ -315,7 +316,7 @@ current.factory('ShoppinglistService', ['$http', function ($http) {
         // },
     };
 }]);
-
+}
 // testing
 
 },{}]},{},[11])

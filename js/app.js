@@ -103,4 +103,3 @@ function readURL(){
     }else{
     }
 }
-require('./services/shoppinglist.js')(app);
