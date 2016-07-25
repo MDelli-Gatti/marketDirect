@@ -1,12 +1,13 @@
 module.exports = function(app) {
-    app.factory('loginService', ['$http', function($http) {
+    app.factory('loginService', function($http, $location) {
         let username = "";
 
         return {
-            userLogin: function(name, password) {
-              console.log("login might be working")
+            userLogin: function(name, password, url, scope) {
+              console.log("login might be working with", name, password, url);
+              console.log($location)
                 username = name;
-                return $http({
+                 $http({
                     method: 'POST',
                     url: '/login',
                     data: {
@@ -14,10 +15,18 @@ module.exports = function(app) {
                         password: password
                     }
                 })
+                .success(function (response) {
+                  console.log(response);
+                  $location.path(url);
+                  return;
+                })
+                .error (function (){
+                  alert("user does not exist!");
+                })
             },
             getUserName: function() {
                 return username;
             },
         }
-    }])
+    })
 }

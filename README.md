@@ -55,3 +55,15 @@ route = "POST" path = "remove-shopping-list-item" data = Item object
 Get Shopping List
 route = "GET" path = "get-shopping-list"
 
+Get Comments
+route = "GET" path = "get-comments" data = Vendor object
+
+Create Comment
+route = "POST" path = "create-comment" data = Vendor object & Comment object
+
+Edit Comment
+route = "POST" path = "edit-comment" data = String text & Comment object
+
+Delete Comment
+route = "POST" path = "delete-comment" data = Comment object
+

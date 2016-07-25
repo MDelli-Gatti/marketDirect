@@ -50,8 +50,8 @@ module.exports = function (app) {
 
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
-            loginService.userLogin($scope.name, $scope.password);
-            $location.path('/explore');
+            loginService.userLogin($scope.name, $scope.password, "/explore");
+            // $location.path('/explore');
         };
     }]);
 }
@@ -108,7 +108,6 @@ module.exports = function (app) {
 };
 
 },{}],10:[function(require,module,exports){
-
 module.exports = function (app) {
     app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppingListService', function ($scope, $http, $location,ShoppingListService) {
       $scope.ShopItems = ShoppingListService.getSLItems();
@@ -228,14 +227,15 @@ require('./services/shoppinglist.js')(app);
 
 },{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
 module.exports = function(app) {
-    app.factory('loginService', ['$http', function($http) {
+    app.factory('loginService', function($http, $location) {
         let username = "";
 
         return {
-            userLogin: function(name, password) {
-              console.log("login might be working")
+            userLogin: function(name, password, url, scope) {
+              console.log("login might be working with", name, password, url);
+              console.log($location)
                 username = name;
-                return $http({
+                 $http({
                     method: 'POST',
                     url: '/login',
                     data: {
@@ -243,12 +243,20 @@ module.exports = function(app) {
                         password: password
                     }
                 })
+                .success(function (response) {
+                  console.log(response);
+                  $location.path(url);
+                  return;
+                })
+                .error (function (){
+                  alert("user does not exist!");
+                })
             },
             getUserName: function() {
                 return username;
             },
         }
-    }])
+    })
 }
 
 },{}],13:[function(require,module,exports){
