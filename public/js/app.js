@@ -246,6 +246,9 @@ module.exports = function(app) {
                   $location.path(url);
                   return;
                 })
+                .error (function (){
+                  alert("user does not exist!");
+                })
             },
             getUserName: function() {
                 return username;
