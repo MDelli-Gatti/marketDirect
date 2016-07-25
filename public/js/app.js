@@ -109,16 +109,14 @@ module.exports = function (app) {
 
 },{}],10:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppingListService', function ($scope, $http, $location,ShoppingListService) {
-      $scope.ShopItems = ShoppingListService.getSLItems();
-
-
-
+    app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppinglistService', function ($scope, $http, $location, ShoppinglistService) {
+  console.log("hey bro whats up?")
+      $scope.ShopItems = ShoppinglistService.getSLItems();
     }]);
 }
 
 },{}],11:[function(require,module,exports){
-let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives','ShoppingListService']);
+let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
 angular.module('MarketDirectives', []);
@@ -166,7 +164,7 @@ app.config(['$routeProvider', function ($routeProvider) {
       templateUrl: 'templates/inventory.html',
     })
     .when('/shoppinglist', {
-      controller: 'InventoryController',
+      controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
 
@@ -207,7 +205,7 @@ require('./controllers/MiscController.js')(app);
 // services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
-// require('./services/shoppinglist.js')(app);
+require('./services/shoppinglist.js')(app);
 
 
 
@@ -289,16 +287,16 @@ module.exports = function(app) {
 }
 
 },{}],14:[function(require,module,exports){
-let current = angular.module('MarketServices');
+let current = angular.module('MarketApp');
 
-current.factory('ShoppingListService', ['$http', function ($http) {
+current.factory('ShoppinglistService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
         /* GET request for book list */
         getSLItems: function () {
             $http({
-                method: 'get',
+                method: 'GET',
                 url: 'get-items'
             }).then(function (response) {
                 console.log(response);
