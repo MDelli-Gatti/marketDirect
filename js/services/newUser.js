@@ -1,27 +1,32 @@
 module.exports = function(app) {
-    app.factory('newUserService', ['$http', function($http) {
+    app.factory('newUserService', function($http, $location) {
         let username = "";
 
         return {
-            userLogin: function(name, password) {
-              console.log("login might be working")
+            userLogin: function(name, password, url, scope) {
+              console.log("newuser might be working with", name, password, url);
+              console.log($location)
                 username = name;
-                return $http({
+                 $http({
                     method: 'POST',
                     url: '/create-user',
                     data: {
                         username: name,
                         password: password
                     }
-                }).then(function(response) {
-                    console.log('getting the response', response);
-                    // username = name;
-                    console.log(username);
                 })
+                .success(function (response) {
+                  console.log(response);
+                  $location.path(url);
+                  return;
+                })
+                // .error (function (){
+                //   alert("user does not exist!");
+                // })
             },
             getUserName: function() {
                 return username;
             },
         }
-    }])
+    })
 }
