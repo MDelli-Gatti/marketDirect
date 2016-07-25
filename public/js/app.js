@@ -58,6 +58,15 @@ module.exports = function (app) {
 
 },{}],6:[function(require,module,exports){
 module.exports = function (app) {
+    app.controller('MiscController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+
+
+
+    }]);
+}
+
+},{}],7:[function(require,module,exports){
+module.exports = function (app) {
     app.controller('NewUserController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
       $scope.name = '';
       $scope.password = '';
@@ -71,16 +80,19 @@ module.exports = function (app) {
     }]);
 };
 
-},{}],7:[function(require,module,exports){
+},{}],8:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ProduceController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
-
+      $scope.login = function () {
+          console.log(`${$scope.name} in as we speak`);
+          loginService.userLogin($scope.name, $scope.password);
+        };
 
     }]);
 }
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
       $scope.name = '';
@@ -95,7 +107,7 @@ module.exports = function (app) {
     }]);
 };
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ShoppinglisteController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
@@ -108,7 +120,7 @@ module.exports = function (app) {
     }]);
 }
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
@@ -213,9 +225,8 @@ require('./controllers/ShoppinglistController.js')(app);
 require('./controllers/ProfileController.js')(app);
 require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
-
-
-
+require('./controllers/MiscController.js')(app);
+// require('./controllers/VideoController.js')(app);
 
 
 
@@ -226,8 +237,9 @@ require('./controllers/ArtController.js')(app);
 // require('./services/libraryService.js')(app);
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
+require('./services/shoppinglist.js')(app);
 
-},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/NewUserController.js":6,"./controllers/ProduceController.js":7,"./controllers/ProfileController.js":8,"./controllers/ShoppinglistController.js":9,"./services/login.js":11,"./services/newUser.js":12}],11:[function(require,module,exports){
+},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', ['$http', function($http) {
         let username = "";
@@ -252,7 +264,7 @@ module.exports = function(app) {
     }])
 }
 
-},{}],12:[function(require,module,exports){
+},{}],13:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('newUserService', ['$http', function($http) {
         let username = "";
@@ -281,4 +293,37 @@ module.exports = function(app) {
     }])
 }
 
-},{}]},{},[10])
+},{}],14:[function(require,module,exports){
+let current = angular.module('MarketServices');
+
+current.factory('ShoppingListService', ['$http', function ($http) {
+    let slItems = [];
+
+    return {
+        /* GET request for book list */
+        getSLItems: function () {
+            $http({
+                method: 'get',
+                url: 'add-shopping-list-item'
+            }).then(function (response) {
+                console.table(response.data.books);
+
+                angular.copy(response.data.books, books);
+            });
+
+            return books;
+        },
+        /* POST request to update one book */
+        borrowBook: function (book) {
+
+        },
+        /* POST request to update one book */
+        returnBook: function (book) {
+
+        },
+    };
+}]);
+
+// testing
+
+},{}]},{},[11])

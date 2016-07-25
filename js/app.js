@@ -114,3 +114,4 @@ require('./controllers/MiscController.js')(app);
 // require('./services/libraryService.js')(app);
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
+require('./services/shoppinglist.js')(app);
