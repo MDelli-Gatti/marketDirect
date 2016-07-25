@@ -4,6 +4,7 @@ module.exports = function (app) {
       $scope.login = function () {
           console.log(`${$scope.name} in as we speak`);
           loginService.userLogin($scope.name, $scope.password);
+        };
 
     }]);
 }
