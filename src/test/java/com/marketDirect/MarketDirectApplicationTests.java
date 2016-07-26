@@ -72,6 +72,7 @@ public class MarketDirectApplicationTests {
 		User user = new User();
 		user.setUsername("Alice@Gmail.com");
 		user.setPassword("password");
+		user.setShoppingList(null);
 
 		ObjectMapper om = new ObjectMapper();
 		String json = om.writeValueAsString(user);
@@ -123,12 +124,12 @@ public class MarketDirectApplicationTests {
 	}
 	@Test
 	public void dtestCreateComment() throws Exception {
-		atestCreateUser();
-		ctestCreateVendor();
 
 	Comment c = new Comment();
 		c.setText("Text");
 		c.setRating(5);
+		c.setVendor(vendors.findByName("Store"));
+		c.setUser(users.findByUsername("Alice@Gmail.com"));
 
 		ObjectMapper om = new ObjectMapper();
 		String json = om.writeValueAsString(c);
