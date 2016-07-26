@@ -18,7 +18,7 @@ app.factory('newItemService', ['$http', function ($http) {
 
             return promise;
         },
-        addSLItems: function (){
+        addNEWitems: function (){
           console.log("sending diz")
           $http({
             method:'POST',
