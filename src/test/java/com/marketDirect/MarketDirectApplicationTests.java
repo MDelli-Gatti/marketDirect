@@ -1,7 +1,10 @@
 package com.marketDirect;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.marketDirect.entities.Comment;
 import com.marketDirect.entities.User;
+import com.marketDirect.entities.Vendor;
 import com.marketDirect.services.CommentRepository;
 import com.marketDirect.services.ItemRepository;
 import com.marketDirect.services.UserRepository;
@@ -103,5 +106,26 @@ public class MarketDirectApplicationTests {
 		//Assert.assertTrue(vendors.findOne(1).getName().equals("Store"));
 	}
 
+	@Test
+	public void dtestCreateComment() throws Exception {
+		atestCreateUser();
+		ctestCreateVendor();
 
+	Comment c = new Comment();
+		c.setText("Text");
+		c.setRating(5);
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(c);
+
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-comment")
+						.content(json)
+						.contentType("application/json")
+						.sessionAttr("username", "Alice@Gmail.com")
+
+		);
+		Assert.assertTrue(comments.count() == 1);
+	}
 }
