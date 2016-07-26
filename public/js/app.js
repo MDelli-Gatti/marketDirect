@@ -67,10 +67,11 @@ module.exports = function (app) {
 
 },{}],7:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('NewitemController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, loginService,newItemService) {
+    app.controller('NewitemController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, loginService, newItemService) {
       $scope.inventories = function(){
-        console.log("we have + $scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price")
-        service.addSLItems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+        console.log("boo");
+        //console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
+        //service.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
       }
     }]);
 }
@@ -183,10 +184,10 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
-    // .when('/newItem', {
-    //   controller: 'NewItemController',
-    //   templateUrl: 'templates/newItem.html'
-    // })
+    .when('/newItem', {
+      controller: 'NewitemController',
+      templateUrl: 'templates/newItem.html'
+    })
 
 }])
 
@@ -306,7 +307,7 @@ app.factory('newItemService', ['$http', function ($http) {
 
             return promise;
         },
-        addSLItems: function (){
+        addNEWitems: function (){
           console.log("sending diz")
           $http({
             method:'POST',

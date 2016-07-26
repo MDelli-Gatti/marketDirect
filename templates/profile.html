@@ -95,17 +95,7 @@
             <h6>Some other shit I'm forgetting....</h6>
             <input type='file' id='getval' /><br/><br/>
             <button type="button" ng-click="showme=!showme" name="button">New Item</button>
-            <div class="addinventory" ng-show="showme">
-              <form method="post" action="/explore" enctype="multipart/form-data">
-                  <input type="text" ng-model="Cat" placeholder="Item Category">
-                  <input type="text" ng-model="Name" placeholder="Item Name">
-                  <input type="text" ng-model="Desc" placeholder="Item Description">
-                  <input type="text" ng-model="Quant" placeholder="Item Quantity">
-                  <input type="text" ng-model="Price" placeholder="Item Price">
-                  <input type="file" name="photo">
-                  <input type="submit" value="Add New Item">
-              </form>
-            </div>
+
           </div>
 
           <!-- <a href="#">
