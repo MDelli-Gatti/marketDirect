@@ -173,6 +173,10 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
+    .when('/newItem', {
+      controller: 'NewItemController',
+      templateUrl: 'templates/newItem.html'
+    })
 
 }])
 
@@ -207,11 +211,13 @@ require('./controllers/ProfileController.js')(app);
 require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
 require('./controllers/MiscController.js')(app);
+// require('./controller/NewItemController.js') (app);
 // require('./controllers/VideoController.js')(app);
 // services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
 require('./services/shoppinglist.js')(app);
+// require('./services/newItem.js')(app);
 
 
 
@@ -226,6 +232,13 @@ function readURL(){
         reader.readAsDataURL(file);
     }else{
     }
+}
+
+
+
+
+function myFunction() {
+    var myWindow = window.open("", "", "width=200,height=100");
 }
 
 },{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewuserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){

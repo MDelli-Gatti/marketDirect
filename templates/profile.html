@@ -1,3 +1,7 @@
+
+
+
+
 <h1>this is profile view + their inventory</h1>
 
 
@@ -90,7 +94,18 @@
             <h6>User/Vendor specialty</h6>
             <h6>Some other shit I'm forgetting....</h6>
             <input type='file' id='getval' /><br/><br/>
-            <button type="button" name="button">New Item</button>
+            <button type="button" ng-click="showme=!showme" name="button">New Item</button>
+            <div class="addinventory" ng-show="showme">
+              <form method="post" action="/explore" enctype="multipart/form-data">
+                  <input type="text" ng-model="itemCat" placeholder="Item Category">
+                  <input type="text" ng-model="itemName" placeholder="Item Name">
+                  <input type="text" ng-model="itemDesc" placeholder="Item Description">
+                  <input type="text" ng-model="itemQuant" placeholder="Item Quantity">
+                  <input type="text" ng-model="itemPrice" placeholder="Item Price">
+                  <input type="file" name="photo">
+                  <input type="submit" value="Add New Item">
+              </form>
+            </div>
           </div>
 
           <!-- <a href="#">
