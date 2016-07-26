@@ -8,9 +8,12 @@ app.factory('ShoppinglistService', ['$http', function ($http) {
           var promise = $http({
                 method: 'GET',
                 url: 'get-items'
-            }).then(function (response) {
-                console.log(response.data);
+            }).success(function (response) {
+                console.log(response);
+                return response;
                 // angular.copy(response., slItems);
+            }).error(function (response) {
+               return {"status": false};
             });
 
             return promise;
