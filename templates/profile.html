@@ -1,3 +1,7 @@
+
+
+
+
 <h1>this is profile view + their inventory</h1>
 
 
@@ -90,7 +94,25 @@
             <h6>User/Vendor specialty</h6>
             <h6>Some other shit I'm forgetting....</h6>
             <input type='file' id='getval' /><br/><br/>
-            <button type="button" name="button">New Item</button>
+            <div ng-init="showModal=false">
+        <button class="btn btn-primary btn-lg" ng-click="showModal = !showModal">
+        ADD SOME INVENTORY!
+        </button>
+        <div class="modal fade in" aria-hidden="false" style="display: block;" ng-show="showModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    MODAL
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary" ng-click="showModal=false">Ok</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+            <button type="button" ng-click="showme=!showme" name="button">New Item</button>
+            <div class="addinventory" ng-show="showme">
+              <h3>this is what you get when you let your heart win</h3>
+            </div>
           </div>
 
           <!-- <a href="#">

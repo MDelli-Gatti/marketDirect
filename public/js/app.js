@@ -228,6 +228,13 @@ function readURL(){
     }
 }
 
+
+
+
+function myFunction() {
+    var myWindow = window.open("", "", "width=200,height=100");
+}
+
 },{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewuserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', function($http, $location) {
