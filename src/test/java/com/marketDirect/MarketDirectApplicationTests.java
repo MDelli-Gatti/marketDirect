@@ -123,7 +123,7 @@ public class MarketDirectApplicationTests {
 		Assert.assertTrue(items.count() == 1);
 	}
 	@Test
-	public void dtestCreateComment() throws Exception {
+	public void etestCreateComment() throws Exception {
 
 	Comment c = new Comment();
 		c.setText("Text");
@@ -143,5 +143,15 @@ public class MarketDirectApplicationTests {
 
 		);
 		Assert.assertTrue(comments.count() == 1);
+	}
+
+	@Test
+	public void ftestDeleteItem() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/delete-item")
+				.param("id", "1")
+				.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.count() == 0);
 	}
 }
