@@ -28,18 +28,7 @@ module.exports = function(app) {
                 return username;
             },
 
-            addNEWitems: function (){
-              console.log("sending diz")
-              $http({
-                method:'POST',
-                url: 'create-item'
-              }).then(function(response){
-                console.log("we created" + response);
-                return response;
-              }).error(function(response){
-                return {'status':false};
-              });
-            }
+  
 
 
 
