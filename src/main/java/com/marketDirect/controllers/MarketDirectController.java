@@ -229,12 +229,18 @@ public class MarketDirectController {
             throw new Exception("Not logged in!");
         }
 
-        Vendor vendor = vendors.findByName(username);
-        if (vendor == null) {
-            throw new Exception("Vendor not in database!");
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
         }
+
+        Vendor vendor = vendors.findByUser(user);
+        if (vendor == null) {
+            throw new Exception("logged in user does not match vendor");
+        }
+
         else if (vendor != item.getVendor()){
-            throw new Exception("Logged in vendor can not delete this!");
+            throw new Exception("Logged in user can not delete this!");
         }
 
         if (name != null) {
