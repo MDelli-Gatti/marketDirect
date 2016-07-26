@@ -119,7 +119,7 @@ module.exports = function (app) {
           $scope.inventories = function(){
             console.log("boo");
             console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-            service.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+            newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
       };
 
     }]);
@@ -289,18 +289,7 @@ module.exports = function(app) {
                 return username;
             },
 
-            addNEWitems: function (){
-              console.log("sending diz")
-              $http({
-                method:'POST',
-                url: 'create-item'
-              }).then(function(response){
-                console.log("we created" + response);
-                return response;
-              }).error(function(response){
-                return {'status':false};
-              });
-            }
+  
 
 
 
@@ -340,8 +329,6 @@ app.factory('newItemService', ['$http', function ($http) {
           }).then(function(response){
             console.log("we created" + response);
             return response;
-          }).error(function(response){
-            return {'status':false};
           });
         }
         // borrowBook: function (target) {

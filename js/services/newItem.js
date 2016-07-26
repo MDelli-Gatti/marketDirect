@@ -26,8 +26,6 @@ app.factory('newItemService', ['$http', function ($http) {
           }).then(function(response){
             console.log("we created" + response);
             return response;
-          }).error(function(response){
-            return {'status':false};
           });
         }
         // borrowBook: function (target) {
