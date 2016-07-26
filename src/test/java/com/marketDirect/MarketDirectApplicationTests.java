@@ -164,8 +164,8 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		ArrayList<HashMap<String, String>> vendorMaps = om.readValue(json, ArrayList.class);
+		Vendor vendor = om.readValue(json, Vendor.class);
 
-		Assert.assertTrue(vendorMaps.size() == 1  && vendorMaps.get(0).get("name").equals("Store"));
+		Assert.assertTrue(vendor.getName().equals("Store"));
 	}
 }
