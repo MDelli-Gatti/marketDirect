@@ -1,5 +1,7 @@
 package com.marketDirect;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.marketDirect.entities.User;
 import com.marketDirect.services.CommentRepository;
 import com.marketDirect.services.ItemRepository;
 import com.marketDirect.services.UserRepository;
@@ -20,10 +22,13 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
+import java.io.FileInputStream;
+
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MarketDirectApplication.class)
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
+
 public class MarketDirectApplicationTests {
 
 	@Autowired
@@ -49,32 +54,54 @@ public class MarketDirectApplicationTests {
 	ItemRepository items;
 
 	@Test
-	public void testLogin() throws Exception {
+	public void btestLogin() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/login")
-						.param("username", "Alice@gmail.com")
-						.param("password", "mypass")
-		);
-		Assert.assertTrue(users.count() == 1);
-	}
-
-	@Test
-	public void testCreateUser() throws Exception {
-		mockMvc.perform(
-				MockMvcRequestBuilders.post("/create-user")
-						.param("username", "bob@gmail.com")
+						.param("username", "Alice@Gmail.com")
 						.param("password", "password")
 		);
 		Assert.assertTrue(users.count() == 1);
 	}
 
 	@Test
-	public void testCreateItem() throws Exception {
-		MockMultipartFile file = new MockMultipartFile("farmer", "farmer.jpg".getBytes());
+	public void atestCreateUser() throws Exception {
+
+		User user = new User();
+		user.setUsername("Alice@Gmail.com");
+		user.setPassword("password");
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(user);
+
+
 		mockMvc.perform(
-				MockMvcRequestBuilders.fileUpload("/create-item")
-					.file(file)
-					.param()
-					.sessionAttr("username", "Alice@gmail.com"));
+				MockMvcRequestBuilders.post("/create-user")
+						.content(json)
+						.contentType("application/json")
+		);
+		Assert.assertTrue(users.count() == 1);
 	}
+
+	@Test
+	public void ctestCreateVendor() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
+		mockMvc.perform(
+				MockMvcRequestBuilders.fileUpload("/create-vendor")
+				.file(file)
+				.param("name", "Store")
+				.param("phone", "555-5555")
+				.param("email", "Alice@Email.com")
+				.param("website", "www.store.com")
+				.param("location", "Charleston")
+				.param("date", "1/1/1900")
+				.sessionAttr("username", "Alice@Gmail.com")
+		);
+
+		System.out.println(vendors.count());
+		Assert.assertTrue(vendors.count() == 1);
+
+		//Assert.assertTrue(vendors.findOne(1).getName().equals("Store"));
+	}
+
+
 }

@@ -112,8 +112,13 @@ module.exports = function (app) {
 module.exports = function (app) {
     app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppinglistService', function ($scope, $http, $location, ShoppinglistService) {
   console.log("hey bro whats up?")
-      $scope.ShopItems = ShoppinglistService.getSLItems();
+       ShoppinglistService.getSLItems().then(function(items){
+         console.log(items.data);
+         $scope.ShopItems = items.data;
+       });
     }]);
+
+
 }
 
 },{}],11:[function(require,module,exports){
@@ -193,7 +198,7 @@ function onSignIn(googleUser) {
 //controllers
 // require('./controllers/LibraryController.js')(app);
 require('./controllers/LoginController.js')(app);
-require('./controllers/NewUserController.js')(app);
+require('./controllers/NewuserController.js')(app);
 require('./controllers/ExploreController.js')(app);
 require('./controllers/CraftedController.js')(app);
 require('./controllers/InventoryController.js')(app);
@@ -222,9 +227,8 @@ function readURL(){
     }else{
     }
 }
-require('./services/shoppinglist.js')(app);
 
-},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewUserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
+},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewuserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', function($http, $location) {
         let username = "";
@@ -281,9 +285,9 @@ module.exports = function(app) {
                   $location.path(url);
                   return;
                 })
-                // .error (function (){
-                //   alert("user does not exist!");
-                // })
+                .error (function (){
+                  alert("newuser is fucking up again");
+                })
             },
             getUserName: function() {
                 return username;
@@ -293,24 +297,27 @@ module.exports = function(app) {
 }
 
 },{}],14:[function(require,module,exports){
-let current = angular.module('MarketApp');
-
-current.factory('ShoppinglistService', ['$http', function ($http) {
+module.exports=function(app){
+app.factory('ShoppinglistService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
         /* GET request for book list */
         getSLItems: function () {
-            $http({
+          var promise = $http({
                 method: 'GET',
                 url: 'get-items'
-            }).then(function (response) {
+            }).success(function (response) {
                 console.log(response);
+                return response;
                 // angular.copy(response., slItems);
+            }).error(function (response) {
+               return {"status": false};
             });
 
-            return shoppinglistItems;
+            return promise;
         },
+
         // /* POST request to update one book */
         // borrowBook: function (book) {
         //
@@ -321,7 +328,7 @@ current.factory('ShoppinglistService', ['$http', function ($http) {
         // },
     };
 }]);
-
+}
 // testing
 
 },{}]},{},[11])
