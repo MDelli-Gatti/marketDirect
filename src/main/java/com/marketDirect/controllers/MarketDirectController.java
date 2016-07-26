@@ -140,7 +140,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/create-item", method = RequestMethod.POST)
-    public void createItem(HttpSession session, String category, MultipartFile file, String description, String price, int quantity) throws Exception {
+    public void createItem(HttpSession session, MultipartFile file, String name, String description, String category,  String price, int quantity) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -160,7 +160,7 @@ public class MarketDirectController {
 
         Vendor vendor = vendors.findByName(username);
 
-        Item item = new Item(username, description, category, uploadedFile.getName(), price, quantity, vendor);
+        Item item = new Item(name, description, category, uploadedFile.getName(), price, quantity, vendor);
         items.save(item);
     }
 
