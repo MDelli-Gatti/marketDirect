@@ -103,5 +103,20 @@ public class MarketDirectApplicationTests {
 		//Assert.assertTrue(vendors.findOne(1).getName().equals("Store"));
 	}
 
+	@Test
+	public void dtestCreateItem() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
+		mockMvc.perform(
+				MockMvcRequestBuilders.fileUpload("/create-item")
+						.file(file)
+						.param("name", "Apples")
+						.param("description", "Red Delicious")
+						.param("category", "Produce")
+						.param("price", "$1.00 / lb")
+						.param("quantity", "100")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.count() == 1);
+	}
 
 }
