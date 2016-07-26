@@ -106,7 +106,7 @@ module.exports = function (app) {
 
 },{}],10:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
+    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
 
@@ -114,6 +114,12 @@ module.exports = function (app) {
           console.log(`${$scope.name} is a new user`);
           newUserService.userLogin($scope.name, $scope.password);
           $location.path('/explore');
+          }
+
+          $scope.inventories = function(){
+            console.log("boo");
+            console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
+            newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
       };
 
     }]);
@@ -184,7 +190,7 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
-    .when('/newItem', {
+    .when('/', {
       controller: 'NewitemController',
       templateUrl: 'templates/newItem.html'
     })
@@ -282,6 +288,14 @@ module.exports = function(app) {
             getUserName: function() {
                 return username;
             },
+
+  
+
+
+
+
+
+
         }
     })
 }
@@ -315,8 +329,6 @@ app.factory('newItemService', ['$http', function ($http) {
           }).then(function(response){
             console.log("we created" + response);
             return response;
-          }).error(function(response){
-            return {'status':false};
           });
         }
         // borrowBook: function (target) {

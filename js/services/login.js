@@ -27,6 +27,14 @@ module.exports = function(app) {
             getUserName: function() {
                 return username;
             },
+
+  
+
+
+
+
+
+
         }
     })
 }
