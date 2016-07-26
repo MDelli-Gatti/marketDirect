@@ -57,7 +57,7 @@ public class MarketDirectApplicationTests {
 	public void btestLogin() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/login")
-						.param("username", "Alice@gmail.com")
+						.param("username", "Alice@Gmail.com")
 						.param("password", "password")
 		);
 		Assert.assertTrue(users.count() == 1);
@@ -84,7 +84,7 @@ public class MarketDirectApplicationTests {
 
 	@Test
 	public void ctestCreateVendor() throws Exception {
-		MockMultipartFile file = new MockMultipartFile("farmer.jpg", new FileInputStream("farmer.jpg"));
+		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
 		mockMvc.perform(
 				MockMvcRequestBuilders.fileUpload("/create-vendor")
 				.file(file)
