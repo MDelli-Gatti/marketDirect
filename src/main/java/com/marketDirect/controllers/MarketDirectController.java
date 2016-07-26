@@ -456,6 +456,7 @@ public class MarketDirectController {
             throw new Exception("User not in database!");
         }
         Comment c = new Comment(comment.getText(),comment.getRating(), user, vendor);
+        vendors.save(vendor);
         comments.save(c);
     }
 
