@@ -13,10 +13,7 @@ import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
@@ -514,8 +511,8 @@ public class MarketDirectController {
         }
     }
 
-    @RequestMapping(path = "delete-comment", method = RequestMethod.POST)
-    public void deleteComment(HttpSession session, @RequestBody Comment comment) throws Exception {
+    @RequestMapping(path = "delete-comment/{id}", method = RequestMethod.POST)
+    public void deleteComment(HttpSession session, @PathVariable("id") int id) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -525,11 +522,12 @@ public class MarketDirectController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
-        if (user != comment.getUser()){
+        Comment commentFromDb = comments.findOne(id);
+        if (user != commentFromDb.getUser()){
             throw new Exception("This is not your comment");
         }
         else {
-            comments.delete(comment);
+            comments.delete(commentFromDb);
         }
     }
 

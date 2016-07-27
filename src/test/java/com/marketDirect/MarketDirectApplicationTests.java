@@ -208,16 +208,6 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void zTestDeleteItem() throws Exception {
-		mockMvc.perform(
-				MockMvcRequestBuilders.post("/delete-item")
-				.param("id", "1")
-				.sessionAttr("username", "Alice@Gmail.com")
-		);
-		Assert.assertTrue(items.count() == 0);
-	}
-
-	@Test
 	public void jTestEditVendor() throws Exception {
 		MockMultipartFile file = new MockMultipartFile("file", "banana.jpeg", "image/jpeg", new FileInputStream("banana.jpeg"));
 		mockMvc.perform(
@@ -309,7 +299,7 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void jTestGetComments() throws Exception {
+	public void rTestGetComments() throws Exception {
 
 		Vendor v = vendors.findByName("Store");
 
@@ -326,31 +316,38 @@ public class MarketDirectApplicationTests {
 		MockHttpServletResponse response = result.getResponse();
 		String jsoncom = response.getContentAsString();
 		System.out.println(comments.count());
-		ArrayList<Comment> coms = om.readValue(jsoncom, ArrayList.class);
-		Comment comTest = coms.get(1);
-
-		//Assert.assertTrue(comTest.getText().equals("Text"));
+		ArrayList<HashMap> coms = om.readValue(jsoncom, ArrayList.class);
+		HashMap comTest = coms.get(0);
+		System.out.println(comTest);
+		Assert.assertTrue(comTest.get("text").equals("New Text"));
 	}
 
 	@Test
-	public void xTestDeleteComment() throws Exception {
+	public void xTestDeleteItem() throws Exception {
 		mockMvc.perform(
-				MockMvcRequestBuilders.post("/delete-comment")
-				.param("id", "1")
-				.sessionAttr("username", "Alice@Gmail.com")
+				MockMvcRequestBuilders.post("/delete-item")
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(items.count() == 0);
 	}
 
-
+	@Test
+	public void yTestDeleteComment() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/delete-comment/1")
+				.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(comments.count() == 0);
+	}
 
 	@Test
-	public void yTestDeleteVendor() throws Exception {
+	public void zTestDeleteVendor() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete-vendor")
 						.param("id", "1")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(items.count() == 0);
+		Assert.assertTrue(vendors.count() == 0);
 	}
 }
