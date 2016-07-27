@@ -1,6 +1,5 @@
 package com.marketDirect;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marketDirect.entities.Comment;
 import com.marketDirect.entities.Item;
@@ -212,6 +211,52 @@ public class MarketDirectApplicationTests {
 				MockMvcRequestBuilders.post("/delete-item")
 				.param("id", "1")
 				.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.count() == 0);
+	}
+
+	@Test
+	public void jTestGetComments() throws Exception {
+
+		Vendor v = vendors.findByName("Store");
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(v);
+
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/get-comments")
+						.content(json)
+						.contentType("application/json")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String jsoncom = response.getContentAsString();
+		System.out.println(comments.count());
+		ArrayList<Comment> coms = om.readValue(jsoncom, ArrayList.class);
+		Comment comTest = coms.get(1);
+
+		//Assert.assertTrue(comTest.getText().equals("Text"));
+	}
+
+	@Test
+	public void kTestDeleteComment() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/delete-comment")
+				.param("id", "1")
+				.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.count() == 0);
+	}
+
+
+
+	@Test
+	public void lTestDeleteVendor() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/delete-vendor")
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(items.count() == 0);
 	}

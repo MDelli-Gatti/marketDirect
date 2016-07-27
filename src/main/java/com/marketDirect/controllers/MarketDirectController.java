@@ -50,7 +50,7 @@ public class MarketDirectController {
     @PostConstruct
     public void init() throws SQLException, PasswordStorage.CannotPerformOperationException, FileNotFoundException {
 
-        User testUser = new User("FarmerJohn", PasswordStorage.createHash("password1"), true);
+        /*User testUser = new User("FarmerJohn", PasswordStorage.createHash("password1"), true);
         if (users.findByUsername(testUser.getUsername()) == null) {
             users.save(testUser);
         }
@@ -71,7 +71,7 @@ public class MarketDirectController {
         }
         if (items.findByName(testItem3.getName()) == null) {
             items.save(testItem3);
-        }
+        }*/
         Server.createWebServer().start();
     }
 
