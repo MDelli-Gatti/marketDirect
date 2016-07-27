@@ -201,7 +201,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/delete-item", method = RequestMethod.POST)
-    public void deleteItem(HttpSession session, int id) throws Exception {
+    public void deleteItem(HttpSession session, Integer id) throws Exception {
         String username = (String) session.getAttribute("username");
         Item item = items.findOne(id);
         Vendor vendor = vendors.findByName(username);
