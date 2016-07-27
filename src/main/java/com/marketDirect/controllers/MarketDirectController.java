@@ -146,10 +146,10 @@ public class MarketDirectController {
             throw new Exception("Not logged in!");
         }
 
-        // User user = users.findByUsername(username);
-        // if (user == null) {
-        //     throw new Exception("User not in database!");
-        // }
+         User user = users.findByUsername(username);
+         if (user == null) {
+             throw new Exception("User not in database!");
+         }
 
         File dir = new File("public/files");
         dir.mkdirs();
