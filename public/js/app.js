@@ -67,6 +67,17 @@ module.exports = function (app) {
 
 },{}],7:[function(require,module,exports){
 module.exports = function (app) {
+    app.controller('NewitemController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, loginService, newItemService) {
+      $scope.inventories = function(){
+        console.log("boo");
+        //console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
+        //service.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+      }
+    }]);
+}
+
+},{}],8:[function(require,module,exports){
+module.exports = function (app) {
     app.controller('NewUserController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
       $scope.name = '';
       $scope.password = '';
@@ -81,7 +92,7 @@ module.exports = function (app) {
     }]);
 };
 
-},{}],8:[function(require,module,exports){
+},{}],9:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ProduceController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
 
@@ -93,7 +104,7 @@ module.exports = function (app) {
     }]);
 }
 
-},{}],9:[function(require,module,exports){
+},{}],10:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
       $scope.name = '';
@@ -108,7 +119,7 @@ module.exports = function (app) {
     }]);
 };
 
-},{}],10:[function(require,module,exports){
+},{}],11:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppinglistService', function ($scope, $http, $location, ShoppinglistService) {
   console.log("hey bro whats up?")
@@ -121,7 +132,7 @@ module.exports = function (app) {
 
 }
 
-},{}],11:[function(require,module,exports){
+},{}],12:[function(require,module,exports){
 let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
@@ -173,6 +184,10 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
+    .when('/newItem', {
+      controller: 'NewitemController',
+      templateUrl: 'templates/newItem.html'
+    })
 
 }])
 
@@ -207,11 +222,13 @@ require('./controllers/ProfileController.js')(app);
 require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
 require('./controllers/MiscController.js')(app);
+require('./controllers/NewitemController.js') (app);
 // require('./controllers/VideoController.js')(app);
 // services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
 require('./services/shoppinglist.js')(app);
+require('./services/newItem.js')(app);
 
 
 
@@ -228,7 +245,14 @@ function readURL(){
     }
 }
 
-},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewuserController.js":7,"./controllers/ProduceController.js":8,"./controllers/ProfileController.js":9,"./controllers/ShoppinglistController.js":10,"./services/login.js":12,"./services/newUser.js":13,"./services/shoppinglist.js":14}],12:[function(require,module,exports){
+
+
+
+function myFunction() {
+    var myWindow = window.open("", "", "width=200,height=100");
+}
+
+},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewitemController.js":7,"./controllers/NewuserController.js":8,"./controllers/ProduceController.js":9,"./controllers/ProfileController.js":10,"./controllers/ShoppinglistController.js":11,"./services/login.js":13,"./services/newItem.js":14,"./services/newUser.js":15,"./services/shoppinglist.js":16}],13:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', function($http, $location) {
         let username = "";
@@ -262,7 +286,64 @@ module.exports = function(app) {
     })
 }
 
-},{}],13:[function(require,module,exports){
+},{}],14:[function(require,module,exports){
+module.exports=function(app){
+app.factory('newItemService', ['$http', function ($http) {
+    let shoppinglistItems = [];
+
+    return {
+        /* GET request for book list */
+        getSLItems: function () {
+          var promise = $http({
+                method: 'GET',
+                url: 'get-items'
+            }).success(function (response) {
+                console.log(response);
+                return response;
+                // angular.copy(response., slItems);
+            }).error(function (response) {
+               return {"status": false};
+            });
+
+            return promise;
+        },
+        addNEWitems: function (){
+          console.log("sending diz")
+          $http({
+            method:'POST',
+            url: 'create-item'
+          }).then(function(response){
+            console.log("we created" + response);
+            return response;
+          }).error(function(response){
+            return {'status':false};
+          });
+        }
+        // borrowBook: function (target) {
+        //  console.log("borrowing diz")
+        //  $http({
+        //    method: "POST",
+        //    url: "http://10.1.10.215:7000/library/borrow/" + target.id
+        //  }).then(function(response){
+        //    console.log(response)
+        //    angular.copy(response.data.books,allBooks);
+        //
+        //  })
+
+        // /* POST request to update one book */
+        // borrowBook: function (book) {
+        //
+        // },
+        // /* POST request to update one book */
+        // returnBook: function (book) {
+        //
+        // },
+    };
+}]);
+}
+// testing
+
+},{}],15:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('newUserService', function($http, $location) {
         let username = "";
@@ -296,7 +377,7 @@ module.exports = function(app) {
     })
 }
 
-},{}],14:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports=function(app){
 app.factory('ShoppinglistService', ['$http', function ($http) {
     let shoppinglistItems = [];
@@ -317,6 +398,16 @@ app.factory('ShoppinglistService', ['$http', function ($http) {
 
             return promise;
         },
+        // borrowBook: function (target) {
+        //  console.log("borrowing diz")
+        //  $http({
+        //    method: "POST",
+        //    url: "http://10.1.10.215:7000/library/borrow/" + target.id
+        //  }).then(function(response){
+        //    console.log(response)
+        //    angular.copy(response.data.books,allBooks);
+        //
+        //  })
 
         // /* POST request to update one book */
         // borrowBook: function (book) {
@@ -331,4 +422,4 @@ app.factory('ShoppinglistService', ['$http', function ($http) {
 }
 // testing
 
-},{}]},{},[11])
+},{}]},{},[12])

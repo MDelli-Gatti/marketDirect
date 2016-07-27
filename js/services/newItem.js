@@ -1,5 +1,5 @@
 module.exports=function(app){
-app.factory('ShoppinglistService', ['$http', function ($http) {
+app.factory('newItemService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
@@ -18,6 +18,18 @@ app.factory('ShoppinglistService', ['$http', function ($http) {
 
             return promise;
         },
+        addNEWitems: function (){
+          console.log("sending diz")
+          $http({
+            method:'POST',
+            url: 'create-item'
+          }).then(function(response){
+            console.log("we created" + response);
+            return response;
+          }).error(function(response){
+            return {'status':false};
+          });
+        }
         // borrowBook: function (target) {
         //  console.log("borrowing diz")
         //  $http({

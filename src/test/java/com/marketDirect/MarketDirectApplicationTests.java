@@ -17,15 +17,20 @@ import org.junit.runner.RunWith;
 import org.junit.runners.MethodSorters;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.SpringApplicationConfiguration;
+import org.springframework.mock.web.MockHttpServletResponse;
 import org.springframework.mock.web.MockMultipartFile;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.web.WebAppConfiguration;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MarketDirectApplication.class)
@@ -91,14 +96,14 @@ public class MarketDirectApplicationTests {
 		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
 		mockMvc.perform(
 				MockMvcRequestBuilders.fileUpload("/create-vendor")
-				.file(file)
-				.param("name", "Store")
-				.param("phone", "555-5555")
-				.param("email", "Alice@Email.com")
-				.param("website", "www.store.com")
-				.param("location", "Charleston")
-				.param("date", "1/1/1900")
-				.sessionAttr("username", "Alice@Gmail.com")
+						.file(file)
+						.param("name", "Store")
+						.param("phone", "555-5555")
+						.param("email", "Alice@Email.com")
+						.param("website", "www.store.com")
+						.param("location", "Charleston")
+						.param("date", "1/1/1900")
+						.sessionAttr("username", "Alice@Gmail.com")
 		);
 
 		System.out.println(vendors.count());
@@ -125,7 +130,7 @@ public class MarketDirectApplicationTests {
 	@Test
 	public void etestCreateComment() throws Exception {
 
-	Comment c = new Comment();
+		Comment c = new Comment();
 		c.setText("Text");
 		c.setRating(5);
 		c.setVendor(vendors.findByName("Store"));
@@ -143,6 +148,24 @@ public class MarketDirectApplicationTests {
 
 		);
 		Assert.assertTrue(comments.count() == 1);
+	}
+
+	@Test
+	public void fTestGetVendor() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/get-vendor")
+				.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
+
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		ArrayList<HashMap<String, String>> vendorMaps = om.readValue(json, ArrayList.class);
+
+		Assert.assertTrue(vendorMaps.size() == 1  && vendorMaps.get(0).get("name").equals("Store"));
 	}
 
 	@Test
