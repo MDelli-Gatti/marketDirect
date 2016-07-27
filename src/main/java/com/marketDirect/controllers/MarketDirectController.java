@@ -318,7 +318,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/edit-vendor", method = RequestMethod.POST)
-    public void editVendor(int id,HttpSession session, MultipartFile file, String name, String phone, String email, String website, String location, String date) throws Exception {
+    public void editVendor(int id, HttpSession session, MultipartFile file, String name, String phone, String email, String website, String location, String date) throws Exception {
         String username = (String) session.getAttribute("username");
         Vendor vendor = vendors.findOne(id);
         if (username == null) {

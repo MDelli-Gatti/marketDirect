@@ -206,4 +206,21 @@ public class MarketDirectApplicationTests {
 		Assert.assertTrue(items.findOne(1).getName().equals("Bananas"));
 	}
 
+	@Test
+	public void iTestEditVendor() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "banana.jpeg", "image/jpeg", new FileInputStream("banana.jpeg"));
+		mockMvc.perform(
+				MockMvcRequestBuilders.fileUpload("/edit-item")
+						.file(file)
+						.param("id", "1")
+						.param("name", "Better Store")
+						.param("phone", "444-4444")
+						.param("email", "BetterStore@Hotmail.com")
+						.param("website", "www.betterstore.com")
+						.param("date", "tomorrow")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.findOne(1).getName().equals("Better Store"));
+	}
+
 }
