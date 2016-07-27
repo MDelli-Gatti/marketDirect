@@ -158,7 +158,7 @@ public class MarketDirectController {
         FileOutputStream fos = new FileOutputStream(uploadedFile);
         fos.write(file.getBytes());
 
-        Vendor vendor = vendors.findByName(username);
+        Vendor vendor = vendors.findByUser(user);
 
         Item item = new Item(name, description, category, uploadedFile.getName(), price, quantity, vendor);
         items.save(item);
@@ -234,7 +234,8 @@ public class MarketDirectController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
-
+        System.out.println(vendors.count());
+        ArrayList<Vendor> vs = (ArrayList<Vendor>) vendors.findAll();
         Vendor vendor = vendors.findByUser(user);
         if (vendor == null) {
             throw new Exception("logged in user does not match vendor");
@@ -317,7 +318,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/edit-vendor", method = RequestMethod.POST)
-    public void editVendor(int id,HttpSession session, MultipartFile file, String name, String phone, String email, String website, String location, String date) throws Exception {
+    public void editVendor(int id, HttpSession session, MultipartFile file, String name, String phone, String email, String website, String location, String date) throws Exception {
         String username = (String) session.getAttribute("username");
         Vendor vendor = vendors.findOne(id);
         if (username == null) {
@@ -452,7 +453,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "create-comment", method = RequestMethod.POST)
-    public void createComment(HttpSession session, @RequestBody Vendor vendor, @RequestBody Comment comment) throws Exception {
+    public void createComment(HttpSession session, int id, @RequestBody Comment comment) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -462,6 +463,7 @@ public class MarketDirectController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
+        Vendor vendor = vendors.findOne(id);
         Comment c = new Comment(comment.getText(),comment.getRating(), user, vendor);
         vendors.save(vendor);
         comments.save(c);
