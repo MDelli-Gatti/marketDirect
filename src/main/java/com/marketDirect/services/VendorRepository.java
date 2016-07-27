@@ -1,5 +1,6 @@
 package com.marketDirect.services;
 
+import com.marketDirect.entities.User;
 import com.marketDirect.entities.Vendor;
 import org.springframework.data.repository.CrudRepository;
 
@@ -10,4 +11,5 @@ public interface VendorRepository extends CrudRepository<Vendor, Integer> {
     Vendor findByName(String name);
     Iterable<Vendor> findByNameLike(String search);
     Iterable<Vendor> findByLocation(String location);
+    Vendor findByUser(User user);
 }
