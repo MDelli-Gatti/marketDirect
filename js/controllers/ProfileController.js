@@ -2,6 +2,16 @@ module.exports = function (app) {
     app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
+      $scope.Cat = '';
+      $scope.Name = '';
+      $scope.Desc = '';
+      $scope.Quant = '';
+      $scope.Price = '';
+
+
+
+
+
 
       $scope.createUser = function () {
           console.log(`${$scope.name} is a new user`);
