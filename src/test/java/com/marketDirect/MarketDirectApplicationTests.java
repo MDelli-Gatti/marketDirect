@@ -63,7 +63,7 @@ public class MarketDirectApplicationTests {
 	ItemRepository items;
 
 	@Test
-	public void bTestLogin() throws Exception {
+	public void btestLogin() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/login")
 						.param("username", "Alice@Gmail.com")
@@ -205,4 +205,14 @@ public class MarketDirectApplicationTests {
 		Assert.assertTrue(items.findOne(1).getName().equals("Bananas"));
 	}
 
+
+	@Test
+	public void iTestDeleteItem() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/delete-item")
+				.param("id", "1")
+				.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.count() == 0);
+	}
 }
