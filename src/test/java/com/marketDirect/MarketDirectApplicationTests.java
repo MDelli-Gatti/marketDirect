@@ -169,7 +169,7 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void ftestDeleteItem() throws Exception {
+	public void gTestDeleteItem() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete-item")
 				.param("id", "1")
