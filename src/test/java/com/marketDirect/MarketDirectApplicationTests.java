@@ -144,6 +144,7 @@ public class MarketDirectApplicationTests {
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-comment")
+						.param("id", "1")
 						.content(json)
 						.contentType("application/json")
 						.sessionAttr("username", "Alice@Gmail.com")
