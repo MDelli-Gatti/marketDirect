@@ -109,6 +109,16 @@ module.exports = function (app) {
     app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
+      $scope.Cat = '';
+      $scope.Name = '';
+      $scope.Desc = '';
+      $scope.Quant = '';
+      $scope.Price = '';
+
+
+
+
+
 
       $scope.createUser = function () {
           console.log(`${$scope.name} is a new user`);
@@ -307,29 +317,17 @@ app.factory('newItemService', ['$http', function ($http) {
 
     return {
         /* GET request for book list */
-        getSLItems: function () {
-          var promise = $http({
-                method: 'GET',
-                url: 'get-items'
-            }).success(function (response) {
-                console.log(response);
-                return response;
-                // angular.copy(response., slItems);
-            }).error(function (response) {
-               return {"status": false};
-            });
-
-            return promise;
-        },
+    
         addNEWitems: function (){
           console.log("sending diz")
           $http({
             method:'POST',
-            url: 'create-item'
+            url: "create-item"
           }).then(function(response){
             console.log("we created" + response);
             return response;
           });
+          console.log("the end")
         }
         // borrowBook: function (target) {
         //  console.log("borrowing diz")
