@@ -1,5 +1,6 @@
 package com.marketDirect;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marketDirect.entities.Comment;
 import com.marketDirect.entities.Item;
@@ -31,6 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MarketDirectApplication.class)
@@ -62,7 +64,7 @@ public class MarketDirectApplicationTests {
 	ItemRepository items;
 
 	@Test
-	public void btestLogin() throws Exception {
+	public void bTestLogin() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/login")
 						.param("username", "Alice@Gmail.com")
@@ -143,6 +145,7 @@ public class MarketDirectApplicationTests {
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-comment")
+						.param("id", "1")
 						.content(json)
 						.contentType("application/json")
 						.sessionAttr("username", "Alice@Gmail.com")
@@ -204,15 +207,105 @@ public class MarketDirectApplicationTests {
 		Assert.assertTrue(items.findOne(1).getName().equals("Bananas"));
 	}
 
-
 	@Test
-	public void iTestDeleteItem() throws Exception {
+	public void zTestDeleteItem() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete-item")
 				.param("id", "1")
 				.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(items.count() == 0);
+	}
+
+	@Test
+	public void jTestEditVendor() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "banana.jpeg", "image/jpeg", new FileInputStream("banana.jpeg"));
+		mockMvc.perform(
+				MockMvcRequestBuilders.fileUpload("/edit-item")
+						.file(file)
+						.param("id", "1")
+						.param("name", "Better Store")
+						.param("phone", "444-4444")
+						.param("email", "BetterStore@Hotmail.com")
+						.param("website", "www.betterstore.com")
+						.param("date", "tomorrow")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.findOne(1).getName().equals("Better Store"));
+	}
+
+	@Test
+	public void kTestEditComment() throws Exception {
+		Comment c = comments.findOne(1);
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(c);
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/edit-comment")
+						.param("id", "1")
+						.param("text", "New Text")
+						.content(json)
+						.contentType("application/json")
+						.sessionAttr("username", "Alice@Gmail.com")
+
+		);
+		Assert.assertTrue(comments.count() == 1 && comments.findOne(1).getText().equals("New Text"));
+	}
+
+	@Test
+	public void lTestAddShoppingListItem() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/add-shopping-list-item")
+				.param("id", "1")
+				.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 1);
+	}
+
+	@Test
+	public void mTestRemoveShoppingListItem() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/remove-shopping-list-item")
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 0);
+	}
+
+	@Test
+	public void nTestFindByLocation() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/find-by-location")
+						.param("location", "Charleston")
+						.sessionAttr("username", "Alice@Gmail.com")
+
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		List<Vendor> vends = om.readValue(json, List.class);
+
+		Assert.assertTrue(vends.size() == 1);
+	}
+
+	@Test
+	public void oTestSearchItem() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/search-item")
+						.param("search", "Banana")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		List<Item> itemList = om.readValue(json, List.class);
+
+		Assert.assertTrue(itemList.size() == 1);
 	}
 
 	@Test
@@ -240,7 +333,7 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void kTestDeleteComment() throws Exception {
+	public void xTestDeleteComment() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete-comment")
 				.param("id", "1")
@@ -252,7 +345,7 @@ public class MarketDirectApplicationTests {
 
 
 	@Test
-	public void lTestDeleteVendor() throws Exception {
+	public void yTestDeleteVendor() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete-vendor")
 						.param("id", "1")
