@@ -221,7 +221,7 @@ public class MarketDirectApplicationTests {
 	public void jTestEditVendor() throws Exception {
 		MockMultipartFile file = new MockMultipartFile("file", "banana.jpeg", "image/jpeg", new FileInputStream("banana.jpeg"));
 		mockMvc.perform(
-				MockMvcRequestBuilders.fileUpload("/edit-item")
+				MockMvcRequestBuilders.fileUpload("/edit-vendor")
 						.file(file)
 						.param("id", "1")
 						.param("name", "Better Store")
@@ -231,7 +231,7 @@ public class MarketDirectApplicationTests {
 						.param("date", "tomorrow")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(items.findOne(1).getName().equals("Better Store"));
+		Assert.assertTrue(vendors.findOne(1).getName().equals("Better Store"));
 	}
 
 	@Test
@@ -264,7 +264,23 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void mTestRemoveShoppingListItem() throws Exception {
+	public void mTestGetShoppingList() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/get-shopping-list")
+						.sessionAttr("username", "Alice@Gmail.com")
+				);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		List<Item> shoppingList = om.readValue(json, List.class);
+
+		Assert.assertTrue(shoppingList.size() == 1);
+	}
+
+	@Test
+	public void nTestRemoveShoppingListItem() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/remove-shopping-list-item")
 						.param("id", "1")
@@ -274,7 +290,7 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void nTestFindByLocation() throws Exception {
+	public void oTestFindByLocation() throws Exception {
 		ResultActions ra = mockMvc.perform(
 				MockMvcRequestBuilders.get("/find-by-location")
 						.param("location", "Charleston")
@@ -292,7 +308,7 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void oTestSearchItem() throws Exception {
+	public void pTestSearchItem() throws Exception {
 		ResultActions ra = mockMvc.perform(
 				MockMvcRequestBuilders.get("/search-item")
 						.param("search", "Banana")
@@ -306,5 +322,22 @@ public class MarketDirectApplicationTests {
 		List<Item> itemList = om.readValue(json, List.class);
 
 		Assert.assertTrue(itemList.size() == 1);
+	}
+
+	@Test
+	public void qTestSearchVendor() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/search-vendor")
+						.param("search", "Better Store")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		List<Vendor> vendorList = om.readValue(json, List.class);
+
+		Assert.assertTrue(vendorList.size() == 1);
 	}
 }

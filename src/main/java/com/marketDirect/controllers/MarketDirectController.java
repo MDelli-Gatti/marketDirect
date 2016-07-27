@@ -458,7 +458,9 @@ public class MarketDirectController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
-        return user.getShoppingList();
+        List<Item> shoppingList = user.getShoppingList();
+        System.out.println(shoppingList.size());
+        return shoppingList;
     }
 
     @RequestMapping(path = "create-comment", method = RequestMethod.POST)
