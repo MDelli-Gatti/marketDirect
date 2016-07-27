@@ -1,5 +1,7 @@
 package com.marketDirect.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 
@@ -35,6 +37,7 @@ public class Vendor {
     String date;
 
     @ManyToOne
+    @JsonIgnore
     User user;
 
     public Vendor() {
