@@ -4,31 +4,17 @@ app.factory('newItemService', ['$http', function ($http) {
 
     return {
         /* GET request for book list */
-        getSLItems: function () {
-          var promise = $http({
-                method: 'GET',
-                url: 'get-items'
-            }).success(function (response) {
-                console.log(response);
-                return response;
-                // angular.copy(response., slItems);
-            }).error(function (response) {
-               return {"status": false};
-            });
-
-            return promise;
-        },
+    
         addNEWitems: function (){
           console.log("sending diz")
           $http({
             method:'POST',
-            url: 'create-item'
+            url: "create-item"
           }).then(function(response){
             console.log("we created" + response);
             return response;
-          }).error(function(response){
-            return {'status':false};
           });
+          console.log("the end")
         }
         // borrowBook: function (target) {
         //  console.log("borrowing diz")

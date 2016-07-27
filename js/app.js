@@ -49,7 +49,7 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
-    .when('/newItem', {
+    .when('/', {
       controller: 'NewitemController',
       templateUrl: 'templates/newItem.html'
     })

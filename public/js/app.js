@@ -106,14 +106,30 @@ module.exports = function (app) {
 
 },{}],10:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', function ($scope, $http, $location, newUserService) {
+    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
+      $scope.Cat = '';
+      $scope.Name = '';
+      $scope.Desc = '';
+      $scope.Quant = '';
+      $scope.Price = '';
+
+
+
+
+
 
       $scope.createUser = function () {
           console.log(`${$scope.name} is a new user`);
           newUserService.userLogin($scope.name, $scope.password);
           $location.path('/explore');
+          }
+
+          $scope.inventories = function(){
+            console.log("boo");
+            console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
+            newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
       };
 
     }]);
@@ -184,7 +200,7 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
-    .when('/newItem', {
+    .when('/', {
       controller: 'NewitemController',
       templateUrl: 'templates/newItem.html'
     })
@@ -282,6 +298,14 @@ module.exports = function(app) {
             getUserName: function() {
                 return username;
             },
+
+  
+
+
+
+
+
+
         }
     })
 }
@@ -293,31 +317,17 @@ app.factory('newItemService', ['$http', function ($http) {
 
     return {
         /* GET request for book list */
-        getSLItems: function () {
-          var promise = $http({
-                method: 'GET',
-                url: 'get-items'
-            }).success(function (response) {
-                console.log(response);
-                return response;
-                // angular.copy(response., slItems);
-            }).error(function (response) {
-               return {"status": false};
-            });
-
-            return promise;
-        },
+    
         addNEWitems: function (){
           console.log("sending diz")
           $http({
             method:'POST',
-            url: 'create-item'
+            url: "create-item"
           }).then(function(response){
             console.log("we created" + response);
             return response;
-          }).error(function(response){
-            return {'status':false};
           });
+          console.log("the end")
         }
         // borrowBook: function (target) {
         //  console.log("borrowing diz")
