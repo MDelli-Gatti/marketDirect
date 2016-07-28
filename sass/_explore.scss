@@ -3,30 +3,31 @@
   border: 2px solid black;
   width: 30%;
   // float: left;
-  display: inline-block;
+  // display: inline-block;
   margin: auto;
 }
 
 #produceContainer{
-  width: 30%;
-  // float: right;
+  width: 70%;
+  height: 200px;
+  float: right;
   display: inline-block;
   border: 2px solid black;
 }
 #craftContainer{
   width: 30%;
-  // float: right;
-  display: inline-block;
+  float: right;
+  // display: inline-block;
   border: 2px solid black;
 }
 #miscContainer{
   width: 30%;
   // float: right;
-  display: inline-block;
+  // display: inline-block;
   border: 2px solid black;
 }
 
 .large-6{
-  display: inline-block;
+  // display: inline-block;
   margin: auto;
 }

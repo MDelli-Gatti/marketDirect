@@ -1,4 +1,4 @@
-<div class="LoginContainer">
+<!-- <div class="LoginContainer">
 
 
 <div id = "loginBox"class="row">
@@ -23,4 +23,21 @@
 </div>
 
 
+</div> -->
+
+
+<div class="LoginContainer">
+
+	<form class="form-signin">
+    <img class = "logo" src="./images/marletdirectlogo.svg" alt="" />
+		<input type="text" class="form-control" ng-model="name" placeholder="somebody@example.com" required="" autofocus="">
+		<input type="password" class="form-control" ng-model="password" placeholder="Password" required="">
+		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click='login()'>
+			Sign In
+		</button>
+    <button class="btn btn-lg btn-primary btn-block" type="button" name="button"><a href="#/newuser" id = "newUser">
+      New User? Click here!</a>
+    </button>
+
+	</form>
 </div>

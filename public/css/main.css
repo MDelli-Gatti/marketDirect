@@ -2,7 +2,8 @@
   background-image: url("../images/green-crop.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
-  height: 670px; }
+  height: 670px;
+  border: 2px solid black; }
 
 p {
   font-family: 'Lato', sans-serif;
@@ -21,54 +22,75 @@ p {
   bottom: -2%; }
 
 .logo {
-  width: 300px;
-  margin-left: 90px; }
+  width: 253px;
+  -webkit-flex-wrap: wrap; }
 
 .blah {
   color: red; }
 
+.form-signin {
+  max-width: 280px;
+  padding: 15px;
+  margin: 0 auto; }
+
+.bottomButton {
+  background-color: blue; }
+
+#newUser {
+  color: white; }
+
 #artContainer {
   border: 2px solid black;
   width: 30%;
-  display: inline-block;
   margin: auto; }
 
 #produceContainer {
-  width: 30%;
+  width: 70%;
+  height: 200px;
+  float: right;
   display: inline-block;
   border: 2px solid black; }
 
 #craftContainer {
   width: 30%;
-  display: inline-block;
+  float: right;
   border: 2px solid black; }
 
 #miscContainer {
   width: 30%;
-  display: inline-block;
   border: 2px solid black; }
 
 .large-6 {
-  display: inline-block;
   margin: auto; }
-
-.has-form {
-  position: absolute;
-  top: 0;
-  left: 6rem;
-  min-width: 14rem; }
-  @media only screen and (max-width: 40em) {
-    .has-form {
-      min-width: 10rem;
-      top: 0.5rem; }
-      .has-form .button {
-        height: 1.85rem; } }
 
 #icon {
   width: 78px;
   position: relative;
   right: -127%;
   top: -15px; }
+
+.navbar-brand-centered {
+  position: absolute;
+  left: 50%;
+  display: block;
+  width: 160px;
+  text-align: center; }
+
+.navbar > .container .navbar-brand-centered,
+.navbar > .container-fluid .navbar-brand-centered {
+  margin-left: -80px; }
+
+.topNavcontainer {
+  height: 50px; }
+
+#navIcon {
+  width: 53px;
+  margin-left: 241px;
+  position: relative;
+  right: -78%; }
+
+#navbar-brand-centered {
+  color: white; }
 
 .paperList {
   background-size: 100%;
@@ -96,3 +118,21 @@ p {
   width: 40%;
   border: 2px solid black;
   background-color: white; }
+
+.media {
+  /*box-shadow:0px 0px 4px -2px #000;*/
+  margin: 20px 0;
+  padding: 30px; }
+
+.dp {
+  border: 10px solid #eee;
+  transition: all 0.2s ease-in-out; }
+
+.thumb {
+  margin-bottom: 30px; }
+
+footer {
+  margin: 50px 0; }
+
+.page-header {
+  text-align: center; }
