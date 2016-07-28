@@ -18,16 +18,16 @@ module.exports = function (app) {
           $location.path('/explore');
           }
 
-          $scope.inventories = function(){
-          var f = document.getElementByID('fileupload').files[0],
-            r = new FileReader();
-          r.onloaded = function(e){
-            var data = e.target.result;
-            console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-            newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
-          }
-          r.readAsBinaryString(f);
-      };
+      //     $scope.inventories = function(){
+      //     var f = document.getElementByID('fileupload').files[0],
+      //       r = new FileReader();
+      //     r.onloaded = function(e){
+      //       var data = e.target.result;
+      //       console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
+      //       newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+      //     }
+      //     r.readAsBinaryString(f);
+      // };
 
     }]);
 };
