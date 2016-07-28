@@ -1,13 +1,7 @@
 package com.marketDirect.controllers;
 
-import com.marketDirect.entities.Comment;
-import com.marketDirect.entities.Item;
-import com.marketDirect.entities.User;
-import com.marketDirect.entities.Vendor;
-import com.marketDirect.services.CommentRepository;
-import com.marketDirect.services.ItemRepository;
-import com.marketDirect.services.UserRepository;
-import com.marketDirect.services.VendorRepository;
+import com.marketDirect.entities.*;
+import com.marketDirect.services.*;
 import com.marketDirect.utilities.PasswordStorage;
 import org.h2.tools.Server;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,6 +37,9 @@ public class MarketDirectController {
 
     @Autowired
     CommentRepository comments;
+
+    @Autowired
+    MessageRepository messages;
 
     @PostConstruct
     public void init() throws SQLException, PasswordStorage.CannotPerformOperationException, FileNotFoundException {
@@ -411,6 +408,10 @@ public class MarketDirectController {
         for (Item item : i){
             items.delete(item);
         }
+        Iterable<Message> m = messages.findByVendor(vendor);
+        for (Message message : m) {
+            messages.delete(message);
+        }
         vendors.delete(vendor);
     }
 
@@ -559,4 +560,23 @@ public class MarketDirectController {
 
         return vendors.findByLocation(location);
     }
+
+    @RequestMapping(path = "create-message", method = RequestMethod.POST)
+    public void createMessage(HttpSession session, Integer id, @RequestBody Message message) throws Exception {
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+
+        Vendor vendor = vendors.findOne(id);
+        Message m = new Message(message.getText(), vendor);
+        messages.save(m);
+    }
+
+
 }
