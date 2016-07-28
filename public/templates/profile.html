@@ -24,7 +24,7 @@
                         <input type="number" name="quantity" placeholder="Item Quantity">
                         <input type="text" name="price" placeholder="Item Price">
                         <input type="file" name="file">
-                        <input type="submit" value="Add New Item">
+                        <input type="submit" ng-click = "addNEWitems()" value="Add New Item">
                     </form>
                 </div>
 
@@ -38,12 +38,23 @@
         <h1 class="page-header">Vendor Inventory</h1>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-        <a class="thumbnail" href="#">
-            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-        </a>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat = "ShopItem in ShopItems">
+        <!-- <a class="thumbnail" href="#profile"> -->
+            <!-- <img class="img-responsive" src="http://placehold.it/400x300" alt=""> -->
+            <!-- <ul class="list-group" ng-repeat = "ShopItem in ShopItems | limitTo: 1">
+              <li class="list-group-item">{{ShopItem.category}}</li>
+              <li class="list-group-item">{{ShopItem.price}}</li>
+              <li class="list-group-item">{{ShopItem.description}}</li>
+
+            </ul> -->
+        <!-- </a> -->
+          <li class="list-group-item">{{ShopItem.category}}</li>
+          <li class="list-group-item">{{ShopItem.price}}</li>
+          <li class="list-group-item">{{ShopItem.description}}</li>
+          <button ng-click = "remove()"  type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
+
     </div>
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+    <!-- <div class="col-lg-3 col-md-4 col-xs-6 thumb">
         <a class="thumbnail" href="#">
             <img class="img-responsive" src="http://placehold.it/400x300" alt="">
         </a>
@@ -99,7 +110,7 @@
         </a>
     </div>
 
-</div>
+</div> -->
 
 <!-- <div class="row">
     <div class="large-12 columns"> -->

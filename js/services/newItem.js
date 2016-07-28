@@ -1,10 +1,13 @@
 module.exports=function(app){
 app.factory('newItemService', ['$http', function ($http) {
     let shoppinglistItems = [];
-
+    // $scope.Cat = '';
+    // $scope.Name = '';
+    // $scope.Desc = '';
+    // $scope.Quant = '';
+    // $scope.Price = '';
     return {
-        /* GET request for book list */
-    
+
         addNEWitems: function (){
           console.log("sending diz")
           $http({
@@ -15,8 +18,23 @@ app.factory('newItemService', ['$http', function ($http) {
             return response;
           });
           console.log("the end")
-        }
-        // borrowBook: function (target) {
+        },
+        getSLItems: function () {
+          var promise = $http({
+                method: 'GET',
+                url: 'get-items'
+            }).success(function (response) {
+                console.log(response);
+                return response;
+                // angular.copy(response., slItems);
+            }).error(function (response) {
+               return {"status": false};
+            });
+
+            return promise;
+        },
+
+         // borrowBook: function (target) {
         //  console.log("borrowing diz")
         //  $http({
         //    method: "POST",
