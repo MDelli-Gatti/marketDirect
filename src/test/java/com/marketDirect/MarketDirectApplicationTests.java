@@ -1,11 +1,18 @@
 package com.marketDirect;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.marketDirect.entities.*;
-import com.marketDirect.services.*;
+import com.marketDirect.entities.Comment;
+import com.marketDirect.entities.Item;
+import com.marketDirect.entities.User;
+import com.marketDirect.entities.Vendor;
+import com.marketDirect.services.CommentRepository;
+import com.marketDirect.services.ItemRepository;
+import com.marketDirect.services.UserRepository;
+import com.marketDirect.services.VendorRepository;
 import org.junit.Assert;
 import org.junit.Before;
+import com.marketDirect.entities.*;
+import com.marketDirect.services.*;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -24,6 +31,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,9 +97,8 @@ public class MarketDirectApplicationTests {
 				MockMvcRequestBuilders.post("/login")
 						.param("username", "Alice@Gmail.com")
 						.param("password", "password")
-
 		);
-		Assert.assertTrue(users.count() == 1);
+		Assert.assertTrue(users.count() == 1 && users.findOne(1).getUsername().equals("Alice@Gmail.com"));
 	}
 
 	@Test
@@ -109,17 +117,15 @@ public class MarketDirectApplicationTests {
 		);
 
 		System.out.println(vendors.count());
-		Assert.assertTrue(vendors.count() == 1);
+		Assert.assertTrue(vendors.count() == 1 && vendors.findOne(1).getName().equals("Store"));
 
 		//Assert.assertTrue(vendors.findOne(1).getName().equals("Store"));
 	}
 
 	@Test
-	public void dTestCreateItem() throws Exception {
-		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
+	public void daTestCreateItem() throws Exception {
 		mockMvc.perform(
-				MockMvcRequestBuilders.fileUpload("/create-item")
-						.file(file)
+				MockMvcRequestBuilders.post("/create-item")
 						.param("name", "Apples")
 						.param("description", "Red Delicious")
 						.param("category", "Produce")
@@ -127,7 +133,19 @@ public class MarketDirectApplicationTests {
 						.param("quantity", "100")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(items.count() == 1);
+		Assert.assertTrue(items.count() == 1 && items.findOne(1).getName().equals("Apples"));
+	}
+
+	@Test
+	public void dzTestAddPicture() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
+		mockMvc.perform(
+				MockMvcRequestBuilders.fileUpload("/add-photo")
+						.file(file)
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.findOne(1).getFilename() != null);
 	}
 
 	@Test
@@ -151,14 +169,14 @@ public class MarketDirectApplicationTests {
 						.sessionAttr("username", "Alice@Gmail.com")
 
 		);
-		Assert.assertTrue(comments.count() == 1);
+		Assert.assertTrue(comments.count() == 1 && comments.findOne(1).getText().equals("Text"));
 	}
 
 	@Test
 	public void fTestGetVendor() throws Exception {
 		ResultActions ra = mockMvc.perform(
 				MockMvcRequestBuilders.get("/get-vendor")
-				.param("id", "1")
+						.param("id", "1")
 						.sessionAttr("username", "Alice@Gmail.com")
 
 		);
@@ -204,7 +222,7 @@ public class MarketDirectApplicationTests {
 						.param("quantity", "200")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(items.findOne(1).getName().equals("Bananas"));
+		Assert.assertTrue(items.findOne(1).getName().equals("Bananas") && items.count() == 1);
 	}
 
 	@Test
@@ -221,7 +239,7 @@ public class MarketDirectApplicationTests {
 						.param("date", "tomorrow")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(vendors.findOne(1).getName().equals("Better Store"));
+		Assert.assertTrue(vendors.findOne(1).getName().equals("Better Store") && vendors.count() == 1);
 	}
 
 	@Test
@@ -247,10 +265,10 @@ public class MarketDirectApplicationTests {
 	public void lTestAddShoppingListItem() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/add-shopping-list-item")
-				.param("id", "1")
-				.sessionAttr("username", "Alice@Gmail.com")
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 1);
+		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 1 && users.findByUsername("Alice@Gmail.com").getShoppingList().get(0).getName().equals("Bananas"));
 	}
 
 	@Test
@@ -258,15 +276,15 @@ public class MarketDirectApplicationTests {
 		ResultActions ra = mockMvc.perform(
 				MockMvcRequestBuilders.get("/get-shopping-list")
 						.sessionAttr("username", "Alice@Gmail.com")
-				);
+		);
 		MvcResult result = ra.andReturn();
 		MockHttpServletResponse response = result.getResponse();
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Item> shoppingList = om.readValue(json, List.class);
+		List<HashMap<String, String>> shoppingList = om.readValue(json, List.class);
 
-		Assert.assertTrue(shoppingList.size() == 1);
+		Assert.assertTrue(shoppingList.size() == 1 && shoppingList.get(0).get("name").equals("Bananas"));
 	}
 
 	@Test
@@ -292,9 +310,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Vendor> vends = om.readValue(json, List.class);
+		List<HashMap<String, String>> vends = om.readValue(json, List.class);
 
-		Assert.assertTrue(vends.size() == 1);
+		Assert.assertTrue(vends.size() == 1 && vends.get(0).get("name").equals("Better Store"));
 	}
 
 	@Test
@@ -309,9 +327,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Item> itemList = om.readValue(json, List.class);
+		List<HashMap<String, String>> itemList = om.readValue(json, List.class);
 
-		Assert.assertTrue(itemList.size() == 1);
+		Assert.assertTrue(itemList.size() == 1 && itemList.get(0).get("name").equals("Bananas"));
 	}
 
 	@Test
@@ -326,9 +344,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Vendor> vendorList = om.readValue(json, List.class);
+		List<HashMap<String, String>> vendorList = om.readValue(json, List.class);
 
-		Assert.assertTrue(vendorList.size() == 1);
+		Assert.assertTrue(vendorList.size() == 1 && vendorList.get(0).get("name").equals("Better Store"));
 	}
 
 	@Test
@@ -344,9 +362,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Comment> commentList = om.readValue(json, List.class);
+		List<HashMap<String, String>> commentList = om.readValue(json, List.class);
 
-		Assert.assertTrue(commentList.size() == 1);
+		Assert.assertTrue(commentList.size() == 1 && commentList.get(0).get("text").equals("New Text"));
 	}
 
 	@Test
@@ -360,9 +378,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Item> itemList = om.readValue(json, List.class);
+		List<HashMap<String, String>> itemList = om.readValue(json, List.class);
 
-		Assert.assertTrue(itemList.size() == 1);
+		Assert.assertTrue(itemList.size() == 1 && itemList.get(0).get("name").equals("Bananas"));
 	}
 
 	@Test
@@ -377,9 +395,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Item> itemList = om.readValue(json, List.class);
+		List<HashMap<String, String>> itemList = om.readValue(json, List.class);
 
-		Assert.assertTrue(itemList.size() == 1);
+		Assert.assertTrue(itemList.size() == 1 && itemList.get(0).get("name").equals("Bananas"));
 	}
 
 	@Test
@@ -393,9 +411,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Vendor> vendorList = om.readValue(json, List.class);
+		List<HashMap<String, String>> vendorList = om.readValue(json, List.class);
 
-		Assert.assertTrue(vendorList.size() == 1);
+		Assert.assertTrue(vendorList.size() == 1 && vendorList.get(0).get("name").equals("Better Store"));
 	}
 
 	@Test
@@ -431,7 +449,7 @@ public class MarketDirectApplicationTests {
 	public void yTestDeleteComment() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete-comment/1")
-				.sessionAttr("username", "Alice@Gmail.com")
+						.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(comments.count() == 0);
 	}

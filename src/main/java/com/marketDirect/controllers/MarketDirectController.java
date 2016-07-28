@@ -44,28 +44,28 @@ public class MarketDirectController {
     @PostConstruct
     public void init() throws SQLException, PasswordStorage.CannotPerformOperationException, FileNotFoundException {
 
-//        User testUser = new User("FarmerJohn", PasswordStorage.createHash("password1"), true);
-//        if (users.findByUsername(testUser.getUsername()) == null) {
-//            users.save(testUser);
-//        }
-//
-//        Vendor testVendor = new Vendor("John's Store", "", "555-5555", "John@email.com", "www.johnsstore.com", "Charleston", "7/25/16", testUser);
-//        if (vendors.findByName(testVendor.getName()) == null) {
-//            vendors.save(testVendor);
-//        }
-//
-//        Item testItem1 = new Item("Apples", "Red Delicious", "Produce", "", "$1.00 / lb", 100, testVendor);
-//        Item testItem2 = new Item("Bananas", "Yellow", "Produce", "", "$5.00 / lb", 20, testVendor);
-//        Item testItem3 = new Item("Strawberries", "Red", "Produce", "", "$2.50 / Bag", 50, testVendor);
-//        if (items.findByName(testItem1.getName()) == null) {
-//            items.save(testItem1);
-//        }
-//        if (items.findByName(testItem2.getName()) == null) {
-//            items.save(testItem2);
-//        }
-//        if (items.findByName(testItem3.getName()) == null) {
-//            items.save(testItem3);
-//        }
+        User testUser = new User("FarmerJohn", PasswordStorage.createHash("password1"), true);
+        if (users.findByUsername(testUser.getUsername()) == null) {
+            users.save(testUser);
+        }
+
+        Vendor testVendor = new Vendor("John's Store", "", "555-5555", "John@email.com", "www.johnsstore.com", "Charleston", "7/25/16", testUser);
+        if (vendors.findByName(testVendor.getName()) == null) {
+            vendors.save(testVendor);
+        }
+
+        Item testItem1 = new Item("Apples", "Red Delicious", "Produce", "", "$1.00 / lb", 100, testVendor);
+        Item testItem2 = new Item("Bananas", "Yellow", "Produce", "", "$5.00 / lb", 20, testVendor);
+        Item testItem3 = new Item("Strawberries", "Red", "Produce", "", "$2.50 / Bag", 50, testVendor);
+        if (items.findByName(testItem1.getName()) == null) {
+            items.save(testItem1);
+        }
+        if (items.findByName(testItem2.getName()) == null) {
+            items.save(testItem2);
+        }
+        if (items.findByName(testItem3.getName()) == null) {
+            items.save(testItem3);
+        }
         Server.createWebServer().start();
     }
 
@@ -134,7 +134,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/create-item", method = RequestMethod.POST)
-    public void createItem(HttpSession session, HttpServletResponse response, String name, MultipartFile file, String description, String category,  String price, int quantity) throws Exception {
+    public void createItem(HttpSession session, HttpServletResponse response, String name, String description, String category,  String price, int quantity) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -145,6 +145,33 @@ public class MarketDirectController {
              throw new Exception("User not in database!");
          }
 
+        Vendor vendor = vendors.findByUser(user);
+
+        Item item = new Item(name, description, category, null , price, quantity, vendor);
+        items.save(item);
+    }
+
+    @RequestMapping(path = "add-photo", method = RequestMethod.POST)
+    public void addPicture(int id, HttpSession session, MultipartFile file, HttpServletResponse response) throws Exception {
+        Item item = items.findOne(id);
+
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        Vendor vendor = vendors.findByUser(user);
+        if (vendor == null) {
+            throw new Exception("logged in user does not match vendor");
+        }
+        else if (vendor != item.getVendor()){
+            throw new Exception("Logged in user can not edit this!");
+        }
+
         File dir = new File("public/files");
         dir.mkdirs();
 
@@ -152,9 +179,7 @@ public class MarketDirectController {
         FileOutputStream fos = new FileOutputStream(uploadedFile);
         fos.write(file.getBytes());
 
-        Vendor vendor = vendors.findByUser(user);
-
-        Item item = new Item(name, description, category, uploadedFile.getName() , price, quantity, vendor);
+        item.setFilename(uploadedFile.getName());
         items.save(item);
     }
 
@@ -229,15 +254,12 @@ public class MarketDirectController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
-        System.out.println(vendors.count());
-        ArrayList<Vendor> vs = (ArrayList<Vendor>) vendors.findAll();
         Vendor vendor = vendors.findByUser(user);
         if (vendor == null) {
             throw new Exception("logged in user does not match vendor");
         }
-
         else if (vendor != item.getVendor()){
-            throw new Exception("Logged in user can not delete this!");
+            throw new Exception("Logged in user can not edit this!");
         }
 
         if (name != null) {

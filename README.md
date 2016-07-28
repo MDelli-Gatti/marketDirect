@@ -23,7 +23,10 @@ Delete Vendor:
 route = "POST" path = "delete-vendor" data = int id
 
 Create Item:
-route = "POST" path = "create-item" data = String category, MultipartFile file, String description, String price, int quantity, Vendor object
+route = "POST" path = "create-item" data = String category, String description, String price, int quantity, Vendor object
+
+Add Photo
+route = "POST" path = "add-photo" data = MultipartFile file, int id
 
 Get ALL Items:
 route = "GET" path = "get-items" (plural)
