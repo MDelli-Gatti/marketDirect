@@ -70,8 +70,8 @@ module.exports = function (app) {
     app.controller('NewitemController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, loginService, newItemService) {
       $scope.inventories = function(){
         console.log("boo");
-        //console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-        //service.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+        console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
+        service.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
       }
     }]);
 }
@@ -125,17 +125,12 @@ module.exports = function (app) {
           newUserService.userLogin($scope.name, $scope.password);
           $location.path('/explore');
           }
-
           $scope.inventories = function(){
-          var f = document.getElementByID('fileupload').files[0],
-            r = new FileReader();
-          r.onloaded = function(e){
-            var data = e.target.result;
+            console.log("boo");
             console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
             newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
           }
-          r.readAsBinaryString(f);
-      };
+
 
     }]);
 };
