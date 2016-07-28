@@ -198,7 +198,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/delete-item", method = RequestMethod.POST)
-    public void deleteItem(HttpSession session, Integer id) throws Exception {
+    public void deleteItem(HttpSession session, int id) throws Exception {
         String username = (String) session.getAttribute("username");
         Item item = items.findOne(id);
 
@@ -217,10 +217,6 @@ public class MarketDirectController {
         File f = new File("public/files/" + item.getFilename());
         f.delete();
 
-        List<Item> shit = (List<Item>) items.findAll();
-        Item fuck = items.findOne(1);
-        System.out.println(shit.size());
-        System.out.println(items.count());
         items.delete(item);
     }
 
@@ -399,9 +395,7 @@ public class MarketDirectController {
 
     @RequestMapping(path = "/search-item", method = RequestMethod.GET)
     public Iterable<Item> searchItem(String search){
-        List<Item> shit = (List<Item>) items.findAll();
-        List<Item> stuff = (List<Item>) items.findByNameLike("%" + search + "%");
-        return stuff;
+        return items.findByNameLike("%" + search + "%");
     }
 
     @RequestMapping(path = "/search-vendor", method = RequestMethod.GET)
@@ -440,7 +434,6 @@ public class MarketDirectController {
         List<Item> sl = user.getShoppingList();
         sl.remove(items.findOne(id));
         user.setShoppingList(sl);
-        System.out.println(user.getShoppingList().size());
         users.save(user);
     }
 
@@ -455,9 +448,7 @@ public class MarketDirectController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
-        List<Item> shoppingList = user.getShoppingList();
-        System.out.println(shoppingList.size());
-        return shoppingList;
+        return user.getShoppingList();
     }
 
     @RequestMapping(path = "create-comment", method = RequestMethod.POST)
@@ -478,7 +469,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "get-comments", method = RequestMethod.GET)
-    public Iterable<Comment> getComments(HttpSession session, @RequestBody Vendor vendor) throws Exception {
+    public Iterable<Comment> getComments(HttpSession session, int id) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -488,7 +479,7 @@ public class MarketDirectController {
         if (user == null) {
             throw new Exception("User not in database!");
         }
-        return comments.findByVendorId(vendor.getId());
+        return comments.findByVendorId(id);
     }
 
     @RequestMapping(path = "edit-comment", method = RequestMethod.POST)
