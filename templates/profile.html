@@ -1,8 +1,3 @@
-
-
-
-
-
 <div class="row">
 
 
@@ -12,24 +7,26 @@
                 <img class="media-object dp img-circle" src="http://www-tc.pbs.org/independentlens/realdirt/images/home_rt.jpg" style="width: 300px;height:300px;">
             </a>
             <div class="media-body">
-                  <h3>User/Vendor Name goes here</h3>
-                  <h6>User/Vendor location</h6>
-                  <h6>User/Vendor specialty</h6>
-                  <h6>Some other shit I'm forgetting....</h6>
-                  <input type='file' id='getval' /><br/><br/>
-                  <button type="button" ng-click="showme=!showme" name="button">New Item</button>
-                  <div class="addinventory" ng-show="showme">
+                <h3>User/Vendor Name goes here</h3>
+                <h6>User/Vendor location</h6>
+                <h6>User/Vendor specialty</h6>
+                <h6>Some other shit I'm forgetting....</h6>
+                <input type='file' id='getval' />
+                <br/>
+                <br/>
+                <button type="button" ng-click="showme=!showme" name="button">New Item</button>
+                <div class="addinventory" ng-show="showme">
 
-                    <form id = "fileupload" method = "POST" enctype = "multipart/form-data">
-                               <input type="text" ng-model="Cat" name="category" placeholder="Item Category">
-                               <input type="text" ng-model="Name" name="name" placeholder="Item Name">
-                               <input type="text" ng-model="Desc" name="description" placeholder="Item Description">
-                               <input type="number" ng-model="Quant" name="quantity" placeholder="Item Quantity">
-                               <input type="text" ng-model="Price" name="price" placeholder="Item Price">
-                               <input type="file" name="file">
-                               <input type="submit" value="Add New Item" ng-click = "inventories()">
-                         </form>
-                  </div>
+                    <form id="fileupload" action="/create-item" method="POST" enctype="multipart/form-data">
+                        <input type="text" name="category" placeholder="Item Category">
+                        <input type="text" name="name" placeholder="Item Name">
+                        <input type="text" name="description" placeholder="Item Description">
+                        <input type="number" name="quantity" placeholder="Item Quantity">
+                        <input type="text" name="price" placeholder="Item Price">
+                        <input type="file" name="file">
+                        <input type="submit" value="Add New Item">
+                    </form>
+                </div>
 
                 <hr style="margin:8px auto">
             </div>
@@ -38,85 +35,85 @@
     </div>
 
     <div class="col-lg-12">
-                    <h1 class="page-header">Vendor Inventory</h1>
-                </div>
+        <h1 class="page-header">Vendor Inventory</h1>
+    </div>
 
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
-                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                    <a class="thumbnail" href="#">
-                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                    </a>
-                </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+        <a class="thumbnail" href="#">
+            <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+        </a>
+    </div>
 
 </div>
 
 <!-- <div class="row">
     <div class="large-12 columns"> -->
 
-    <!-- Navigation -->
+<!-- Navigation -->
 
-      <!-- <div class="row">
+<!-- <div class="row">
         <div class="large-12 columns">
 
           <nav class="top-bar">
             <ul class="title-area"> -->
 
-              <!-- Title Area -->
-              <!-- <li class="name">
+<!-- Title Area -->
+<!-- <li class="name">
                 <h1>
                   <a href="#">
                     Top Bar Title
@@ -127,8 +124,8 @@
             </ul>
 
             <section class="top-bar-section"> -->
-              <!-- Right Nav Section -->
-              <!-- <ul class="right">
+<!-- Right Nav Section -->
+<!-- <ul class="right">
                 <li class="divider"></li>
                 <li class="has-dropdown">
                   <a href="#">Main Item 1</a>
@@ -172,18 +169,18 @@
               </ul>
             </section>
           </nav> -->
-          <!-- End Top Bar -->
-        <!-- </div>
+<!-- End Top Bar -->
+<!-- </div>
       </div> -->
 
-    <!-- End Navigation -->
+<!-- End Navigation -->
 
-      <!-- <div class="row"> -->
+<!-- <div class="row"> -->
 
 
-  <!-- Side Bar -->
+<!-- Side Bar -->
 
-        <!-- <div class="large-4 small-12 columns">
+<!-- <div class="large-4 small-12 columns">
 
           <img src="http://placehold.it/500x500&text=Logo">
 
@@ -220,22 +217,22 @@
             </div>
           </div> -->
 
-          <!-- <a href="#">
+<!-- <a href="#">
           <div class="panel callout radius">
             <h6>99&nbsp; items in your cart</h6>
           </div>
           </a> -->
 
-        <!-- </div> -->
+<!-- </div> -->
 
-    <!-- End Side Bar -->
-
-
+<!-- End Side Bar -->
 
 
-    <!-- Thumbnails -->
 
-        <!-- <div class="large-8 columns">
+
+<!-- Thumbnails -->
+
+<!-- <div class="large-8 columns">
           <div class="row">
 
             <div class="large-4 small-6 columns">
@@ -312,7 +309,7 @@
         </div>
       </footer> -->
 
-    <!-- End Footer -->
+<!-- End Footer -->
 
-    <!-- </div>
+<!-- </div>
   </div> -->
