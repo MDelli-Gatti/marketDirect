@@ -30,6 +30,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -114,11 +116,9 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void dTestCreateItem() throws Exception {
-		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
+	public void daTestCreateItem() throws Exception {
 		mockMvc.perform(
-				MockMvcRequestBuilders.fileUpload("/create-item")
-						.file(file)
+				MockMvcRequestBuilders.post("/create-item")
 						.param("name", "Apples")
 						.param("description", "Red Delicious")
 						.param("category", "Produce")
@@ -127,6 +127,18 @@ public class MarketDirectApplicationTests {
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(items.count() == 1 && items.findOne(1).getName().equals("Apples"));
+	}
+
+	@Test
+	public void dzTestAddPicture() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
+		mockMvc.perform(
+				MockMvcRequestBuilders.fileUpload("/add-photo")
+						.file(file)
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.findOne(1).getFilename() != null);
 	}
 
 	@Test
