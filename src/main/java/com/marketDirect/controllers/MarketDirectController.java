@@ -137,7 +137,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/create-item", method = RequestMethod.POST)
-    public void createItem(HttpSession session, HttpServletResponse response, String name, String description, String category,  String price, int quantity) throws Exception {
+    public void createItem(HttpSession session, HttpServletResponse response, String name, MultipartFile file, String description, String category,  String price, int quantity) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -148,16 +148,16 @@ public class MarketDirectController {
              throw new Exception("User not in database!");
          }
 
-//        File dir = new File("public/files");
-//        dir.mkdirs();
-//
-//        File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
-//        FileOutputStream fos = new FileOutputStream(uploadedFile);
-//        fos.write(file.getBytes());
+        File dir = new File("public/files");
+        dir.mkdirs();
+
+        File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
+        FileOutputStream fos = new FileOutputStream(uploadedFile);
+        fos.write(file.getBytes());
 
         Vendor vendor = vendors.findByUser(user);
 
-        Item item = new Item(name, description, category, "fake file name string", price, quantity, vendor);
+        Item item = new Item(name, description, category, uploadedFile.getName() , price, quantity, vendor);
         items.save(item);
         response.sendRedirect("/#/create-item");
     }

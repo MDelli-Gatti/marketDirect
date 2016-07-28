@@ -21,7 +21,7 @@ public class Item {
     @Column(nullable = false)
     String category;
 
-    @Column
+    @Column(nullable = false)
     String filename;
 
     @Column(nullable = false)
