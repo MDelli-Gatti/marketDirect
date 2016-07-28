@@ -75,6 +75,12 @@ public class MarketDirectApplicationTests {
 		ObjectMapper om = new ObjectMapper();
 		String json = om.writeValueAsString(user);
 
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-user")
+						.content(json)
+						.contentType("application/json")
+		);
+
 		Assert.assertTrue(users.count() == 1);
 	}
 
@@ -86,10 +92,6 @@ public class MarketDirectApplicationTests {
 						.param("username", "Alice@Gmail.com")
 						.param("password", "password")
 
-		mockMvc.perform(
-				MockMvcRequestBuilders.post("/create-user")
-						.content(json)
-						.contentType("application/json")
 		);
 		Assert.assertTrue(users.count() == 1);
 	}
