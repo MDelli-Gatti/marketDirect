@@ -3,6 +3,7 @@ package com.marketDirect;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marketDirect.entities.Comment;
+import com.marketDirect.entities.Item;
 import com.marketDirect.entities.User;
 import com.marketDirect.entities.Vendor;
 import com.marketDirect.services.CommentRepository;
@@ -31,6 +32,7 @@ import org.springframework.web.context.WebApplicationContext;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = MarketDirectApplication.class)
@@ -62,7 +64,7 @@ public class MarketDirectApplicationTests {
 	ItemRepository items;
 
 	@Test
-	public void btestLogin() throws Exception {
+	public void bTestLogin() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/login")
 						.param("username", "Alice@Gmail.com")
@@ -72,7 +74,7 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void atestCreateUser() throws Exception {
+	public void aTestCreateUser() throws Exception {
 
 		User user = new User();
 		user.setUsername("Alice@Gmail.com");
@@ -92,7 +94,7 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void ctestCreateVendor() throws Exception {
+	public void cTestCreateVendor() throws Exception {
 		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
 		mockMvc.perform(
 				MockMvcRequestBuilders.fileUpload("/create-vendor")
@@ -113,7 +115,7 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void dtestCreateItem() throws Exception {
+	public void dTestCreateItem() throws Exception {
 		MockMultipartFile file = new MockMultipartFile("file", "farmer.jpg", "image/jpeg", new FileInputStream("farmer.jpg"));
 		mockMvc.perform(
 				MockMvcRequestBuilders.fileUpload("/create-item")
@@ -129,7 +131,7 @@ public class MarketDirectApplicationTests {
 	}
 
 	@Test
-	public void etestCreateComment() throws Exception {
+	public void eTestCreateComment() throws Exception {
 
 		Comment c = new Comment();
 		c.setText("Text");
@@ -143,6 +145,7 @@ public class MarketDirectApplicationTests {
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-comment")
+						.param("id", "1")
 						.content(json)
 						.contentType("application/json")
 						.sessionAttr("username", "Alice@Gmail.com")
@@ -167,5 +170,217 @@ public class MarketDirectApplicationTests {
 		Vendor vendor = om.readValue(json, Vendor.class);
 
 		Assert.assertTrue(vendor.getName().equals("Store"));
+	}
+
+	@Test
+	public void gTestGetItem() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/get-item")
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
+
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		Item item = om.readValue(json, Item.class);
+
+		Assert.assertTrue(item.getName().equals("Apples"));
+	}
+
+	@Test
+	public void hTestEditItem() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "banana.jpeg", "image/jpeg", new FileInputStream("banana.jpeg"));
+		mockMvc.perform(
+				MockMvcRequestBuilders.fileUpload("/edit-item")
+						.file(file)
+						.param("id", "1")
+						.param("name", "Bananas")
+						.param("description", "Yellow")
+						.param("category", "Produce")
+						.param("price", "$1.00 / lb")
+						.param("quantity", "200")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.findOne(1).getName().equals("Bananas"));
+	}
+
+	@Test
+	public void jTestEditVendor() throws Exception {
+		MockMultipartFile file = new MockMultipartFile("file", "banana.jpeg", "image/jpeg", new FileInputStream("banana.jpeg"));
+		mockMvc.perform(
+				MockMvcRequestBuilders.fileUpload("/edit-vendor")
+						.file(file)
+						.param("id", "1")
+						.param("name", "Better Store")
+						.param("phone", "444-4444")
+						.param("email", "BetterStore@Hotmail.com")
+						.param("website", "www.betterstore.com")
+						.param("date", "tomorrow")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(vendors.findOne(1).getName().equals("Better Store"));
+	}
+
+	@Test
+	public void kTestEditComment() throws Exception {
+		Comment c = comments.findOne(1);
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(c);
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/edit-comment")
+						.param("id", "1")
+						.param("text", "New Text")
+						.content(json)
+						.contentType("application/json")
+						.sessionAttr("username", "Alice@Gmail.com")
+
+		);
+		Assert.assertTrue(comments.count() == 1 && comments.findOne(1).getText().equals("New Text"));
+	}
+
+	@Test
+	public void lTestAddShoppingListItem() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/add-shopping-list-item")
+				.param("id", "1")
+				.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 1);
+	}
+
+	@Test
+	public void mTestGetShoppingList() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/get-shopping-list")
+						.sessionAttr("username", "Alice@Gmail.com")
+				);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		List<Item> shoppingList = om.readValue(json, List.class);
+
+		Assert.assertTrue(shoppingList.size() == 1);
+	}
+
+	@Test
+	public void nTestRemoveShoppingListItem() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/remove-shopping-list-item")
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 0);
+	}
+
+	@Test
+	public void oTestFindByLocation() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/find-by-location")
+						.param("location", "Charleston")
+						.sessionAttr("username", "Alice@Gmail.com")
+
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		List<Vendor> vends = om.readValue(json, List.class);
+
+		Assert.assertTrue(vends.size() == 1);
+	}
+
+	@Test
+	public void pTestSearchItem() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/search-item")
+						.param("search", "Banana")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		List<Item> itemList = om.readValue(json, List.class);
+
+		Assert.assertTrue(itemList.size() == 1);
+	}
+
+	@Test
+	public void qTestSearchVendor() throws Exception {
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/search-vendor")
+						.param("search", "Better Store")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String json = response.getContentAsString();
+
+		ObjectMapper om = new ObjectMapper();
+		List<Vendor> vendorList = om.readValue(json, List.class);
+
+		Assert.assertTrue(vendorList.size() == 1);
+	}
+
+	@Test
+	public void rTestGetComments() throws Exception {
+
+		Vendor v = vendors.findByName("Store");
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(v);
+
+		ResultActions ra = mockMvc.perform(
+				MockMvcRequestBuilders.get("/get-comments")
+						.content(json)
+						.contentType("application/json")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		MvcResult result = ra.andReturn();
+		MockHttpServletResponse response = result.getResponse();
+		String jsoncom = response.getContentAsString();
+		System.out.println(comments.count());
+		ArrayList<HashMap> coms = om.readValue(jsoncom, ArrayList.class);
+		HashMap comTest = coms.get(0);
+		System.out.println(comTest);
+		Assert.assertTrue(comTest.get("text").equals("New Text"));
+	}
+
+	@Test
+	public void xTestDeleteItem() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/delete-item")
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(items.count() == 0);
+	}
+
+	@Test
+	public void yTestDeleteComment() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/delete-comment/1")
+				.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(comments.count() == 0);
+	}
+
+	@Test
+	public void zTestDeleteVendor() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/delete-vendor")
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
+		);
+		Assert.assertTrue(vendors.count() == 0);
 	}
 }

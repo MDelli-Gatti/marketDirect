@@ -195,6 +195,7 @@
             <input type='file' id='getval' /><br/><br/>
             <button type="button" ng-click="showme=!showme" name="button">New Item</button>
             <div class="addinventory" ng-show="showme">
+<<<<<<< HEAD
 
               <form id = "fileupload" method = "POST" enctype = "multipart/form-data">
                          <input type="text" ng-model="Cat" name="category" placeholder="Item Category">
@@ -205,6 +206,17 @@
                          <input type="file" name="file">
                          <input type="submit" value="Add New Item" ng-click = "inventories()">
                    </form>
+=======
+              <form id = "fileupload" action = "/create-item" method = "post" enctype = "multipart/form-data" ng-submit="inventories()">
+                  <input type="text" ng-model="Cat" name="category" placeholder="Item Category">
+                  <input type="text" ng-model="Name" name="name" placeholder="Item Name">
+                  <input type="text" ng-model="Desc" name="description" placeholder="Item Description">
+                  <input type="text" ng-model="Quant" name="quantity" placeholder="Item Quantity">
+                  <input type="text" ng-model="Price" name="price" placeholder="Item Price">
+                  <input type="file" name="photo">
+                  <input type="submit" value="Add New Item">
+            </form>
+>>>>>>> f6daab0d6a3f6b984b407b41b5bf79071c7b30c7
             </div>
           </div> -->
 
