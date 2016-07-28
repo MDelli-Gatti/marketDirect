@@ -1,4 +1,4 @@
-<h1>this is a new user </h1>
+<!-- <h1>this is a new user </h1>
 
 <div id = "loginBox"class="row">
   <div class="medium-6 medium-centered large-4 large-centered columns">
@@ -13,11 +13,23 @@
         </label>
         <label>Re-type Password:
           <input type="password" ng-model="password" placeholder="Confirm Password">
-        </label>
+        </label> -->
         <!-- <input id="show-password" type="checkbox"><label for="show-password">Show password</label> -->
-        <p><a type="submit" class="button expanded" class = "bottomButton"ng-click='createUser()'>Create Market Direct Account</a></p>
+        <!-- <p><a type="submit" class="button expanded" class = "bottomButton"ng-click='createUser()'>Create Market Direct Account</a></p>
       </div>
     </form>
 
   </div>
+</div> -->
+<div class="LoginContainer">
+
+	<form class="form-signin">
+		<input type="text" class="form-control" ng-model="name" placeholder="somebody@example.com" required="" autofocus="">
+		<input type="password" class="form-control" ng-model="password" placeholder="Password" required="">
+		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click='createUser()'>
+			Sign up
+		</button>
+
+
+	</form>
 </div>

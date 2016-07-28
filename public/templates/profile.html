@@ -2,19 +2,118 @@
 
 
 
-<h1>this is profile view + their inventory</h1>
-
 
 <div class="row">
-    <div class="large-12 columns">
+
+
+    <div class="col-lg-5">
+        <div class="media">
+            <a class="pull-left" href="#profile">
+                <img class="media-object dp img-circle" src="http://www-tc.pbs.org/independentlens/realdirt/images/home_rt.jpg" style="width: 300px;height:300px;">
+            </a>
+            <div class="media-body">
+                  <h3>User/Vendor Name goes here</h3>
+                  <h6>User/Vendor location</h6>
+                  <h6>User/Vendor specialty</h6>
+                  <h6>Some other shit I'm forgetting....</h6>
+                  <input type='file' id='getval' /><br/><br/>
+                  <button type="button" ng-click="showme=!showme" name="button">New Item</button>
+                  <div class="addinventory" ng-show="showme">
+
+                    <form id = "fileupload" method = "POST" enctype = "multipart/form-data">
+                               <input type="text" ng-model="Cat" name="category" placeholder="Item Category">
+                               <input type="text" ng-model="Name" name="name" placeholder="Item Name">
+                               <input type="text" ng-model="Desc" name="description" placeholder="Item Description">
+                               <input type="number" ng-model="Quant" name="quantity" placeholder="Item Quantity">
+                               <input type="text" ng-model="Price" name="price" placeholder="Item Price">
+                               <input type="file" name="file">
+                               <input type="submit" value="Add New Item" ng-click = "inventories()">
+                         </form>
+                  </div>
+
+                <hr style="margin:8px auto">
+            </div>
+        </div>
+
+    </div>
+
+    <div class="col-lg-12">
+                    <h1 class="page-header">Vendor Inventory</h1>
+                </div>
+
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+                <div class="col-lg-3 col-md-4 col-xs-6 thumb">
+                    <a class="thumbnail" href="#">
+                        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
+                    </a>
+                </div>
+
+</div>
+
+<!-- <div class="row">
+    <div class="large-12 columns"> -->
 
     <!-- Navigation -->
 
-      <div class="row">
+      <!-- <div class="row">
         <div class="large-12 columns">
 
           <nav class="top-bar">
-            <ul class="title-area">
+            <ul class="title-area"> -->
 
               <!-- Title Area -->
               <!-- <li class="name">
@@ -74,17 +173,17 @@
             </section>
           </nav> -->
           <!-- End Top Bar -->
-        </div>
-      </div>
+        <!-- </div>
+      </div> -->
 
     <!-- End Navigation -->
 
-      <div class="row">
+      <!-- <div class="row"> -->
 
 
   <!-- Side Bar -->
 
-        <div class="large-4 small-12 columns">
+        <!-- <div class="large-4 small-12 columns">
 
           <img src="http://placehold.it/500x500&text=Logo">
 
@@ -96,6 +195,18 @@
             <input type='file' id='getval' /><br/><br/>
             <button type="button" ng-click="showme=!showme" name="button">New Item</button>
             <div class="addinventory" ng-show="showme">
+<<<<<<< HEAD
+
+              <form id = "fileupload" method = "POST" enctype = "multipart/form-data">
+                         <input type="text" ng-model="Cat" name="category" placeholder="Item Category">
+                         <input type="text" ng-model="Name" name="name" placeholder="Item Name">
+                         <input type="text" ng-model="Desc" name="description" placeholder="Item Description">
+                         <input type="number" ng-model="Quant" name="quantity" placeholder="Item Quantity">
+                         <input type="text" ng-model="Price" name="price" placeholder="Item Price">
+                         <input type="file" name="file">
+                         <input type="submit" value="Add New Item" ng-click = "inventories()">
+                   </form>
+=======
               <form id = "fileupload" action = "/create-item" method = "post" enctype = "multipart/form-data" ng-submit="inventories()">
                   <input type="text" ng-model="Cat" name="category" placeholder="Item Category">
                   <input type="text" ng-model="Name" name="name" placeholder="Item Name">
@@ -105,8 +216,9 @@
                   <input type="file" name="photo">
                   <input type="submit" value="Add New Item">
             </form>
+>>>>>>> f6daab0d6a3f6b984b407b41b5bf79071c7b30c7
             </div>
-          </div>
+          </div> -->
 
           <!-- <a href="#">
           <div class="panel callout radius">
@@ -114,7 +226,7 @@
           </div>
           </a> -->
 
-        </div>
+        <!-- </div> -->
 
     <!-- End Side Bar -->
 
@@ -123,7 +235,7 @@
 
     <!-- Thumbnails -->
 
-        <div class="large-8 columns">
+        <!-- <div class="large-8 columns">
           <div class="row">
 
             <div class="large-4 small-6 columns">
@@ -181,11 +293,8 @@
             </div>
           </div>
 
-    <!-- End Thumbnails -->
 
-    <!-- Footer -->
 
-      <footer class="row">
         <div class="large-12 columns"><hr />
           <div class="row">
 
@@ -201,9 +310,9 @@
 
           </div>
         </div>
-      </footer>
+      </footer> -->
 
     <!-- End Footer -->
 
-    </div>
-  </div>
+    <!-- </div>
+  </div> -->
