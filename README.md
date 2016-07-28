@@ -47,23 +47,26 @@ Search By Vendor Name:
 route = "GET" path = "search-vendor" data = "String search"
 
 Add Shopping List Item:
-route = "POST" path = "add-shopping-list-item" data = Item object
+route = "POST" path = "add-shopping-list-item" data = int id (of the item)
 
 Remove Shopping List Item:
-route = "POST" path = "remove-shopping-list-item" data = Item object
+route = "POST" path = "remove-shopping-list-item" data = int id (of the item)
 
 Get Shopping List
 route = "GET" path = "get-shopping-list"
 
 Get Comments
-route = "GET" path = "get-comments" data = Vendor object
+route = "GET" path = "get-comments" data = int id (of the vendor)
 
 Create Comment
-route = "POST" path = "create-comment" data = Vendor object & Comment object
+route = "POST" path = "create-comment" data = int id (of the vendor) & Comment object
 
 Edit Comment
-route = "POST" path = "edit-comment" data = String text & Comment object
+route = "POST" path = "edit-comment" data = String text & int id (of the comment)
 
 Delete Comment
-route = "POST" path = "delete-comment" data = Comment object
+route = "POST" path = "delete-comment" data = int id (of the comment)
+
+Find Items By Location
+route = "GET" path = "find-by-location" data = String location
 
