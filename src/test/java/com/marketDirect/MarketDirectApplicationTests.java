@@ -90,7 +90,7 @@ public class MarketDirectApplicationTests {
 						.content(json)
 						.contentType("application/json")
 		);
-		Assert.assertTrue(users.count() == 1);
+		Assert.assertTrue(users.count() == 1 && users.findOne(1).getUsername().equals("Alice@Gmail.com"));
 	}
 
 	@Test
@@ -109,9 +109,8 @@ public class MarketDirectApplicationTests {
 		);
 
 		System.out.println(vendors.count());
-		Assert.assertTrue(vendors.count() == 1);
+		Assert.assertTrue(vendors.count() == 1 && vendors.findOne(1).getName().equals("Store"));
 
-		//Assert.assertTrue(vendors.findOne(1).getName().equals("Store"));
 	}
 
 	@Test
@@ -127,7 +126,7 @@ public class MarketDirectApplicationTests {
 						.param("quantity", "100")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(items.count() == 1);
+		Assert.assertTrue(items.count() == 1 && items.findOne(1).getName().equals("Apples"));
 	}
 
 	@Test
@@ -151,7 +150,7 @@ public class MarketDirectApplicationTests {
 						.sessionAttr("username", "Alice@Gmail.com")
 
 		);
-		Assert.assertTrue(comments.count() == 1);
+		Assert.assertTrue(comments.count() == 1 && comments.findOne(1).getText().equals("Text"));
 	}
 
 	@Test
@@ -204,7 +203,7 @@ public class MarketDirectApplicationTests {
 						.param("quantity", "200")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(items.findOne(1).getName().equals("Bananas"));
+		Assert.assertTrue(items.findOne(1).getName().equals("Bananas") && items.count() == 1);
 	}
 
 	@Test
@@ -221,7 +220,7 @@ public class MarketDirectApplicationTests {
 						.param("date", "tomorrow")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(vendors.findOne(1).getName().equals("Better Store"));
+		Assert.assertTrue(vendors.findOne(1).getName().equals("Better Store") && vendors.count() == 1);
 	}
 
 	@Test
@@ -250,7 +249,7 @@ public class MarketDirectApplicationTests {
 						.param("id", "1")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
-		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 1);
+		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 1 && users.findByUsername("Alice@Gmail.com").getShoppingList().get(0).getName().equals("Bananas"));
 	}
 
 	@Test
@@ -264,9 +263,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Item> shoppingList = om.readValue(json, List.class);
+		List<HashMap<String, String>> shoppingList = om.readValue(json, List.class);
 
-		Assert.assertTrue(shoppingList.size() == 1);
+		Assert.assertTrue(shoppingList.size() == 1 && shoppingList.get(0).get("name").equals("Bananas"));
 	}
 
 	@Test
@@ -292,9 +291,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Vendor> vends = om.readValue(json, List.class);
+		List<HashMap<String, String>> vends = om.readValue(json, List.class);
 
-		Assert.assertTrue(vends.size() == 1);
+		Assert.assertTrue(vends.size() == 1 && vends.get(0).get("name").equals("Better Store"));
 	}
 
 	@Test
@@ -309,9 +308,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Item> itemList = om.readValue(json, List.class);
+		List<HashMap<String, String>> itemList = om.readValue(json, List.class);
 
-		Assert.assertTrue(itemList.size() == 1);
+		Assert.assertTrue(itemList.size() == 1 && itemList.get(0).get("name").equals("Bananas"));
 	}
 
 	@Test
@@ -326,9 +325,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Vendor> vendorList = om.readValue(json, List.class);
+		List<HashMap<String, String>> vendorList = om.readValue(json, List.class);
 
-		Assert.assertTrue(vendorList.size() == 1);
+		Assert.assertTrue(vendorList.size() == 1 && vendorList.get(0).get("name").equals("Better Store"));
 	}
 
 	@Test
@@ -344,9 +343,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Comment> commentList = om.readValue(json, List.class);
+		List<HashMap<String, String>> commentList = om.readValue(json, List.class);
 
-		Assert.assertTrue(commentList.size() == 1);
+		Assert.assertTrue(commentList.size() == 1 && commentList.get(0).get("text").equals("New Text"));
 	}
 
 	@Test
@@ -360,9 +359,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Item> itemList = om.readValue(json, List.class);
+		List<HashMap<String, String>> itemList = om.readValue(json, List.class);
 
-		Assert.assertTrue(itemList.size() == 1);
+		Assert.assertTrue(itemList.size() == 1 && itemList.get(0).get("name").equals("Bananas"));
 	}
 
 	@Test
@@ -377,9 +376,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Item> itemList = om.readValue(json, List.class);
+		List<HashMap<String, String>> itemList = om.readValue(json, List.class);
 
-		Assert.assertTrue(itemList.size() == 1);
+		Assert.assertTrue(itemList.size() == 1 && itemList.get(0).get("name").equals("Bananas"));
 	}
 
 	@Test
@@ -393,9 +392,9 @@ public class MarketDirectApplicationTests {
 		String json = response.getContentAsString();
 
 		ObjectMapper om = new ObjectMapper();
-		List<Vendor> vendorList = om.readValue(json, List.class);
+		List<HashMap<String, String>> vendorList = om.readValue(json, List.class);
 
-		Assert.assertTrue(vendorList.size() == 1);
+		Assert.assertTrue(vendorList.size() == 1 && vendorList.get(0).get("name").equals("Better Store"));
 	}
 
 	@Test
