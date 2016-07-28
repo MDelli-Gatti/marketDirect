@@ -2,14 +2,8 @@ package com.marketDirect;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.marketDirect.entities.Comment;
-import com.marketDirect.entities.Item;
-import com.marketDirect.entities.User;
-import com.marketDirect.entities.Vendor;
-import com.marketDirect.services.CommentRepository;
-import com.marketDirect.services.ItemRepository;
-import com.marketDirect.services.UserRepository;
-import com.marketDirect.services.VendorRepository;
+import com.marketDirect.entities.*;
+import com.marketDirect.services.*;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.FixMethodOrder;
@@ -63,6 +57,9 @@ public class MarketDirectApplicationTests {
 
 	@Autowired
 	ItemRepository items;
+
+	@Autowired
+	MessageRepository messages;
 
 	@Test
 	public void aTestCreateUser() throws Exception {
@@ -399,6 +396,25 @@ public class MarketDirectApplicationTests {
 		List<Vendor> vendorList = om.readValue(json, List.class);
 
 		Assert.assertTrue(vendorList.size() == 1);
+	}
+
+	@Test
+	public void vTestCreateMessage() throws Exception {
+		Message message = new Message();
+		message.setText("Hello, what time will you be at the market?");
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(message);
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-message")
+						.param("id", "1")
+						.content(json)
+						.contentType("application/json")
+						.sessionAttr("username", "Alice@Gmail.com")
+
+		);
+		Assert.assertTrue(messages.count() == 1);
 	}
 
 	@Test
