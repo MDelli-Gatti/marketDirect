@@ -103,6 +103,7 @@ module.exports = function (app) {
 
     }]);
 }
+/////Scope.Inventories is in the profile controller////
 
 },{}],10:[function(require,module,exports){
 module.exports = function (app) {
@@ -119,7 +120,6 @@ module.exports = function (app) {
 
 
 
-
       $scope.createUser = function () {
           console.log(`${$scope.name} is a new user`);
           newUserService.userLogin($scope.name, $scope.password);
@@ -127,9 +127,14 @@ module.exports = function (app) {
           }
 
           $scope.inventories = function(){
-            console.log("boo");
+          var f = document.getElementByID('fileupload').files[0],
+            r = new FileReader();
+          r.onloaded = function(e){
+            var data = e.target.result;
             console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
             newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+          }
+          r.readAsBinaryString(f);
       };
 
     }]);
@@ -147,6 +152,7 @@ module.exports = function (app) {
 
 
 }
+/////Scope.Inventories is in the profile controller////
 
 },{}],12:[function(require,module,exports){
 let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);

@@ -8,3 +8,4 @@ module.exports = function (app) {
 
     }]);
 }
+/////Scope.Inventories is in the profile controller////
