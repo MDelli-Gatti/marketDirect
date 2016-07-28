@@ -125,11 +125,16 @@ module.exports = function (app) {
           $scope.inventories = function(){
             console.log("boo");
             console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-            service.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+            newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
           }
 
-          $scope.remove=function($index){
-              $scope.ShopItems.splice($index,1);     
+          $scope.remove=function(idx){
+              // $scope.ShopItems.splice($index,1);
+              var person_to_delete = $scope.ShopItems[idx];
+              
+              API.DeletePerson({ id: person_to_delete.id }, function (success) {
+              $scope.ShopItems.splice(idx, 1);
+               });
                 }
 
 
@@ -407,6 +412,19 @@ app.factory('newItemService', ['$http', function ($http) {
 
             return promise;
         },
+        DeleteItems: function () {
+          var gone = $http({
+            method: 'POST',
+            url: 'delete-item'
+          }).success(function (response){
+            console.log("response");
+          })
+        }
+
+
+
+
+
 
          // borrowBook: function (target) {
         //  console.log("borrowing diz")

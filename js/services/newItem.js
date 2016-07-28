@@ -33,6 +33,19 @@ app.factory('newItemService', ['$http', function ($http) {
 
             return promise;
         },
+        DeleteItems: function () {
+          var gone = $http({
+            method: 'POST',
+            url: 'delete-item'
+          }).success(function (response){
+            console.log("response");
+          })
+        }
+
+
+
+
+
 
          // borrowBook: function (target) {
         //  console.log("borrowing diz")
