@@ -152,7 +152,6 @@ public class MarketDirectController {
 
         Item item = new Item(name, description, category, null , price, quantity, vendor);
         items.save(item);
-        response.sendRedirect("/#/profile");
     }
 
     @RequestMapping(path = "add-photo", method = RequestMethod.POST)
@@ -185,8 +184,6 @@ public class MarketDirectController {
 
         item.setFilename(uploadedFile.getName());
         items.save(item);
-        response.sendRedirect("/#/profile");
-
     }
 
     @RequestMapping(path = "/get-items", method = RequestMethod.GET)
