@@ -39,7 +39,6 @@ import java.util.List;
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
-
 public class MarketDirectApplicationTests {
 
 	@Autowired
@@ -65,6 +64,16 @@ public class MarketDirectApplicationTests {
 	ItemRepository items;
 
 	@Test
+	public void bTestLogin() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/login")
+						.param("username", "Alice@Gmail.com")
+						.param("password", "password")
+		);
+		Assert.assertTrue(users.count() == 1);
+	}
+
+	@Test
 	public void aTestCreateUser() throws Exception {
 
 		User user = new User();
@@ -75,16 +84,6 @@ public class MarketDirectApplicationTests {
 		ObjectMapper om = new ObjectMapper();
 		String json = om.writeValueAsString(user);
 
-		Assert.assertTrue(users.count() == 1);
-	}
-
-
-	@Test
-	public void bTestLogin() throws Exception {
-		mockMvc.perform(
-				MockMvcRequestBuilders.post("/login")
-						.param("username", "Alice@Gmail.com")
-						.param("password", "password")
 
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-user")
@@ -159,7 +158,7 @@ public class MarketDirectApplicationTests {
 	public void fTestGetVendor() throws Exception {
 		ResultActions ra = mockMvc.perform(
 				MockMvcRequestBuilders.get("/get-vendor")
-				.param("id", "1")
+						.param("id", "1")
 						.sessionAttr("username", "Alice@Gmail.com")
 
 		);
@@ -248,8 +247,8 @@ public class MarketDirectApplicationTests {
 	public void lTestAddShoppingListItem() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/add-shopping-list-item")
-				.param("id", "1")
-				.sessionAttr("username", "Alice@Gmail.com")
+						.param("id", "1")
+						.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 1);
 	}
@@ -259,7 +258,7 @@ public class MarketDirectApplicationTests {
 		ResultActions ra = mockMvc.perform(
 				MockMvcRequestBuilders.get("/get-shopping-list")
 						.sessionAttr("username", "Alice@Gmail.com")
-				);
+		);
 		MvcResult result = ra.andReturn();
 		MockHttpServletResponse response = result.getResponse();
 		String json = response.getContentAsString();
@@ -413,7 +412,7 @@ public class MarketDirectApplicationTests {
 	public void yTestDeleteComment() throws Exception {
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete-comment/1")
-				.sessionAttr("username", "Alice@Gmail.com")
+						.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(comments.count() == 0);
 	}
