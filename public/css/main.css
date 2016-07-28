@@ -125,7 +125,7 @@ p {
   padding: 30px; }
 
 .dp {
-  border: 10px solid #eee;
+  border: 10px solid #3A684A;
   transition: all 0.2s ease-in-out; }
 
 .thumb {
@@ -136,3 +136,12 @@ footer {
 
 .page-header {
   text-align: center; }
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px; }

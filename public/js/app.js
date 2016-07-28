@@ -51,7 +51,7 @@ module.exports = function (app) {
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
             loginService.userLogin($scope.name, $scope.password, "/explore");
-            // $location.path('/explore');
+            $location.path('/explore');
         };
     }]);
 }
@@ -68,11 +68,7 @@ module.exports = function (app) {
 },{}],7:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('NewitemController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, loginService, newItemService) {
-      $scope.inventories = function(){
-        console.log("boo");
-        //console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-        //service.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
-      }
+      
     }]);
 }
 
@@ -110,11 +106,11 @@ module.exports = function (app) {
     app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
-      $scope.Cat = '';
-      $scope.Name = '';
-      $scope.Desc = '';
-      $scope.Quant = '';
-      $scope.Price = '';
+      console.log("hey bro whats up?")
+           newItemService.getSLItems().then(function(items){
+             console.log(items.data);
+             $scope.ShopItems = items.data;
+           });
 
 
 
@@ -125,6 +121,30 @@ module.exports = function (app) {
           newUserService.userLogin($scope.name, $scope.password);
           $location.path('/explore');
           }
+
+          $scope.inventories = function(){
+            console.log("boo");
+            console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
+            service.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+          }
+
+          $scope.remove=function($index){
+              $scope.ShopItems.splice($index,1);     
+                }
+
+
+
+
+
+
+// <<<<<<< HEAD
+//           $scope.inventories = function(){
+//             console.log("boo");
+//             console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
+//             newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+//           }
+//
+// =======
 
       //     $scope.inventories = function(){
       //     var f = document.getElementByID('fileupload').files[0],
@@ -274,6 +294,41 @@ function myFunction() {
     var myWindow = window.open("", "", "width=200,height=100");
 }
 
+
+
+var video, canvas, msg;
+       var load = function () {
+           video  = document.getElementById('video');
+           canvas = document.getElementById('canvas');
+           msg    = document.getElementById('error');
+           if( navigator.getUserMedia ) {
+               video.onclick = function () {
+                   var context = canvas.getContext("2d");
+                   context.drawImage(video, 0, 0, 240, 320);
+                   var image = {"demo" : {
+                       "type"  : "device",
+                       "image" : canvas.toDataURL("image/png")
+                   }};
+               };
+
+               var success = function ( stream ) {
+                   video.src = stream;
+               };
+
+               var error = function ( err ) {
+                   msg.innerHTML = "Error: " + err.code;
+               };
+
+               navigator.getUserMedia('video', success, error);
+
+           } else {
+               msg.innerHTML = "Native web camera not supported :(";
+           }
+
+       };
+
+       window.addEventListener('DOMContentLoaded', load, false);
+
 },{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewitemController.js":7,"./controllers/NewuserController.js":8,"./controllers/ProduceController.js":9,"./controllers/ProfileController.js":10,"./controllers/ShoppinglistController.js":11,"./services/login.js":13,"./services/newItem.js":14,"./services/newUser.js":15,"./services/shoppinglist.js":16}],13:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', function($http, $location) {
@@ -320,10 +375,13 @@ module.exports = function(app) {
 module.exports=function(app){
 app.factory('newItemService', ['$http', function ($http) {
     let shoppinglistItems = [];
-
+    // $scope.Cat = '';
+    // $scope.Name = '';
+    // $scope.Desc = '';
+    // $scope.Quant = '';
+    // $scope.Price = '';
     return {
-        /* GET request for book list */
-    
+
         addNEWitems: function (){
           console.log("sending diz")
           $http({
@@ -334,8 +392,23 @@ app.factory('newItemService', ['$http', function ($http) {
             return response;
           });
           console.log("the end")
-        }
-        // borrowBook: function (target) {
+        },
+        getSLItems: function () {
+          var promise = $http({
+                method: 'GET',
+                url: 'get-items'
+            }).success(function (response) {
+                console.log(response);
+                return response;
+                // angular.copy(response., slItems);
+            }).error(function (response) {
+               return {"status": false};
+            });
+
+            return promise;
+        },
+
+         // borrowBook: function (target) {
         //  console.log("borrowing diz")
         //  $http({
         //    method: "POST",
