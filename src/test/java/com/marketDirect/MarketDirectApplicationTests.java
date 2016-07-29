@@ -289,9 +289,16 @@ public class MarketDirectApplicationTests {
 
 	@Test
 	public void nTestRemoveShoppingListItem() throws Exception {
+		Item i = new Item();
+		i.setId(1);
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(i);
+
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/remove-shopping-list-item")
-						.param("id", "1")
+						.content(json)
+						.contentType("application/json")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(users.findByUsername("Alice@Gmail.com").getShoppingList().size() == 0);
@@ -437,9 +444,16 @@ public class MarketDirectApplicationTests {
 
 	@Test
 	public void xTestDeleteItem() throws Exception {
+		Item i = new Item();
+		i.setId(1);
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(i);
+
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete-item")
-						.param("id", "1")
+						.content(json)
+						.contentType("application/json")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(items.count() == 0);
@@ -456,9 +470,16 @@ public class MarketDirectApplicationTests {
 
 	@Test
 	public void zTestDeleteVendor() throws Exception {
+		Vendor v = new Vendor();
+		v.setId(1);
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(v);
+
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/delete-vendor")
-						.param("id", "1")
+						.content(json)
+						.contentType("application/json")
 						.sessionAttr("username", "Alice@Gmail.com")
 		);
 		Assert.assertTrue(vendors.count() == 0);
