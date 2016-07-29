@@ -2,6 +2,7 @@ module.exports = function (app) {
     app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
+      $scope.ShopItems = '';
       console.log("hey bro whats up?")
            newItemService.getSLItems().then(function(items){
              console.log(items.data);
@@ -21,12 +22,15 @@ module.exports = function (app) {
           $scope.inventories = function(){
             console.log("boo");
             console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-            service.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
+            newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
           }
 
-          $scope.remove=function($index){
-              $scope.ShopItems.splice($index,1);     
-                }
+          $scope.remove=function(ShopItem){
+            newItemService.DeleteSLItems(ShopItem)
+            // console.log(ShopItem);
+            // var index = $scope.ShopItems.indexOf(x);
+            // $scope.ShopItems.splice(index,1);
+              }
 
 
 
