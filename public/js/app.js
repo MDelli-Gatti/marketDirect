@@ -421,11 +421,14 @@ module.exports = function(app) {
                         description: ShopItem.description,
                         category: ShopItem.category,
                     }
-                    console.log("phase one")
+
+                    var itemId = ShopItem.id;
+
+                    console.log("phase one:", itemId)
                     return $http({
                         method: 'POST',
-                        url: 'delete-item',
-                        // data: gone,
+                        url: 'delete-item/',
+                        data: {id: itemId}
                     }).then(function(res) {
                         console.log("phase two");
                         $scope.ShopItem.splice(index, 1);
