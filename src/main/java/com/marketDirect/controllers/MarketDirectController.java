@@ -134,7 +134,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/create-item", method = RequestMethod.POST)
-    public void createItem(HttpSession session, String name, String description, String category,  String price, int quantity) throws Exception {
+    public void createItem(HttpSession session, HttpServletResponse response, String name, String description, String category,  String price, int quantity) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -149,6 +149,7 @@ public class MarketDirectController {
 
         Item item = new Item(name, description, category, null , price, quantity, vendor);
         items.save(item);
+        response.sendRedirect("/#/profile");
     }
 
     @RequestMapping(path = "add-photo", method = RequestMethod.POST)
