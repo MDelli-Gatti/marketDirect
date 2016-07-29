@@ -131,9 +131,9 @@ module.exports = function (app) {
 
           $scope.remove=function(ShopItem){
             newItemService.DeleteSLItems(ShopItem)
-            // console.log(ShopItem);
-            // var index = $scope.ShopItems.indexOf(x);
-            // $scope.ShopItems.splice(index,1);
+            console.log(ShopItem);
+            var index = $scope.ShopItems.indexOf(ShopItem);
+            $scope.ShopItems.splice(index,1);
               }
 
 
@@ -431,7 +431,6 @@ module.exports = function(app) {
                         data: {id: itemId}
                     }).then(function(res) {
                         console.log("phase two");
-                        $scope.ShopItem.splice(index, 1);
                     }).catch(function(response) {
                         console.log('the end of delete',
                             response);
