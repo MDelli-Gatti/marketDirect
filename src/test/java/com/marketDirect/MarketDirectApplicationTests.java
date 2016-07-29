@@ -1,6 +1,5 @@
 package com.marketDirect;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.marketDirect.entities.Comment;
 import com.marketDirect.entities.Item;
@@ -12,6 +11,8 @@ import com.marketDirect.services.UserRepository;
 import com.marketDirect.services.VendorRepository;
 import org.junit.Assert;
 import org.junit.Before;
+import com.marketDirect.entities.*;
+import com.marketDirect.services.*;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -41,6 +42,7 @@ import java.util.List;
 @WebAppConfiguration
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 
+
 public class MarketDirectApplicationTests {
 
 	@Autowired
@@ -65,15 +67,8 @@ public class MarketDirectApplicationTests {
 	@Autowired
 	ItemRepository items;
 
-	@Test
-	public void bTestLogin() throws Exception {
-		mockMvc.perform(
-				MockMvcRequestBuilders.post("/login")
-						.param("username", "Alice@Gmail.com")
-						.param("password", "password")
-		);
-		Assert.assertTrue(users.count() == 1);
-	}
+	@Autowired
+	MessageRepository messages;
 
 	@Test
 	public void aTestCreateUser() throws Exception {
@@ -86,11 +81,22 @@ public class MarketDirectApplicationTests {
 		ObjectMapper om = new ObjectMapper();
 		String json = om.writeValueAsString(user);
 
-
 		mockMvc.perform(
 				MockMvcRequestBuilders.post("/create-user")
 						.content(json)
 						.contentType("application/json")
+		);
+
+		Assert.assertTrue(users.count() == 1);
+	}
+
+
+	@Test
+	public void bTestLogin() throws Exception {
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/login")
+						.param("username", "Alice@Gmail.com")
+						.param("password", "password")
 		);
 		Assert.assertTrue(users.count() == 1 && users.findOne(1).getUsername().equals("Alice@Gmail.com"));
 	}
@@ -113,6 +119,7 @@ public class MarketDirectApplicationTests {
 		System.out.println(vendors.count());
 		Assert.assertTrue(vendors.count() == 1 && vendors.findOne(1).getName().equals("Store"));
 
+		//Assert.assertTrue(vendors.findOne(1).getName().equals("Store"));
 	}
 
 	@Test
@@ -407,6 +414,25 @@ public class MarketDirectApplicationTests {
 		List<HashMap<String, String>> vendorList = om.readValue(json, List.class);
 
 		Assert.assertTrue(vendorList.size() == 1 && vendorList.get(0).get("name").equals("Better Store"));
+	}
+
+	@Test
+	public void vTestCreateMessage() throws Exception {
+		Message message = new Message();
+		message.setText("Hello, what time will you be at the market?");
+
+		ObjectMapper om = new ObjectMapper();
+		String json = om.writeValueAsString(message);
+
+		mockMvc.perform(
+				MockMvcRequestBuilders.post("/create-message")
+						.param("id", "1")
+						.content(json)
+						.contentType("application/json")
+						.sessionAttr("username", "Alice@Gmail.com")
+
+		);
+		Assert.assertTrue(messages.count() == 1);
 	}
 
 	@Test
