@@ -134,7 +134,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/create-item", method = RequestMethod.POST)
-    public void createItem(HttpSession session, HttpServletResponse response, String name, String description, String category,  String price, int quantity) throws Exception {
+    public void createItem(HttpSession session, String name, String description, String category,  String price, int quantity) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -218,10 +218,13 @@ public class MarketDirectController {
         return items.findByCategory(category);
     }
 
-    @RequestMapping(path = "/delete-item", method = RequestMethod.POST)
-    public void deleteItem(HttpSession session, int id) throws Exception {
+//    @RequestMapping(path = "/item/{id}", method = RequestMethod.POST) // create new
+//    @RequestMapping(path = "/item/{id}", method = RequestMethod.PUT) //edit
+//    @RequestMapping(path = "/item/{id}", method = RequestMethod.GET) //get
+    @RequestMapping(path = "/delete-item", method = RequestMethod.POST) //delete
+    public void deleteItem(HttpSession session, @RequestBody Item i) throws Exception {
         String username = (String) session.getAttribute("username");
-        Item item = items.findOne(id);
+        Item item = items.findOne(i.getId());
 
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -392,9 +395,9 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/delete-vendor", method = RequestMethod.POST)
-    public void deleteVendor(HttpSession session, int id) throws Exception {
+    public void deleteVendor(HttpSession session, @RequestBody Vendor v) throws Exception {
         String username = (String) session.getAttribute("username");
-        Vendor vendor = vendors.findOne(id);
+        Vendor vendor = vendors.findOne(v.getId());
         if (username == null) {
             throw new Exception("Not logged in!");
         }
@@ -443,7 +446,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "remove-shopping-list-item", method = RequestMethod.POST)
-    public void removeShoppingListItem(HttpSession session, int id) throws Exception {
+    public void removeShoppingListItem(HttpSession session, @RequestBody Item i) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -454,7 +457,7 @@ public class MarketDirectController {
             throw new Exception("User not in database!");
         }
         List<Item> sl = user.getShoppingList();
-        sl.remove(items.findOne(id));
+        sl.remove(items.findOne(i.getId()));
         user.setShoppingList(sl);
         users.save(user);
     }
