@@ -53,7 +53,6 @@ module.exports = function(app) {
                         data: {id: itemId}
                     }).then(function(res) {
                         console.log("phase two");
-                        $scope.ShopItem.splice(index, 1);
                     }).catch(function(response) {
                         console.log('the end of delete',
                             response);

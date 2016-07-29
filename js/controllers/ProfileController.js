@@ -27,9 +27,9 @@ module.exports = function (app) {
 
           $scope.remove=function(ShopItem){
             newItemService.DeleteSLItems(ShopItem)
-            // console.log(ShopItem);
-            // var index = $scope.ShopItems.indexOf(x);
-            // $scope.ShopItems.splice(index,1);
+            console.log(ShopItem);
+            var index = $scope.ShopItems.indexOf(ShopItem);
+            $scope.ShopItems.splice(index,1);
               }
 
 
