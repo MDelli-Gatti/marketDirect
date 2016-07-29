@@ -106,6 +106,7 @@ module.exports = function (app) {
     app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
+      $scope.ShopItems = '';
       console.log("hey bro whats up?")
            newItemService.getSLItems().then(function(items){
              console.log(items.data);
@@ -128,14 +129,12 @@ module.exports = function (app) {
             newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
           }
 
-          $scope.remove=function(idx){
-              // $scope.ShopItems.splice($index,1);
-              var person_to_delete = $scope.ShopItems[idx];
-              
-              API.DeletePerson({ id: person_to_delete.id }, function (success) {
-              $scope.ShopItems.splice(idx, 1);
-               });
-                }
+          $scope.remove=function(ShopItem){
+            newItemService.DeleteSLItems(ShopItem)
+            // console.log(ShopItem);
+            // var index = $scope.ShopItems.indexOf(x);
+            // $scope.ShopItems.splice(index,1);
+              }
 
 
 
@@ -377,78 +376,68 @@ module.exports = function(app) {
 }
 
 },{}],14:[function(require,module,exports){
-module.exports=function(app){
-app.factory('newItemService', ['$http', function ($http) {
-    let shoppinglistItems = [];
-    // $scope.Cat = '';
-    // $scope.Name = '';
-    // $scope.Desc = '';
-    // $scope.Quant = '';
-    // $scope.Price = '';
-    return {
-
-        addNEWitems: function (){
-          console.log("sending diz")
-          $http({
-            method:'POST',
-            url: "create-item"
-          }).then(function(response){
-            console.log("we created" + response);
-            return response;
-          });
-          console.log("the end")
-        },
-        getSLItems: function () {
-          var promise = $http({
-                method: 'GET',
-                url: 'get-items'
-            }).success(function (response) {
-                console.log(response);
-                return response;
-                // angular.copy(response., slItems);
-            }).error(function (response) {
-               return {"status": false};
-            });
-
-            return promise;
-        },
-        DeleteItems: function () {
-          var gone = $http({
-            method: 'POST',
-            url: 'delete-item'
-          }).success(function (response){
-            console.log("response");
-          })
+module.exports = function(app) {
+    app.factory('newItemService', ['$http',
+        function($http) {
+            let shoppinglistItems = [];
+            // $scope.Cat = '';
+            // $scope.Name = '';
+            // $scope.Desc = '';
+            // $scope.Quant = '';
+            // $scope.Price = '';
+            return {
+                addNEWitems: function() {
+                    console.log("sending diz")
+                    $http({
+                        method: 'POST',
+                        url: "create-item"
+                    }).then(function(response) {
+                        console.log("we created" +
+                            response);
+                        return response;
+                    });
+                    console.log("the end")
+                },
+                getSLItems: function() {
+                    var promise = $http({
+                        method: 'GET',
+                        url: 'get-items'
+                    }).success(function(response) {
+                        console.log(response);
+                        return response;
+                        // angular.copy(response., slItems);
+                    }).error(function(response) {
+                        return {
+                            "status": false
+                        };
+                    });
+                    return promise;
+                },
+                DeleteSLItems: function(ShopItem) {
+                    console.log(ShopItem);
+                    var gone = {
+                        id: ShopItem.id,
+                        name: ShopItem.name,
+                        description: ShopItem.description,
+                        category: ShopItem.category,
+                    }
+                    console.log("phase one")
+                    return $http({
+                        method: 'POST',
+                        url: 'delete-item',
+                        // data: gone,
+                    }).then(function(res) {
+                        console.log("phase two");
+                        $scope.ShopItem.splice(index, 1);
+                    }).catch(function(response) {
+                        console.log('the end of delete',
+                            response);
+                    })
+                }
+            }
         }
-
-
-
-
-
-
-         // borrowBook: function (target) {
-        //  console.log("borrowing diz")
-        //  $http({
-        //    method: "POST",
-        //    url: "http://10.1.10.215:7000/library/borrow/" + target.id
-        //  }).then(function(response){
-        //    console.log(response)
-        //    angular.copy(response.data.books,allBooks);
-        //
-        //  })
-
-        // /* POST request to update one book */
-        // borrowBook: function (book) {
-        //
-        // },
-        // /* POST request to update one book */
-        // returnBook: function (book) {
-        //
-        // },
-    };
-}]);
-}
-// testing
+    ]);
+};
 
 },{}],15:[function(require,module,exports){
 module.exports = function(app) {
