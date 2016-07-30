@@ -66,12 +66,12 @@ public class MarketDirectController {
         if (items.findByName(testItem3.getName()) == null) {
             items.save(testItem3);
         }
-        Server.createWebServer().start();
+        Server.createWebServer("-webPort", "1337").start();
     }
 
     @RequestMapping(path = "/login", method = RequestMethod.POST)
     public void login(HttpSession session, @RequestBody User user) throws Exception {
-        if (user.getUsername() == "" || user.getPassword() == ""){
+        if (user.getUsername().equals("")  || user.getPassword().equals("")){
             throw new Exception("name and password fields may not be blank");
         }
         User userFromDb = users.findByUsername(user.getUsername());
@@ -87,7 +87,7 @@ public class MarketDirectController {
 
     @RequestMapping(path = "/create-user", method = RequestMethod.POST)
     public void createUser(HttpSession session, @RequestBody User user) throws Exception {
-        if (user.getUsername() == "" || user.getPassword() == ""){
+        if (user.getUsername().equals("") || user.getPassword().equals("")){
             throw new Exception("name and password fields may not be blank");
         }
         User userFromDb = users.findByUsername(user.getUsername());
@@ -152,9 +152,9 @@ public class MarketDirectController {
         response.sendRedirect("/#/profile");
     }
 
-    @RequestMapping(path = "add-photo", method = RequestMethod.POST)
-    public void addPicture(int id, HttpSession session, MultipartFile file, HttpServletResponse response) throws Exception {
-        Item item = items.findOne(id);
+    @RequestMapping(path = "add-item-photo", method = RequestMethod.POST)
+    public void addPicture(@RequestBody Item i, HttpSession session, MultipartFile file, HttpServletResponse response) throws Exception {
+        Item item = items.findOne(i.getId());
 
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -246,8 +246,8 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/edit-item", method = RequestMethod.POST)
-    public void editItem(int id, HttpSession session, MultipartFile file, String name, String description, String category, String price, Integer quantity) throws Exception {
-        Item item = items.findOne(id);
+    public void editItem(HttpSession session, @RequestBody Item i) throws Exception {
+        Item item = items.findOne(i.getId());
 
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -266,45 +266,65 @@ public class MarketDirectController {
             throw new Exception("Logged in user can not edit this!");
         }
 
-        if (name != null) {
-            item.setName(name);
+        if (i.getName() != null) {
+            item.setName(i.getName());
         }
 
-        if (description != null) {
-            item.setDescription(description);
+        if (i.getDescription() != null) {
+            item.setDescription(i.getDescription());
         }
 
-        if (category != null) {
-            item.setCategory(category);
+        if (i.getCategory() != null) {
+            item.setCategory(i.getCategory());
         }
 
-        if (price != null) {
-            item.setPrice(price);
+        if (i.getPrice() != null) {
+            item.setPrice(i.getPrice());
         }
 
-        if (quantity != null) {
-            item.setQuantity(quantity);
+        if (i.getQuantity() != null) {
+            item.setQuantity(i.getQuantity());
         }
 
-        if (file != null) {
+        items.save(item);
+    }
 
-            if (!file.getContentType().contains("image")){
+    @RequestMapping(path = "edit-item-image", method = RequestMethod.POST)
+    public void editItemImage(HttpSession session, MultipartFile file, @RequestBody Item i) throws Exception {
+        Item item = items.findOne(i.getId());
+
+        String username = (String) session.getAttribute("username");
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("User not in database!");
+        }
+        Vendor vendor = vendors.findByUser(user);
+        if (vendor == null) {
+            throw new Exception("logged in user does not match vendor");
+        }
+        else if (vendor != item.getVendor()){
+            throw new Exception("Logged in user can not edit this!");
+        }
+
+        if (!file.getContentType().contains("image")){
                 throw new Exception("Only images allowed!");
             }
 
-            File f = new File("public/files/" + item.getFilename());
-            f.delete();
+        File f = new File("public/files/" + item.getFilename());
+        f.delete();
 
-            File dir = new File("public/files");
-            dir.mkdirs();
+        File dir = new File("public/files");
+        dir.mkdirs();
 
-            File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
-            FileOutputStream fos = new FileOutputStream(uploadedFile);
-            fos.write(file.getBytes());
+        File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
+        FileOutputStream fos = new FileOutputStream(uploadedFile);
+        fos.write(file.getBytes());
 
-            item.setFilename(uploadedFile.getName());
-        }
-
+        item.setFilename(uploadedFile.getName());
         items.save(item);
     }
 
