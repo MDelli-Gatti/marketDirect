@@ -219,6 +219,26 @@ public class MarketDirectController {
         return items.findByCategory(category);
     }
 
+    @RequestMapping(path = "/items-produce", method = RequestMethod.GET)
+    public Iterable<Item> itemsProduce (){
+        return items.findByCategory("Produce");
+    }
+
+    @RequestMapping(path = "/items-art", method = RequestMethod.GET)
+    public Iterable<Item> itemsArt (){
+        return items.findByCategory("Art");
+    }
+
+    @RequestMapping(path = "/items-hand-crafted", method = RequestMethod.GET)
+    public Iterable<Item> itemsHandCrafted (){
+        return items.findByCategory("Hand-Crafted");
+    }
+
+    @RequestMapping(path = "/items-misc", method = RequestMethod.GET)
+    public Iterable<Item> itemsMisc (){
+        return items.findByCategory("Miscellaneous");
+    }
+
 //    @RequestMapping(path = "/item/{id}", method = RequestMethod.POST) // create new
 //    @RequestMapping(path = "/item/{id}", method = RequestMethod.PUT) //edit
 //    @RequestMapping(path = "/item/{id}", method = RequestMethod.GET) //get
