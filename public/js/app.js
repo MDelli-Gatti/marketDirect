@@ -230,10 +230,10 @@ app.config(['$routeProvider', function ($routeProvider) {
       controller: 'ShoppinglistController',
       templateUrl: 'templates/shoppinglist.html',
     })
-    .when('/', {
-      controller: 'NewitemController',
-      templateUrl: 'templates/newItem.html'
-    })
+    // .when('/', {
+    //   controller: 'NewitemController',
+    //   templateUrl: 'templates/newItem.html'
+    // })
 
 }])
 
