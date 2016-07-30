@@ -1,9 +1,8 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ArtController', ['$scope', '$http', '$location', 'getItemService', function ($scope, $http, $location, loginService, getItemService) {
-
-
-
+    app.controller('ArtController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
+     console.log("this is the art page");
+     $scope.arts = newItemService.getARTitems();
     }]);
 }
 
@@ -103,7 +102,7 @@ module.exports = function (app) {
 
 },{}],10:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, $timeout, newUserService, newItemService) {
+    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
       $scope.ShopItems = '';
@@ -137,19 +136,6 @@ module.exports = function (app) {
               }
 
 
-              // Function to replicate setInterval using $timeout service.
-              //   $scope.intervalFunction = function(){
-              //     $timeout(function() {
-              //       $scope.getData();
-              //       $scope.intervalFunction();
-              //     }, 1000)
-              //   };
-              //
-              //   // Kick off the interval
-              //   $scope.intervalFunction();
-              //
-              // });
-
 
 
 
@@ -180,16 +166,15 @@ module.exports = function (app) {
 },{}],11:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppinglistService', function ($scope, $http, $location, ShoppinglistService) {
-  console.log("hey bro whats up?")
-       ShoppinglistService.getSLItems().then(function(items){
-         console.log(items.data);
-         $scope.ShopItems = items.data;
-       });
+  // console.log("hey bro whats up?")
+      //  ShoppinglistService.getSLItems().then(function(items){
+      //    console.log(items.data);
+      //    $scope.ShopItems = items.data;
+      //  });
     }]);
 
 
 }
-/////Scope.Inventories is in the profile controller////
 
 },{}],12:[function(require,module,exports){
 let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
@@ -410,6 +395,7 @@ module.exports = function(app) {
     app.factory('newItemService', ['$http',
         function($http) {
             let shoppinglistItems = [];
+            let arts = [];
             // $scope.Cat = '';
             // $scope.Name = '';
             // $scope.Desc = '';
@@ -451,22 +437,44 @@ module.exports = function(app) {
                         description: ShopItem.description,
                         category: ShopItem.category,
                     }
+
                     var itemId = ShopItem.id;
+
                     console.log("phase one:", itemId)
                     return $http({
                         method: 'POST',
                         url: 'delete-item/',
-                        data: {
-                            id: itemId
-                        }
+                        data: {id: itemId}
                     }).then(function(res) {
                         console.log("phase two");
                     }).catch(function(response) {
                         console.log('the end of delete',
                             response);
-                    });
-                }
-            };
+                    })
+                },
+
+               getARTitems: function(){
+                    return $http({
+                   method: 'GET',
+                   url: 'items-art'
+                 }).then(function success(response){
+                    console.log(response);
+                    angular.copy(response.data.books,arts);
+                 })
+                //  return newthing;
+
+               }
+
+
+
+
+
+
+
+
+
+
+            }
         }
     ]);
 };
@@ -512,20 +520,20 @@ app.factory('ShoppinglistService', ['$http', function ($http) {
 
     return {
         /* GET request for book list */
-        getSLItems: function () {
-          var promise = $http({
-                method: 'GET',
-                url: 'get-items'
-            }).success(function (response) {
-                console.log(response);
-                return response;
-                // angular.copy(response., slItems);
-            }).error(function (response) {
-               return {"status": false};
-            });
-
-            return promise;
-        },
+        // getSLItems: function () {
+        //   var promise = $http({
+        //         method: 'GET',
+        //         url: 'get-items'
+        //     }).success(function (response) {
+        //         console.log(response);
+        //         return response;
+        //         // angular.copy(response., slItems);
+        //     }).error(function (response) {
+        //        return {"status": false};
+        //     });
+        //
+        //     return promise;
+        // },
         // borrowBook: function (target) {
         //  console.log("borrowing diz")
         //  $http({

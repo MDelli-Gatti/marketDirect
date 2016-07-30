@@ -1,25 +1,10 @@
 
-  <div class="col-lg-12">
-                  <h1 class="page-header">Art</h1>
-              </div>
 
-              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                  <a class="thumbnail" href="#">
-                      <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                  </a>
-              </div>
-              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                  <a class="thumbnail" href="#">
-                      <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                  </a>
-              </div>
-              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                  <a class="thumbnail" href="#">
-                      <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                  </a>
-              </div>
-              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                  <a class="thumbnail" href="#">
-                      <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                  </a>
-              </div>
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="art in arts">
+
+        <li class="list-group-item">{{art.data.category}}</li>
+        <li class="list-group-item">{{art.object.price}}</li>
+        <li class="list-group-item">{{art.description}}</li>
+        <!-- <button  type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button> -->
+
+    </div>

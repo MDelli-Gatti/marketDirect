@@ -1,5 +1,5 @@
 module.exports = function (app) {
-    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, $timeout, newUserService, newItemService) {
+    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
       $scope.ShopItems = '';
@@ -32,19 +32,6 @@ module.exports = function (app) {
             $scope.ShopItems.splice(index,1);
               }
 
-
-              // Function to replicate setInterval using $timeout service.
-              //   $scope.intervalFunction = function(){
-              //     $timeout(function() {
-              //       $scope.getData();
-              //       $scope.intervalFunction();
-              //     }, 1000)
-              //   };
-              //
-              //   // Kick off the interval
-              //   $scope.intervalFunction();
-              //
-              // });
 
 
 
