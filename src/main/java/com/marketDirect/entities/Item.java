@@ -28,7 +28,7 @@ public class Item {
     String price;
 
     @Column(nullable = false)
-    int quantity;
+    Integer quantity;
 
     @ManyToOne
     Vendor vendor;
@@ -37,7 +37,7 @@ public class Item {
     public Item() {
     }
 
-    public Item(String name, String description, String category, String filename, String price, int quantity, Vendor vendor) {
+    public Item(String name, String description, String category, String filename, String price, Integer quantity, Vendor vendor) {
         this.name = name;
         this.description = description;
         this.category = category;
@@ -103,11 +103,11 @@ public class Item {
         this.price = price;
     }
 
-    public int getQuantity() {
+    public Integer getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(int quantity) {
+    public void setQuantity(Integer quantity) {
         this.quantity = quantity;
     }
 }
