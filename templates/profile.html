@@ -16,22 +16,21 @@
                 <br/>
                 <button type="button" ng-click="showme=!showme" name="button">New Item</button>
                 <div class="addinventory" ng-show="showme">
-
                     <form id="fileupload" action="/create-item" method="POST" enctype="multipart/form-data">
-                      <select name="category">
-                           <option value="Produce">Produce</option>
-                           <option value="Art">Art</option>
-                           <option value="Hand-Crafted">Hand-Crafted</option>
-                           <option value="Miscellanous">Miscellanous</option>
-                       </select>
-                        <input type="text"  name="name" placeholder="Item Name">
+
+                        <select name="category">
+                            <option value="Produce">Produce</option>
+                            <option value="Art">Art</option>
+                            <option value="Hand-Crafted">Hand-Crafted</option>
+                            <option value="Miscellanous">Miscellanous</option>
+                        </select>
+                        <input type="text" name="name" placeholder="Item Name">
                         <input type="text" name="description" placeholder="Item Description">
-                        <input type="number"  name="quantity" placeholder="Item Quantity">
-                        <input type="text"  name="price" placeholder="Item Price">
+                        <input type="number" name="quantity" placeholder="Item Quantity">
+                        <input type="text" name="price" placeholder="Item Price">
                         <input type="submit" value="Add New Item">
                     </form>
                 </div>
-
                 <hr style="margin:8px auto">
             </div>
         </div>
@@ -52,11 +51,11 @@
 
             </ul> -->
         <!-- </a> -->
-          <li class="list-group-item">{{ShopItem.category}}</li>
-          <li class="list-group-item">{{ShopItem.price}}</li>
-          <li class="list-group-item">{{ShopItem.description}}</li>
-          <button ng-click = "remove(ShopItem)"  type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
-<!-- =======
+        <li class="list-group-item">{{ShopItem.category}}</li>
+        <li class="list-group-item">{{ShopItem.price}}</li>
+        <li class="list-group-item">{{ShopItem.description}}</li>
+        <button ng-click="remove(ShopItem)" type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
+        <!-- =======
         <li class="list-group-item">{{ShopItem.category}}</li>
         <li class="list-group-item">{{ShopItem.price}}</li>
         <li class="list-group-item">{{ShopItem.description}}</li>
