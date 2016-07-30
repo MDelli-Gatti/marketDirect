@@ -88,12 +88,11 @@ require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
 require('./controllers/MiscController.js')(app);
 require('./controllers/NewitemController.js') (app);
-// require('./controllers/VideoController.js')(app);
-// services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
 require('./services/shoppinglist.js')(app);
 require('./services/newItem.js')(app);
+require('./services/getItems.js')(app);
 
 
 

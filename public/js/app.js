@@ -1,9 +1,9 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ArtController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+    app.controller('ArtController', ['$scope', '$http', '$location', 'getItemService', function ($scope, $http, $location, loginService, getItemService) {
 
 
-      
+
     }]);
 }
 
@@ -103,7 +103,7 @@ module.exports = function (app) {
 
 },{}],10:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
+    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, $timeout, newUserService, newItemService) {
       $scope.name = '';
       $scope.password = '';
       $scope.ShopItems = '';
@@ -131,11 +131,24 @@ module.exports = function (app) {
 
           $scope.remove=function(ShopItem){
             newItemService.DeleteSLItems(ShopItem)
-            // console.log(ShopItem);
-            // var index = $scope.ShopItems.indexOf(x);
-            // $scope.ShopItems.splice(index,1);
+            console.log(ShopItem);
+            var index = $scope.ShopItems.indexOf(ShopItem);
+            $scope.ShopItems.splice(index,1);
               }
 
+
+              // Function to replicate setInterval using $timeout service.
+              //   $scope.intervalFunction = function(){
+              //     $timeout(function() {
+              //       $scope.getData();
+              //       $scope.intervalFunction();
+              //     }, 1000)
+              //   };
+              //
+              //   // Kick off the interval
+              //   $scope.intervalFunction();
+              //
+              // });
 
 
 
@@ -269,12 +282,11 @@ require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
 require('./controllers/MiscController.js')(app);
 require('./controllers/NewitemController.js') (app);
-// require('./controllers/VideoController.js')(app);
-// services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
 require('./services/shoppinglist.js')(app);
 require('./services/newItem.js')(app);
+require('./services/getItems.js')(app);
 
 
 
@@ -333,7 +345,25 @@ var video, canvas, msg;
 
        window.addEventListener('DOMContentLoaded', load, false);
 
-},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewitemController.js":7,"./controllers/NewuserController.js":8,"./controllers/ProduceController.js":9,"./controllers/ProfileController.js":10,"./controllers/ShoppinglistController.js":11,"./services/login.js":13,"./services/newItem.js":14,"./services/newUser.js":15,"./services/shoppinglist.js":16}],13:[function(require,module,exports){
+},{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewitemController.js":7,"./controllers/NewuserController.js":8,"./controllers/ProduceController.js":9,"./controllers/ProfileController.js":10,"./controllers/ShoppinglistController.js":11,"./services/getItems.js":13,"./services/login.js":14,"./services/newItem.js":15,"./services/newUser.js":16,"./services/shoppinglist.js":17}],13:[function(require,module,exports){
+module.exports = function(app) {
+    app.factory('getItemService', function($http) {
+
+        return {
+
+
+
+
+
+
+
+
+
+        }
+    })
+}
+
+},{}],14:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('loginService', function($http, $location) {
         let username = "";
@@ -375,7 +405,7 @@ module.exports = function(app) {
     })
 }
 
-},{}],14:[function(require,module,exports){
+},{}],15:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('newItemService', ['$http',
         function($http) {
@@ -421,28 +451,27 @@ module.exports = function(app) {
                         description: ShopItem.description,
                         category: ShopItem.category,
                     }
-
                     var itemId = ShopItem.id;
-
                     console.log("phase one:", itemId)
                     return $http({
                         method: 'POST',
                         url: 'delete-item/',
-                        data: {id: itemId}
+                        data: {
+                            id: itemId
+                        }
                     }).then(function(res) {
                         console.log("phase two");
-                        $scope.ShopItem.splice(index, 1);
                     }).catch(function(response) {
                         console.log('the end of delete',
                             response);
-                    })
+                    });
                 }
-            }
+            };
         }
     ]);
 };
 
-},{}],15:[function(require,module,exports){
+},{}],16:[function(require,module,exports){
 module.exports = function(app) {
     app.factory('newUserService', function($http, $location) {
         let username = "";
@@ -476,7 +505,7 @@ module.exports = function(app) {
     })
 }
 
-},{}],16:[function(require,module,exports){
+},{}],17:[function(require,module,exports){
 module.exports=function(app){
 app.factory('ShoppinglistService', ['$http', function ($http) {
     let shoppinglistItems = [];

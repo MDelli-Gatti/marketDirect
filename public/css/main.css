@@ -39,29 +39,26 @@ p {
 #newUser {
   color: white; }
 
-#artContainer {
-  border: 2px solid black;
-  width: 30%;
-  margin: auto; }
+.thumbnail {
+  height: 300px; }
 
-#produceContainer {
-  width: 70%;
-  height: 200px;
-  float: right;
+img {
+  width: 300px; }
+
+#exploreItem {
+  background-image: url("images/produce.jpg");
+  width: 30%;
+  border: 2px solid gray;
+  height: 300px;
   display: inline-block;
-  border: 2px solid black; }
+  margin-left: 20px;
+  margin-top: 10px; }
 
-#craftContainer {
-  width: 30%;
-  float: right;
-  border: 2px solid black; }
+.col-sm-4 {
+  background-image: url("images/produce.jpg"); }
 
-#miscContainer {
-  width: 30%;
-  border: 2px solid black; }
-
-.large-6 {
-  margin: auto; }
+#work {
+  height: 400px; }
 
 #icon {
   width: 78px;

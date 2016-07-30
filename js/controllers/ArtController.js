@@ -1,7 +1,7 @@
 module.exports = function (app) {
-    app.controller('ArtController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
+    app.controller('ArtController', ['$scope', '$http', '$location', 'getItemService', function ($scope, $http, $location, loginService, getItemService) {
 
 
-      
+
     }]);
 }

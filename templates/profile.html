@@ -18,7 +18,12 @@
                 <div class="addinventory" ng-show="showme">
 
                     <form id="fileupload" action="/create-item" method="POST" enctype="multipart/form-data">
-                        <input type="text" name="category" placeholder="Item Category">
+                      <select name="category">
+                           <option value="Produce">Produce</option>
+                           <option value="Art">Art</option>
+                           <option value="Hand-Crafted">Hand-Crafted</option>
+                           <option value="Miscellanous">Miscellanous</option>
+                       </select>
                         <input type="text"  name="name" placeholder="Item Name">
                         <input type="text" name="description" placeholder="Item Description">
                         <input type="number"  name="quantity" placeholder="Item Quantity">
