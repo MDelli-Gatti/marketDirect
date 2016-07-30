@@ -2,6 +2,7 @@ module.exports = function(app) {
     app.factory('newItemService', ['$http',
         function($http) {
             let shoppinglistItems = [];
+            let arts = [];
             // $scope.Cat = '';
             // $scope.Name = '';
             // $scope.Desc = '';
@@ -57,7 +58,29 @@ module.exports = function(app) {
                         console.log('the end of delete',
                             response);
                     })
-                }
+                },
+
+               getARTitems: function(){
+                    return $http({
+                   method: 'GET',
+                   url: 'items-art'
+                 }).then(function success(response){
+                    console.log(response);
+                    angular.copy(response.data.books,arts);
+                 })
+                //  return newthing;
+
+               }
+
+
+
+
+
+
+
+
+
+
             }
         }
     ]);

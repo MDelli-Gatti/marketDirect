@@ -17,6 +17,7 @@
                 <button type="button" ng-click="showme=!showme" name="button">New Item</button>
                 <div class="addinventory" ng-show="showme">
                     <form id="fileupload" action="/create-item" method="POST" enctype="multipart/form-data">
+
                         <select name="category">
                             <option value="Produce">Produce</option>
                             <option value="Art">Art</option>
