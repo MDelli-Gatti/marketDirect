@@ -32,13 +32,16 @@ Get ALL Items:
 route = "GET" path = "get-items" (plural)
 
 Get ONE Item
-route = "GET" path = "get-item" (singular) data = int id
+route = "GET" path = "get-item" (singular) data = Item object with an id
 
 Get Items By Category:
 route = "GET" path = "items-by-category" (plural) data = String category
 
 Edit Item
-route = "POST" path = "edit-item" data = MultipartFile file, String name, String description, String category, String price, Integer quantity
+route = "POST" path = "edit-item" data = Item object with an id
+
+Edit Item Image
+route = "POST" path = "edit-item-photo" data = MultipartFile file, Item object with an id
 
 Delete Item:
 route = "POST" path = "delete-item" data = int id

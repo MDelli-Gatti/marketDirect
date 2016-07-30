@@ -200,7 +200,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/get-item", method = RequestMethod.GET)
-    public Item getItem(HttpSession session, int id) throws Exception {
+    public Item getItem(HttpSession session, @RequestBody Item i) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -211,7 +211,7 @@ public class MarketDirectController {
             throw new Exception("User not in database!");
         }
 
-        return items.findOne(id);
+        return items.findOne(i.getId());
     }
 
     @RequestMapping(path = "/items-by-category", method = RequestMethod.GET)
@@ -289,7 +289,7 @@ public class MarketDirectController {
         items.save(item);
     }
 
-    @RequestMapping(path = "edit-item-image", method = RequestMethod.POST)
+    @RequestMapping(path = "edit-item-photo", method = RequestMethod.POST)
     public void editItemImage(HttpSession session, MultipartFile file, @RequestBody Item i) throws Exception {
         Item item = items.findOne(i.getId());
 
