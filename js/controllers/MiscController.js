@@ -3,9 +3,9 @@ module.exports = function (app) {
      console.log("this is the misc page");
      $scope.miscs = newItemService.getMISCSitems();
 
-     newItemService.getMISCSitems().then(function(miscs){
-       console.log(miscs.data);
-       $scope.miscs = miscs.data;
+     newItemService.getMISCSitems().then(function(misc){
+       console.log(misc.data);
+       $scope.misc = misc.data;
      });
 
     }]);
