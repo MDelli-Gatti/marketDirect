@@ -152,7 +152,7 @@ public class MarketDirectController {
         response.sendRedirect("/#/profile");
     }
 
-    @RequestMapping(path = "add-item-photo", method = RequestMethod.POST)
+    @RequestMapping(path = "/add-item-photo", method = RequestMethod.POST)
     public void addPicture(@RequestBody Item i, HttpSession session, MultipartFile file, HttpServletResponse response) throws Exception {
         Item item = items.findOne(i.getId());
 
@@ -234,7 +234,7 @@ public class MarketDirectController {
         return items.findByCategory("Hand-Crafted");
     }
 
-    @RequestMapping(path = "/items-misc", method = RequestMethod.GET)
+    @RequestMapping(path = "/items-miscellaneous", method = RequestMethod.GET)
     public Iterable<Item> itemsMisc (){
         return items.findByCategory("Miscellaneous");
     }
@@ -309,7 +309,7 @@ public class MarketDirectController {
         items.save(item);
     }
 
-    @RequestMapping(path = "edit-item-photo", method = RequestMethod.POST)
+    @RequestMapping(path = "/edit-item-photo", method = RequestMethod.POST)
     public void editItemImage(HttpSession session, MultipartFile file, @RequestBody Item i) throws Exception {
         Item item = items.findOne(i.getId());
 
@@ -469,7 +469,7 @@ public class MarketDirectController {
         return vendors.findByNameLike( "%" + search + "%");
     }
 
-    @RequestMapping(path = "add-shopping-list-item", method = RequestMethod.POST)
+    @RequestMapping(path = "/add-shopping-list-item", method = RequestMethod.POST)
     public void createShoppingList(HttpSession session, int id) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -486,7 +486,7 @@ public class MarketDirectController {
         users.save(user);
     }
 
-    @RequestMapping(path = "remove-shopping-list-item", method = RequestMethod.POST)
+    @RequestMapping(path = "/remove-shopping-list-item", method = RequestMethod.POST)
     public void removeShoppingListItem(HttpSession session, @RequestBody Item i) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -503,7 +503,7 @@ public class MarketDirectController {
         users.save(user);
     }
 
-    @RequestMapping(path = "get-shopping-list", method = RequestMethod.GET)
+    @RequestMapping(path = "/get-shopping-list", method = RequestMethod.GET)
         public Iterable<Item> getShoppingList(HttpSession session) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -517,7 +517,7 @@ public class MarketDirectController {
         return user.getShoppingList();
     }
 
-    @RequestMapping(path = "create-comment", method = RequestMethod.POST)
+    @RequestMapping(path = "/create-comment", method = RequestMethod.POST)
     public void createComment(HttpSession session, int id, @RequestBody Comment comment) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -534,7 +534,7 @@ public class MarketDirectController {
         comments.save(c);
     }
 
-    @RequestMapping(path = "get-comments", method = RequestMethod.GET)
+    @RequestMapping(path = "/get-comments", method = RequestMethod.GET)
     public Iterable<Comment> getComments(HttpSession session, int id) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -548,7 +548,7 @@ public class MarketDirectController {
         return comments.findByVendorId(id);
     }
 
-    @RequestMapping(path = "edit-comment", method = RequestMethod.POST)
+    @RequestMapping(path = "/edit-comment", method = RequestMethod.POST)
     public void editComment(HttpSession session, int id, String text) throws Exception {
         Comment comment = comments.findOne(id);
         String username = (String) session.getAttribute("username");
@@ -570,7 +570,7 @@ public class MarketDirectController {
         }
     }
 
-    @RequestMapping(path = "delete-comment/{id}", method = RequestMethod.POST)
+    @RequestMapping(path = "/delete-comment/{id}", method = RequestMethod.POST)
     public void deleteComment(HttpSession session, @PathVariable("id") int id) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -590,7 +590,7 @@ public class MarketDirectController {
         }
     }
 
-    @RequestMapping(path = "find-by-location", method = RequestMethod.GET)
+    @RequestMapping(path = "/find-by-location", method = RequestMethod.GET)
     public Iterable<Vendor> findByLocation(HttpSession session, String location) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -605,7 +605,7 @@ public class MarketDirectController {
         return vendors.findByLocation(location);
     }
 
-    @RequestMapping(path = "create-message", method = RequestMethod.POST)
+    @RequestMapping(path = "/create-message", method = RequestMethod.POST)
     public void createMessage(HttpSession session, Integer id, @RequestBody Message message) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {

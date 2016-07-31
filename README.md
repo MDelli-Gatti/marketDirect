@@ -37,6 +37,18 @@ route = "GET" path = "get-item" (singular) data = Item object with an id
 Get Items By Category:
 route = "GET" path = "items-by-category" (plural) data = String category
 
+Get Produce Items
+route = "GET" path = "items-produce"
+
+Get Art Items
+route = "GET" path = "items-art"
+
+Get Hand Crafted Items
+route = "GET" path = "items-hand-crafted"
+
+Get Misc Items
+route = "GET" path = "items-misc"
+
 Edit Item
 route = "POST" path = "edit-item" data = Item object with an id
 
