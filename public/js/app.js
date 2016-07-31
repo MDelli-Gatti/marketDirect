@@ -152,30 +152,8 @@ module.exports = function (app) {
             $scope.ShopItems.splice(index,1);
               }
 
+            
 
-
-
-
-
-// <<<<<<< HEAD
-//           $scope.inventories = function(){
-//             console.log("boo");
-//             console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-//             newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
-//           }
-//
-// =======
-
-      //     $scope.inventories = function(){
-      //     var f = document.getElementByID('fileupload').files[0],
-      //       r = new FileReader();
-      //     r.onloaded = function(e){
-      //       var data = e.target.result;
-      //       console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-      //       newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
-      //     }
-      //     r.readAsBinaryString(f);
-      // };
 
     }]);
 };
@@ -291,6 +269,20 @@ require('./services/newUser.js')(app);
 require('./services/shoppinglist.js')(app);
 require('./services/newItem.js')(app);
 require('./services/getItems.js')(app);
+
+
+document.getElementById('picVal').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("picVal").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('itemPicture').style.backgroundImage = "url(" + reader.result + ")";
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
 
 
 
