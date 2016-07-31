@@ -15,8 +15,14 @@ module.exports = function (app) {
 },{}],2:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('CraftedController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
-     console.log("this is the hand-crafted page");
+     console.log("this is the handcrafted page");
      $scope.handcrafts = newItemService.getHANDCRAFTEDitems();
+
+     newItemService.getHANDCRAFTEDitems().then(function(handcraft){
+       console.log(handcraft.data);
+       $scope.handcrafts = handcraft.data;
+     });
+
     }]);
 }
 
@@ -63,8 +69,14 @@ module.exports = function (app) {
 },{}],6:[function(require,module,exports){
 module.exports = function (app) {
     app.controller('MiscController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
-     console.log("this is the miscellanous page");
-     $scope.misc = newItemService.getMISCELLANOUSitems();
+     console.log("this is the misc page");
+     $scope.miscs = newItemService.getMISCSitems();
+
+     newItemService.getMISCSitems().then(function(misc){
+       console.log(misc.data);
+       $scope.misc = misc.data;
+     });
+
     }]);
 }
 
@@ -96,6 +108,12 @@ module.exports = function (app) {
     app.controller('ProduceController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
      console.log("this is the produce page");
      $scope.produces = newItemService.getPRODUCEitems();
+
+     newItemService.getPRODUCEitems().then(function(produce){
+       console.log(produce.data);
+       $scope.produces = produce.data;
+     });
+
     }]);
 }
 
@@ -134,30 +152,8 @@ module.exports = function (app) {
             $scope.ShopItems.splice(index,1);
               }
 
+            
 
-
-
-
-
-// <<<<<<< HEAD
-//           $scope.inventories = function(){
-//             console.log("boo");
-//             console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-//             newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
-//           }
-//
-// =======
-
-      //     $scope.inventories = function(){
-      //     var f = document.getElementByID('fileupload').files[0],
-      //       r = new FileReader();
-      //     r.onloaded = function(e){
-      //       var data = e.target.result;
-      //       console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-      //       newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
-      //     }
-      //     r.readAsBinaryString(f);
-      // };
 
     }]);
 };
@@ -273,6 +269,20 @@ require('./services/newUser.js')(app);
 require('./services/shoppinglist.js')(app);
 require('./services/newItem.js')(app);
 require('./services/getItems.js')(app);
+
+
+document.getElementById('picVal').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("picVal").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('itemPicture').style.backgroundImage = "url(" + reader.result + ")";
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
 
 
 
@@ -399,7 +409,7 @@ module.exports = function(app) {
             let arts = [];
             let produces = [];
             let handcrafts = [];
-            let misc = [];
+            let miscellaneouses = [];
             // $scope.Cat = '';
             // $scope.Name = '';
             // $scope.Desc = '';
@@ -474,41 +484,56 @@ module.exports = function(app) {
 
               },
 
-               getPRODUCEitems: function(){
-                    return $http({
-                   method: 'GET',
-                   url: 'items-produce'
-                 }).then(function success(response){
-                    console.log(response);
-                    angular.copy(response.data.books,produces);
-                 })
-                //  return newthing;
-
-              },
-
-              getHANDCRAFTEDitems: function(){
-                   return $http({
+              getPRODUCEitems: function(){
+                   var promise = $http({
                   method: 'GET',
-                  url: 'items-hand-crafted'
-                }).then(function success(response){
+                  url: 'items-produce',
+                }).success(function(response){
                    console.log(response);
-                   angular.copy(response.data.books,handcrafts);
-                })
-               //  return newthing;
+                   console.log("here we are");
+                   // angular.copy(response.data.books,arts);
+                }).error(function(response){
+                  return {
+                    "status": false
+                  };
+                });
+                return promise;
 
              },
 
-             getMISCELLANOUSitems: function(){
-                  return $http({
+             getHANDCRAFTEDitems: function(){
+                  var promise = $http({
                  method: 'GET',
-                 url: 'items-miscellanous'
-               }).then(function success(response){
+                 url: 'items-hand-crafted',
+               }).success(function(response){
                   console.log(response);
-                  angular.copy(response.data.books,misc);
-               })
-              //  return newthing;
+                  console.log("here we are");
+                  // angular.copy(response.data.books,arts);
+               }).error(function(response){
+                 return {
+                   "status": false
+                 };
+               });
+               return promise;
 
             },
+
+            getMISCSitems: function(){
+                 var promise = $http({
+                method: 'GET',
+                url: 'items-misc',
+              }).success(function(response){
+                 console.log(response);
+                 console.log("we are getting miscsssss");
+                 // angular.copy(response.data.books,arts);
+              }).error(function(response){
+                return {
+                  "status": false
+                };
+              });
+              return promise;
+
+           },
 
 
 

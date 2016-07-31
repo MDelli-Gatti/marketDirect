@@ -22,7 +22,7 @@
                             <option value="Produce">Produce</option>
                             <option value="Art">Art</option>
                             <option value="Hand-Crafted">Hand-Crafted</option>
-                            <option value="Miscellanous">Miscellanous</option>
+                            <option value="Misc">Miscellaneous</option>
                         </select>
                         <input type="text" name="name" placeholder="Item Name">
                         <input type="text" name="description" placeholder="Item Description">
@@ -42,25 +42,13 @@
     </div>
 
     <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="ShopItem in ShopItems">
-        <!-- <a class="thumbnail" href="#profile"> -->
-        <!-- <img class="img-responsive" src="http://placehold.it/400x300" alt=""> -->
-        <!-- <ul class="list-group" ng-repeat = "ShopItem in ShopItems | limitTo: 1">
-              <li class="list-group-item">{{ShopItem.category}}</li>
-              <li class="list-group-item">{{ShopItem.price}}</li>
-              <li class="list-group-item">{{ShopItem.description}}</li>
 
-            </ul> -->
-        <!-- </a> -->
         <li class="list-group-item">{{ShopItem.category}}</li>
         <li class="list-group-item">{{ShopItem.price}}</li>
         <li class="list-group-item">{{ShopItem.description}}</li>
         <button ng-click="remove(ShopItem)" type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
-        <!-- =======
-        <li class="list-group-item">{{ShopItem.category}}</li>
-        <li class="list-group-item">{{ShopItem.price}}</li>
-        <li class="list-group-item">{{ShopItem.description}}</li>
-        <button ng-click="remove()" type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
->>>>>>> e177656dd0bfb0323eda2f69583eecddea962f72 -->
+        <input type="file" id="picVal" /><br/><br/>
+        <div id="itemPicture"></div>
 
     </div>
     <!-- <div class="col-lg-3 col-md-4 col-xs-6 thumb">
