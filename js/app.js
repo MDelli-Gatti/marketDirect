@@ -1,4 +1,4 @@
-let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
+let app = angular.module('MarketApp', ['ngRoute','MarketControllers', 'MarketServices', 'MarketDirectives']);
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
 angular.module('MarketDirectives', []);
@@ -152,3 +152,15 @@ var video, canvas, msg;
        };
 
        window.addEventListener('DOMContentLoaded', load, false);
+
+
+
+
+
+
+
+
+//
+// myVideo = {
+//   mp4: public/.mp4,
+// }

@@ -1,5 +1,4 @@
 .LoginContainer {
-  background-image: url("../images/green-crop.jpg");
   background-repeat: no-repeat;
   background-size: 100%;
   height: 670px;
@@ -38,6 +37,12 @@ p {
 
 #newUser {
   color: white; }
+
+.MainContainer {
+  background-color: #769481; }
+
+.page-header {
+  font-family: 'Cookie', cursive; }
 
 .thumbnail {
   height: 300px; }
@@ -142,3 +147,14 @@ footer {
   font-size: 12px;
   line-height: 1.428571429;
   border-radius: 15px; }
+
+#video-background {
+  /*  making the video fullscreen  */
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  width: auto;
+  height: auto;
+  z-index: -100; }
