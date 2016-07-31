@@ -3,6 +3,9 @@ module.exports = function(app) {
         function($http) {
             let shoppinglistItems = [];
             let arts = [];
+            let produces = [];
+            let handcrafts = [];
+            let misc = [];
             // $scope.Cat = '';
             // $scope.Name = '';
             // $scope.Desc = '';
@@ -70,7 +73,45 @@ module.exports = function(app) {
                  })
                 //  return newthing;
 
-               }
+              },
+
+               getPRODUCEitems: function(){
+                    return $http({
+                   method: 'GET',
+                   url: 'items-produce'
+                 }).then(function success(response){
+                    console.log(response);
+                    angular.copy(response.data.books,produces);
+                 })
+                //  return newthing;
+
+              },
+
+              getHANDCRAFTEDitems: function(){
+                   return $http({
+                  method: 'GET',
+                  url: 'items-hand-crafted'
+                }).then(function success(response){
+                   console.log(response);
+                   angular.copy(response.data.books,handcrafts);
+                })
+               //  return newthing;
+
+             },
+
+             getMISCELLANOUSitems: function(){
+                  return $http({
+                 method: 'GET',
+                 url: 'items-miscellanous'
+               }).then(function success(response){
+                  console.log(response);
+                  angular.copy(response.data.books,misc);
+               })
+              //  return newthing;
+
+            },
+
+
 
 
 

@@ -1,11 +1,6 @@
 module.exports = function (app) {
-    app.controller('ProduceController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
-
-      $scope.login = function () {
-          console.log(`${$scope.name} in as we speak`);
-          loginService.userLogin($scope.name, $scope.password);
-        };
-
+    app.controller('ProduceController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
+     console.log("this is the produce page");
+     $scope.produces = newItemService.getPRODUCEitems();
     }]);
 }
-/////Scope.Inventories is in the profile controller////

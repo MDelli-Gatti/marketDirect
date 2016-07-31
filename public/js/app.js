@@ -8,10 +8,9 @@ module.exports = function (app) {
 
 },{}],2:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('CraftedController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
-
-
-      
+    app.controller('CraftedController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
+     console.log("this is the hand-crafted page");
+     $scope.handcrafts = newItemService.getHANDCRAFTEDitems();
     }]);
 }
 
@@ -57,10 +56,9 @@ module.exports = function (app) {
 
 },{}],6:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('MiscController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
-
-
-
+    app.controller('MiscController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
+     console.log("this is the miscellanous page");
+     $scope.misc = newItemService.getMISCELLANOUSitems();
     }]);
 }
 
@@ -89,16 +87,11 @@ module.exports = function (app) {
 
 },{}],9:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ProduceController', ['$scope', '$http', '$location', 'loginService', function ($scope, $http, $location, loginService) {
-
-      $scope.login = function () {
-          console.log(`${$scope.name} in as we speak`);
-          loginService.userLogin($scope.name, $scope.password);
-        };
-
+    app.controller('ProduceController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
+     console.log("this is the produce page");
+     $scope.produces = newItemService.getPRODUCEitems();
     }]);
 }
-/////Scope.Inventories is in the profile controller////
 
 },{}],10:[function(require,module,exports){
 module.exports = function (app) {
@@ -267,6 +260,8 @@ require('./controllers/ProduceController.js')(app);
 require('./controllers/ArtController.js')(app);
 require('./controllers/MiscController.js')(app);
 require('./controllers/NewitemController.js') (app);
+
+//services
 require('./services/login.js')(app);
 require('./services/newUser.js')(app);
 require('./services/shoppinglist.js')(app);
@@ -396,6 +391,9 @@ module.exports = function(app) {
         function($http) {
             let shoppinglistItems = [];
             let arts = [];
+            let produces = [];
+            let handcrafts = [];
+            let misc = [];
             // $scope.Cat = '';
             // $scope.Name = '';
             // $scope.Desc = '';
@@ -463,7 +461,45 @@ module.exports = function(app) {
                  })
                 //  return newthing;
 
-               }
+              },
+
+               getPRODUCEitems: function(){
+                    return $http({
+                   method: 'GET',
+                   url: 'items-produce'
+                 }).then(function success(response){
+                    console.log(response);
+                    angular.copy(response.data.books,produces);
+                 })
+                //  return newthing;
+
+              },
+
+              getHANDCRAFTEDitems: function(){
+                   return $http({
+                  method: 'GET',
+                  url: 'items-hand-crafted'
+                }).then(function success(response){
+                   console.log(response);
+                   angular.copy(response.data.books,handcrafts);
+                })
+               //  return newthing;
+
+             },
+
+             getMISCELLANOUSitems: function(){
+                  return $http({
+                 method: 'GET',
+                 url: 'items-miscellanous'
+               }).then(function success(response){
+                  console.log(response);
+                  angular.copy(response.data.books,misc);
+               })
+              //  return newthing;
+
+            },
+
+
 
 
 
