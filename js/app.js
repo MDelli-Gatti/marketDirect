@@ -97,6 +97,20 @@ require('./services/newItem.js')(app);
 require('./services/getItems.js')(app);
 
 
+document.getElementById('picVal').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("picVal").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('itemPicture').style.backgroundImage = "url(" + reader.result + ")";
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
+
+
 
 document.getElementById('getval').addEventListener('change', readURL, true);
 function readURL(){

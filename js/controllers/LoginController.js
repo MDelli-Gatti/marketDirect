@@ -6,19 +6,8 @@ module.exports = function (app) {
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
             loginService.userLogin($scope.name, $scope.password, "/explore");
-            $location.path('/explore');
 
-            app.directive('iframeDirective', ['$sce', function($sce) {
-                 return {
-                   restrict: 'E',
-                   template: '<iframe src="{{ trustedUrl }}" frameborder="0" allowfullscreen></iframe>',
-                   link: function(scope) {
-                     scope.trustedUrl = $sce.trustAsResourceUrl("");
-                   }
-                 }
-               }]);
-
-
+            // $location.path('/explore');
         };
     }]);
 }

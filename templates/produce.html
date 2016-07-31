@@ -1,74 +1,9 @@
-<nav  id = "topNav" class="navbar navbar-default" role="navigation">
-<div class="topNavcontainer">
 
-<!-- Brand and toggle get grouped for better mobile display -->
-<div class="navbar-header">
-  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <div class="navbar-brand navbar-brand-centered"></div>
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="produce in produces">
 
-</div>
+        <li class="list-group-item">{{produce.category}}</li>
+        <li class="list-group-item">{{produce.price}}</li>
+        <li class="list-group-item">{{produce.description}}</li>
+        <!-- <button  type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button> -->
 
-<!-- Collect the nav links, forms, and other content for toggling -->
-<div class="collapse navbar-collapse" id="navbar-brand-centered">
-  <ul class="nav navbar-nav">
-    <a href="#explore"><img id = "navIcon"src="/images/navbaricon.svg" alt="" /></a>
-
-  </ul>
-  <ul class="nav navbar-nav navbar-right">
-
-    <li class="dropdown">
-          <!-- <a href="#login" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a> -->
-          <!-- <ul class="dropdown-menu" role="menu"> -->
-          <li><a href="#profile">Profile</a></li>
-          <li><a href="#shoppinglist">Shopping List</a></li>
-          <li><a href="#explore">Explore</a></li>
-          <!-- <li><a href="#inventory">Inventory</a></li> -->
-          <li><a href="#login">Logout</a></li>
-          <!-- </ul> -->
-        </li>
-  </ul>
-</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
-</nav>
-
-
-<div class="col-lg-12">
-    <h1 class="page-header">produce</h1>
-</div>
-
-<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-    <a class="thumbnail" href="#">
-        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-    </a>
-</div>
-<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-    <a class="thumbnail" href="#">
-        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-    </a>
-</div>
-<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-    <a class="thumbnail" href="#">
-        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-    </a>
-</div>
-<div class="col-lg-3 col-md-4 col-xs-6 thumb">
-    <a class="thumbnail" href="#">
-        <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-    </a>
-</div>
-
-
-<!-- testing below -->
-<div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="ShopItem in ShopItems">
-
-    <li class="list-group-item">{{ShopItem.category}}</li>
-    <li class="list-group-item">{{ShopItem.price}}</li>
-    <li class="list-group-item">{{ShopItem.description}}</li>
-    <button ng-click="remove(ShopItem)" type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
-
-</div>
+    </div>
