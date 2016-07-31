@@ -64,14 +64,19 @@ module.exports = function(app) {
                 },
 
                getARTitems: function(){
-                    return $http({
+                    var promise = $http({
                    method: 'GET',
-                   url: 'items-art'
-                 }).then(function success(response){
+                   url: 'items-art',
+                 }).success(function(response){
                     console.log(response);
-                    angular.copy(response.data.books,arts);
-                 })
-                //  return newthing;
+                    console.log("here we are");
+                    // angular.copy(response.data.books,arts);
+                 }).error(function(response){
+                   return {
+                     "status": false
+                   };
+                 });
+                 return promise;
 
               },
 
