@@ -142,3 +142,11 @@ footer {
   font-size: 12px;
   line-height: 1.428571429;
   border-radius: 15px; }
+
+#itemPicture {
+  background-image: url("");
+  background-size: cover;
+  background-position: center;
+  height: 250px;
+  width: 250px;
+  border: 1px solid #bbb; }

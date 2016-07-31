@@ -5,7 +5,7 @@ module.exports = function(app) {
             let arts = [];
             let produces = [];
             let handcrafts = [];
-            let misc = [];
+            let miscellaneouses = [];
             // $scope.Cat = '';
             // $scope.Name = '';
             // $scope.Desc = '';
@@ -80,41 +80,56 @@ module.exports = function(app) {
 
               },
 
-               getPRODUCEitems: function(){
-                    return $http({
-                   method: 'GET',
-                   url: 'items-produce'
-                 }).then(function success(response){
-                    console.log(response);
-                    angular.copy(response.data.books,produces);
-                 })
-                //  return newthing;
-
-              },
-
-              getHANDCRAFTEDitems: function(){
-                   return $http({
+              getPRODUCEitems: function(){
+                   var promise = $http({
                   method: 'GET',
-                  url: 'items-hand-crafted'
-                }).then(function success(response){
+                  url: 'items-produce',
+                }).success(function(response){
                    console.log(response);
-                   angular.copy(response.data.books,handcrafts);
-                })
-               //  return newthing;
+                   console.log("here we are");
+                   // angular.copy(response.data.books,arts);
+                }).error(function(response){
+                  return {
+                    "status": false
+                  };
+                });
+                return promise;
 
              },
 
-             getMISCELLANOUSitems: function(){
-                  return $http({
+             getHANDCRAFTEDitems: function(){
+                  var promise = $http({
                  method: 'GET',
-                 url: 'items-miscellanous'
-               }).then(function success(response){
+                 url: 'items-hand-crafted',
+               }).success(function(response){
                   console.log(response);
-                  angular.copy(response.data.books,misc);
-               })
-              //  return newthing;
+                  console.log("here we are");
+                  // angular.copy(response.data.books,arts);
+               }).error(function(response){
+                 return {
+                   "status": false
+                 };
+               });
+               return promise;
 
             },
+
+            getMISCSitems: function(){
+                 var promise = $http({
+                method: 'GET',
+                url: 'items-misc',
+              }).success(function(response){
+                 console.log(response);
+                 console.log("we are getting miscsssss");
+                 // angular.copy(response.data.books,arts);
+              }).error(function(response){
+                return {
+                  "status": false
+                };
+              });
+              return promise;
+
+           },
 
 
 
