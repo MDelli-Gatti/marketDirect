@@ -214,6 +214,17 @@ public class MarketDirectController {
         return items.findOne(i.getId());
     }
 
+    @RequestMapping(path = "/get-item-images", method = RequestMethod.GET)
+    public ArrayList<String> getItemImages(@RequestBody Vendor v){
+        List<Item> itemList = (List<Item>) items.findByVendor(v);
+        ArrayList<String> shit = new ArrayList<>();
+        for (Item item : itemList){
+            String fileName = item.getFilename();
+            shit.add(fileName);
+        }
+        return shit;
+    }
+
     @RequestMapping(path = "/items-by-category", method = RequestMethod.GET)
     public Iterable<Item> itemsByCategory(String category){
         return items.findByCategory(category);
