@@ -234,9 +234,9 @@ public class MarketDirectController {
         return items.findByCategory("Hand-Crafted");
     }
 
-    @RequestMapping(path = "/items-miscellaneous", method = RequestMethod.GET)
+    @RequestMapping(path = "/items-misc", method = RequestMethod.GET)
     public Iterable<Item> itemsMisc (){
-        return items.findByCategory("Miscellaneous");
+        return items.findByCategory("Misc");
     }
 
 //    @RequestMapping(path = "/item/{id}", method = RequestMethod.POST) // create new
