@@ -49,6 +49,9 @@ route = "GET" path = "items-hand-crafted"
 Get Misc Items
 route = "GET" path = "items-misc"
 
+Get Item Images
+route = "GET" path = "get-item-images" data = Vendor object
+
 Edit Item
 route = "POST" path = "edit-item" data = Item object with an id
 
