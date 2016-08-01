@@ -197,3 +197,41 @@ footer {
   height: 250px;
   width: 250px;
   border: 1px solid #bbb; }
+
+.desc_ImageOverlay {
+  text-decoration: none;
+  position: relative;
+  display: block;
+  float: left;
+  overflow: hidden;
+  width: 240px;
+  background: none 50%;
+  background-size: cover; }
+
+.desc_ImageOverlay .desc {
+  font: 16px/20px sans-serif;
+  color: #fff;
+  text-align: center;
+  padding: 24px 16px;
+  transform: translateY(30%);
+  -webkit-transform: translateY(30%);
+  transition: 0.5s;
+  -webkit-transition: 0.5s; }
+
+.desc_ImageOverlay .desc li {
+  transition: 0.5s;
+  -webkit-transition: 0.5s;
+  opacity: 0; }
+
+/*hover*/
+.desc_ImageOverlay:hover .desc {
+  transform: translateY(0%);
+  -webkit-transform: translateY(0%);
+  background: rgba(255, 255, 255, 0.5); }
+
+.desc_ImageOverlay:hover .desc li {
+  opacity: 1;
+  color: #000; }
+
+.desc_ImageOverlay:hover h2 h4 {
+  visibility: hidden; }
