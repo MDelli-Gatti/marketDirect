@@ -58,12 +58,12 @@
         <li class="list-group-item">{{ShopItem.description}}</li>
         <button ng-click="remove(ShopItem)" type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
         <form class="picUpload" action="add-item-photo" method="post" enctype='multipart/form-data'>
-          <input type="file" name="file" />
-          <br/>
-          <br/>
-          <!-- <div id="itemPicture"></div> -->
-          <input type="submit" name="picSubmit" value="Submit Item Photo">
-          <input type="hidden" name="id" value="{{ShopItem.id}}">
+            <input type="file" name="file" />
+            <br/>
+            <br/>
+            <input type="submit" name="picSubmit" value="Submit Item Photo">
+            <input type="hidden" name="id" value="{{ShopItem.id}}">
+            <img src="/public/files/{{ShopItem.filename}}" alt="" />
         </form>
 
 
