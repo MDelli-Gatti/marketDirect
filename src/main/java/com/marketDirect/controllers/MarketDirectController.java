@@ -153,8 +153,8 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/add-item-photo", method = RequestMethod.POST)
-    public void addPicture(@RequestBody Item i, HttpSession session, MultipartFile file, HttpServletResponse response) throws Exception {
-        Item item = items.findOne(i.getId());
+    public void addPicture(int id, HttpSession session, MultipartFile file, HttpServletResponse response) throws Exception {
+        Item item = items.findOne(id);
 
         String username = (String) session.getAttribute("username");
         if (username == null) {
