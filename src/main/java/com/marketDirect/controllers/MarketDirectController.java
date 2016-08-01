@@ -481,7 +481,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/add-shopping-list-item", method = RequestMethod.POST)
-    public void createShoppingList(HttpSession session, int id) throws Exception {
+    public void createShoppingList(HttpSession session, @RequestBody Item i) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -492,7 +492,7 @@ public class MarketDirectController {
             throw new Exception("User not in database!");
         }
         List<Item> sl = user.getShoppingList();
-        sl.add(items.findOne(id));
+        sl.add(items.findOne(i.getId()));
         user.setShoppingList(sl);
         users.save(user);
     }
