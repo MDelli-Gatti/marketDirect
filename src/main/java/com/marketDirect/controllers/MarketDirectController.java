@@ -182,6 +182,7 @@ public class MarketDirectController {
 
         item.setFilename(uploadedFile.getName());
         items.save(item);
+        response.sendRedirect("/#/profile");
     }
 
     @RequestMapping(path = "/get-items", method = RequestMethod.GET)
