@@ -133,6 +133,41 @@ public class MarketDirectController {
         vendors.save(vendor);
     }
 
+    @RequestMapping(path = "add-vendor-photo", method = RequestMethod.POST)
+    public void addVendorPhoto(HttpSession session, MultipartFile file, int id) throws Exception {
+        String username = (String) session.getAttribute("username");
+        Vendor vendor = vendors.findOne(id);
+        if (username == null) {
+            throw new Exception("Not logged in!");
+        }
+
+        User user = users.findByUsername(username);
+        if (user == null) {
+            throw new Exception("Username not in database!");
+        }
+
+        if (!file.getContentType().contains("image")){
+            throw new Exception("Only images allowed!");
+        }
+
+        if (user != vendor.getUser()){
+            throw new Exception("vendor creator and logged in user do not match");
+        }
+
+        File f = new File("public/files/" + vendor.getFileName());
+        f.delete();
+
+        File dir = new File("public/files");
+        dir.mkdirs();
+
+        File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
+        FileOutputStream fos = new FileOutputStream(uploadedFile);
+        fos.write(file.getBytes());
+
+        vendor.setFileName(uploadedFile.getName());
+        vendors.save(vendor);
+    }
+
     @RequestMapping(path = "/create-item", method = RequestMethod.POST)
     public void createItem(HttpSession session, HttpServletResponse response, String name, String description, String category,  String price, int quantity) throws Exception {
         String username = (String) session.getAttribute("username");
@@ -391,9 +426,9 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/edit-vendor", method = RequestMethod.POST)
-    public void editVendor(int id, HttpSession session, MultipartFile file, String name, String phone, String email, String website, String location, String date) throws Exception {
+    public void editVendor(HttpSession session, @RequestBody Vendor v) throws Exception {
         String username = (String) session.getAttribute("username");
-        Vendor vendor = vendors.findOne(id);
+        Vendor vendor = vendors.findOne(v.getId());
         if (username == null) {
             throw new Exception("Not logged in!");
         }
@@ -403,47 +438,34 @@ public class MarketDirectController {
             throw new Exception("Username not in database!");
         }
 
-        if (!file.getContentType().contains("image")){
-            throw new Exception("Only images allowed!");
+        if (user != vendor.getUser()){
+            throw new Exception("vendor creator and logged in user do not match");
         }
 
-        if (name != null){
-            vendor.setName(name);
+        if (v.getName() != null){
+            vendor.setName(v.getName());
         }
 
-        if(phone != null){
-            vendor.setPhone(phone);
+        if(v.getPhone() != null){
+            vendor.setPhone(v.getPhone());
         }
 
-        if (email != null){
-            vendor.setEmail(email);
+        if (v.getEmail() != null){
+            vendor.setEmail(v.getEmail());
         }
 
-        if (website != null){
-            vendor.setWebsite(website);
+        if (v.getWebsite() != null){
+            vendor.setWebsite(v.getWebsite());
         }
 
-        if (location != null){
-            vendor.setLocation(location);
+        if (v.getLocation() != null){
+            vendor.setLocation(v.getLocation());
         }
 
-        if (date != null){
-            vendor.setDate(date);
+        if (v.getDate() != null){
+            vendor.setDate(v.getDate());
         }
 
-        if(file != null) {
-            File f = new File("public/files/" + vendor.getFileName());
-            f.delete();
-
-            File dir = new File("public/files");
-            dir.mkdirs();
-
-            File uploadedFile = File.createTempFile("file", file.getOriginalFilename(), dir);
-            FileOutputStream fos = new FileOutputStream(uploadedFile);
-            fos.write(file.getBytes());
-
-            vendor.setFileName(uploadedFile.getName());
-        }
         vendors.save(vendor);
     }
 
@@ -458,6 +480,10 @@ public class MarketDirectController {
         User user = users.findByUsername(username);
         if (user == null) {
             throw new Exception("User not in database!");
+        }
+
+        if (user != vendor.getUser()){
+            throw new Exception("vendor creator and logged in user do not match");
         }
 
         Iterable<Item> i = items.findByVendor(vendor);
