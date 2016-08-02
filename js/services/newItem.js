@@ -47,14 +47,14 @@ module.exports = function(app) {
                         description: ShopItem.description,
                         category: ShopItem.category,
                     }
-
                     var itemId = ShopItem.id;
-
                     console.log("phase one:", itemId)
                     return $http({
                         method: 'POST',
                         url: 'delete-item/',
-                        data: {id: itemId}
+                        data: {
+                            id: itemId
+                        }
                     }).then(function(res) {
                         console.log("phase two");
                     }).catch(function(response) {
@@ -62,86 +62,83 @@ module.exports = function(app) {
                             response);
                     })
                 },
-
-               getARTitems: function(){
+                getARTitems: function() {
                     var promise = $http({
-                   method: 'GET',
-                   url: 'items-art',
-                 }).success(function(response){
-                    console.log(response);
-                    console.log("here we are");
-                    // angular.copy(response.data.books,arts);
-                 }).error(function(response){
-                   return {
-                     "status": false
-                   };
-                 });
-                 return promise;
+                        method: 'GET',
+                        url: 'items-art',
+                    }).success(function(response) {
+                        console.log(response);
+                        console.log("here we are");
+                        // angular.copy(response.data.books,arts);
+                    }).error(function(response) {
+                        return {
+                            "status": false
+                        };
+                    });
+                    return promise;
+                },
+                getPRODUCEitems: function() {
+                    var promise = $http({
+                        method: 'GET',
+                        url: 'items-produce',
+                    }).success(function(response) {
+                        console.log(response);
+                        console.log("here we are");
+                        // angular.copy(response.data.books,arts);
+                    }).error(function(response) {
+                        return {
+                            "status": false
+                        };
+                    });
+                    return promise;
+                },
+                getHANDCRAFTEDitems: function() {
+                    var promise = $http({
+                        method: 'GET',
+                        url: 'items-hand-crafted',
+                    }).success(function(response) {
+                        console.log(response);
+                        console.log("here we are");
+                        // angular.copy(response.data.books,arts);
+                    }).error(function(response) {
+                        return {
+                            "status": false
+                        };
+                    });
+                    return promise;
+                },
+                getMISCSitems: function() {
+                    var promise = $http({
+                        method: 'GET',
+                        url: 'items-misc',
+                    }).success(function(response) {
+                        console.log(response);
+                        console.log(
+                            "we are getting miscsssss"
+                        );
+                        // angular.copy(response.data.books,arts);
+                    }).error(function(response) {
+                        return {
+                            "status": false
+                        };
+                    });
+                    return promise;
+                },
 
-              },
+                addToshoplist: function(Shopitem) {
+                    console.log("phase one:")
+                    // var itemId = Shopitem.id;
 
-              getPRODUCEitems: function(){
-                   var promise = $http({
-                  method: 'GET',
-                  url: 'items-produce',
-                }).success(function(response){
-                   console.log(response);
-                   console.log("here we are");
-                   // angular.copy(response.data.books,arts);
-                }).error(function(response){
-                  return {
-                    "status": false
-                  };
-                });
-                return promise;
+                    var promise = $http({
+                        method: 'POST',
+                        url: 'add-shopping-list-item/' + Shopitem,
 
-             },
-
-             getHANDCRAFTEDitems: function(){
-                  var promise = $http({
-                 method: 'GET',
-                 url: 'items-hand-crafted',
-               }).success(function(response){
-                  console.log(response);
-                  console.log("here we are");
-                  // angular.copy(response.data.books,arts);
-               }).error(function(response){
-                 return {
-                   "status": false
-                 };
-               });
-               return promise;
-
-            },
-
-            getMISCSitems: function(){
-                 var promise = $http({
-                method: 'GET',
-                url: 'items-misc',
-              }).success(function(response){
-                 console.log(response);
-                 console.log("we are getting miscsssss");
-                 // angular.copy(response.data.books,arts);
-              }).error(function(response){
-                return {
-                  "status": false
-                };
-              });
-              return promise;
-
-           },
-
-
-
-
-
-
-
-
-
-
-
-
+                    }).then(function(res) {
+                      console.log(response)
+                    angular.copy(response.data.Shopitem.id);
+                    });
+                    // return promise;
+                },
             }
         }
     ]);

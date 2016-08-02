@@ -1,6 +1,6 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);throw new Error("Cannot find module '"+o+"'")}var f=n[o]={exports:{}};t[o][0].call(f.exports,function(e){var n=t[o][1][e];return s(n?n:e)},f,f.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ArtController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
+    app.controller('ArtController', ['$scope', '$http', '$location', 'newItemService', 'shoppingListService', function ($scope, $http, $location, newItemService, shoppingListService) {
      console.log("this is the art page");
      $scope.arts = newItemService.getARTitems();
 
@@ -8,13 +8,21 @@ module.exports = function (app) {
        console.log(art.data);
        $scope.arts = art.data;
      });
+     $scope.add = function(ShopItem) {
+             newItemService.addToshoplist(ShopItem)
+             console.log(ShopItem);
+            //  var index = $scope.art.indexOf(ShopItem);
+            //  $scope.art.splice(index, 1);
+         },
+      $scope.addtoSL = function(Item){
+      console.log(Item);
+      shoppingListService.postToSL(Item);
+    };
 
-     $scope.addtoSL = function(target){
-     console.log(target)
-     service.borrowBook(target)
-   }
-    }]);
-}
+
+
+     }]);
+    };
 
 },{}],2:[function(require,module,exports){
 module.exports = function (app) {
@@ -123,44 +131,39 @@ module.exports = function (app) {
 }
 
 },{}],10:[function(require,module,exports){
-module.exports = function (app) {
-    app.controller('ProfileController', ['$scope', '$http', '$location', 'newUserService', 'newItemService', function ($scope, $http, $location, newUserService, newItemService) {
-      $scope.name = '';
-      $scope.password = '';
-      $scope.ShopItems = '';
-      console.log("hey bro whats up?")
-           newItemService.getSLItems().then(function(items){
-             console.log(items.data);
-             $scope.ShopItems = items.data;
-           });
+module.exports = function(app) {
+    app.controller('ProfileController', ['$scope', '$http', '$location','newUserService', 'newItemService',function($scope, $http, $location, newUserService,newItemService) {
+            $scope.name = '';
+            $scope.password = '';
+            $scope.ShopItems = '';
+            console.log("hey bro whats up?")
+            newItemService.getSLItems().then(function(items) {
+                console.log(items.data);
+                $scope.ShopItems = items.data;
+            });
 
-
-
-
-
-      $scope.createUser = function () {
-          console.log(`${$scope.name} is a new user`);
-          newUserService.userLogin($scope.name, $scope.password);
-          $location.path('/explore');
-          }
-
-          $scope.inventories = function(){
-            console.log("boo");
-            console.log("we have ", $scope.Cat, $scope.Name, $scope.Desc, $scope.Quant, $scope.Price)
-            newItemService.addNEWitems($scope.Cat,$scope.Name,$scope.Desc,$scope.Quant,$scope.Price)
-          }
-
-          $scope.remove=function(ShopItem){
-            newItemService.DeleteSLItems(ShopItem)
-            console.log(ShopItem);
-            var index = $scope.ShopItems.indexOf(ShopItem);
-            $scope.ShopItems.splice(index,1);
-              }
-
-            
-
-
-    }]);
+                $scope.createUser = function() {
+                    console.log(`${$scope.name} is a new user`);
+                    newUserService.userLogin($scope.name, $scope.password);
+                    $location.path('/explore');
+                }
+            $scope.inventories = function() {
+                console.log("boo");
+                console.log("we have ", $scope.Cat, $scope.Name,
+                    $scope.Desc, $scope.Quant, $scope.Price
+                )
+                newItemService.addNEWitems($scope.Cat, $scope.Name,
+                    $scope.Desc, $scope.Quant, $scope.Price
+                )
+            }
+            $scope.remove = function(ShopItem) {
+                newItemService.DeleteSLItems(ShopItem)
+                console.log(ShopItem);
+                var index = $scope.ShopItem.indexOf(ShopItem);
+                $scope.ShopItem.splice(index, 1);
+            }
+        }
+    ]);
 };
 
 },{}],11:[function(require,module,exports){
@@ -439,14 +442,14 @@ module.exports = function(app) {
                         description: ShopItem.description,
                         category: ShopItem.category,
                     }
-
                     var itemId = ShopItem.id;
-
                     console.log("phase one:", itemId)
                     return $http({
                         method: 'POST',
                         url: 'delete-item/',
-                        data: {id: itemId}
+                        data: {
+                            id: itemId
+                        }
                     }).then(function(res) {
                         console.log("phase two");
                     }).catch(function(response) {
@@ -454,86 +457,83 @@ module.exports = function(app) {
                             response);
                     })
                 },
-
-               getARTitems: function(){
+                getARTitems: function() {
                     var promise = $http({
-                   method: 'GET',
-                   url: 'items-art',
-                 }).success(function(response){
-                    console.log(response);
-                    console.log("here we are");
-                    // angular.copy(response.data.books,arts);
-                 }).error(function(response){
-                   return {
-                     "status": false
-                   };
-                 });
-                 return promise;
+                        method: 'GET',
+                        url: 'items-art',
+                    }).success(function(response) {
+                        console.log(response);
+                        console.log("here we are");
+                        // angular.copy(response.data.books,arts);
+                    }).error(function(response) {
+                        return {
+                            "status": false
+                        };
+                    });
+                    return promise;
+                },
+                getPRODUCEitems: function() {
+                    var promise = $http({
+                        method: 'GET',
+                        url: 'items-produce',
+                    }).success(function(response) {
+                        console.log(response);
+                        console.log("here we are");
+                        // angular.copy(response.data.books,arts);
+                    }).error(function(response) {
+                        return {
+                            "status": false
+                        };
+                    });
+                    return promise;
+                },
+                getHANDCRAFTEDitems: function() {
+                    var promise = $http({
+                        method: 'GET',
+                        url: 'items-hand-crafted',
+                    }).success(function(response) {
+                        console.log(response);
+                        console.log("here we are");
+                        // angular.copy(response.data.books,arts);
+                    }).error(function(response) {
+                        return {
+                            "status": false
+                        };
+                    });
+                    return promise;
+                },
+                getMISCSitems: function() {
+                    var promise = $http({
+                        method: 'GET',
+                        url: 'items-misc',
+                    }).success(function(response) {
+                        console.log(response);
+                        console.log(
+                            "we are getting miscsssss"
+                        );
+                        // angular.copy(response.data.books,arts);
+                    }).error(function(response) {
+                        return {
+                            "status": false
+                        };
+                    });
+                    return promise;
+                },
 
-              },
+                addToshoplist: function(Shopitem) {
+                    console.log("phase one:")
+                    // var itemId = Shopitem.id;
 
-              getPRODUCEitems: function(){
-                   var promise = $http({
-                  method: 'GET',
-                  url: 'items-produce',
-                }).success(function(response){
-                   console.log(response);
-                   console.log("here we are");
-                   // angular.copy(response.data.books,arts);
-                }).error(function(response){
-                  return {
-                    "status": false
-                  };
-                });
-                return promise;
+                    var promise = $http({
+                        method: 'POST',
+                        url: 'add-shopping-list-item/' + Shopitem,
 
-             },
-
-             getHANDCRAFTEDitems: function(){
-                  var promise = $http({
-                 method: 'GET',
-                 url: 'items-hand-crafted',
-               }).success(function(response){
-                  console.log(response);
-                  console.log("here we are");
-                  // angular.copy(response.data.books,arts);
-               }).error(function(response){
-                 return {
-                   "status": false
-                 };
-               });
-               return promise;
-
-            },
-
-            getMISCSitems: function(){
-                 var promise = $http({
-                method: 'GET',
-                url: 'items-misc',
-              }).success(function(response){
-                 console.log(response);
-                 console.log("we are getting miscsssss");
-                 // angular.copy(response.data.books,arts);
-              }).error(function(response){
-                return {
-                  "status": false
-                };
-              });
-              return promise;
-
-           },
-
-
-
-
-
-
-
-
-
-
-
-
+                    }).then(function(res) {
+                      console.log(response)
+                    angular.copy(response.data.Shopitem.id);
+                    });
+                    // return promise;
+                },
             }
         }
     ]);
@@ -574,7 +574,6 @@ module.exports = function(app) {
 }
 
 },{}],17:[function(require,module,exports){
-<<<<<<< HEAD
 module.exports=function(app){
 app.factory('shoppingListService', ['$http', function ($http) {
     let shoppinglistItems = [];
@@ -595,73 +594,29 @@ app.factory('shoppingListService', ['$http', function ($http) {
         //
         //     return promise;
         // },
-        // borrowBook: function (target) {
-        //  console.log("borrowing diz")
-        //  $http({
-        //    method: "POST",
-        //    url: "http://10.1.10.215:7000/library/borrow/" + target.id
-        //  }).then(function(response){
-        //    console.log(response)
-        //    angular.copy(response.data.books,allBooks);
-        //
-        //  })
+        postToSL: function (Item) {
+         console.log("borrowing diz")
+         $http({
+           method: "POST",
+           url: "add-shopping-list-item" + Item.id
+         }).then(function(response){
+           console.log(response)
+           angular.copy(response.data.books,allBooks);
 
-        // /* POST request to update one book */
+         })
+
+        /* POST request to update one book */
         // borrowBook: function (book) {
         //
         // },
-        // /* POST request to update one book */
+        /* POST request to update one book */
         // returnBook: function (book) {
         //
         // },
+        }
     };
 }]);
-}
+};
 // testing
-=======
-module.exports = function(app) {
-        app.factory('ShoppinglistService', ['$http',
-                    function($http) {
-                        let shoppinglistItems = [];
-                        return {
-                            /* GET request for book list */
-                            getSLItems: function() {
-                                var promise = $http({
-                                    method: 'GET',
-                                    url: 'get-items'
-                                }).success(function(response) {
-                                    console.log(response);
-                                    return response;
-                                    // angular.copy(response., slItems);
-                                }).error(function(response) {
-                                    return {
-                                        "status": false
-                                    };
-                                });
-                                return promise;
-                            },
-                            // borrowBook: function(target) {
-                            //     console.log("borrowing diz")
-                            //     $http({
-                            //             method: "POST",
-                            //             url: "http://10.1.10.215:7000/library/borrow/" +
-                            //                 target.id
-                            //         }).then(function(response) {
-                            //             console.log(response)
-                            //             angular.copy(response.data.books,
-                            //                 allBooks);
-                            //         })
-                                    /* POST request to update one book */
-                                    //  borrowBook: function (book) {
-                                    //  },
-                                    /* POST request to update one book */
-                                    //  returnBook: function (book) {
-                                    //  },
-                                    // }
-                        };
-                            }]);
-                };
-                // testing
->>>>>>> f45ba3dfd027de15145778dd5da5d06a0e5da719
 
 },{}]},{},[12])
