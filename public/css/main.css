@@ -487,6 +487,9 @@ footer {
   /* Opera < 12.1 */
   animation: fadein 4s; }
 
+#fileupload {
+  color: black; }
+
 .desc_ImageOverlay {
   text-decoration: none;
   position: relative;

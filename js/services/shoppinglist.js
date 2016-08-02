@@ -37,7 +37,8 @@ app.factory('shoppingListService', ['$http', function ($http) {
         // returnBook: function (book) {
         //
         // },
+        }
     };
 }]);
-}
+};
 // testing
