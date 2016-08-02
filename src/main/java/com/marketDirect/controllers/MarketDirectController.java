@@ -538,8 +538,9 @@ public class MarketDirectController {
         return vendors.findByNameLike( "%" + search + "%");
     }
 
-    @RequestMapping(path = "/add-shopping-list-item", method = RequestMethod.POST)
-    public void createShoppingList(HttpSession session, @RequestBody Item i) throws Exception {
+    @RequestMapping(path = "/add-shopping-list-item/{id}", method = RequestMethod.POST)
+    public void createShoppingList(HttpSession session, @PathVariable ("id") int id) throws Exception {
+        Item i = items.findOne(id);
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -550,13 +551,14 @@ public class MarketDirectController {
             throw new Exception("User not in database!");
         }
         List<Item> sl = user.getShoppingList();
-        sl.add(items.findOne(i.getId()));
+        sl.add(items.findOne(id));
         user.setShoppingList(sl);
         users.save(user);
     }
 
-    @RequestMapping(path = "/remove-shopping-list-item", method = RequestMethod.POST)
-    public void removeShoppingListItem(HttpSession session, @RequestBody Item i) throws Exception {
+    @RequestMapping(path = "/remove-shopping-list-item/{id}", method = RequestMethod.POST)
+    public void removeShoppingListItem(HttpSession session, @PathVariable ("id") int id) throws Exception {
+        Item i = items.findOne(id);
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -567,7 +569,7 @@ public class MarketDirectController {
             throw new Exception("User not in database!");
         }
         List<Item> sl = user.getShoppingList();
-        sl.remove(items.findOne(i.getId()));
+        sl.remove(id);
         user.setShoppingList(sl);
         users.save(user);
     }
