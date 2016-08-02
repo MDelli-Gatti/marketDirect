@@ -131,11 +131,11 @@ module.exports = function(app) {
 
                     var promise = $http({
                         method: 'POST',
-                        url: 'add-shopping-list-item/' + Shopitem,
+                        url: 'add-shopping-list-item/' + Shopitem.id,
 
                     }).then(function(res) {
                       console.log(response)
-                    angular.copy(response.data.Shopitem.id);
+                    angular.copy(response.data.Shopitem);
                     });
                     // return promise;
                 },

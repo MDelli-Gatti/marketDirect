@@ -3,21 +3,21 @@ app.factory('shoppingListService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
-        /* GET request for book list */
-        // getSLItems: function () {
-        //   var promise = $http({
-        //         method: 'GET',
-        //         url: 'get-items'
-        //     }).success(function (response) {
-        //         console.log(response);
-        //         return response;
-        //         // angular.copy(response., slItems);
-        //     }).error(function (response) {
-        //        return {"status": false};
-        //     });
-        //
-        //     return promise;
-        // },
+        // /* GET request for book list */
+            getSLItems: function () {
+              var promise = $http({
+                    method: 'GET',
+                    url: 'get-items'
+                }).success(function (response) {
+                    console.log(response);
+                    return response;
+                    // angular.copy(response., slItems);
+                }).error(function (response) {
+                   return {"status": false};
+                });
+
+                 return promise;
+            },
         postToSL: function (item) {
          console.log("post to SL string", item)
          $http({
