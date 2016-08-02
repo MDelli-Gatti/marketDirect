@@ -39,26 +39,28 @@
 
 
 
-<div class="profileContainer">
 
     <div class="col-lg-5">
+      <div class="emptyContainer">
+
+      </div>
         <div class="media">
             <a class="pull-left" href="#profile">
-                <img class="media-object dp img-circle" src="/files/{{Vendor.filename}}" style="width: 300px;height:300px;">
+                <img class="media-object dp img-circle" src="/images/farmerzach.jpg" style="width: 300px;height:300px;">
             </a>
             <div class="media-body">
-                <h2>Farmer John</h2>
+                <h2 id = "userHeader">Farmer John</h2>
                 <h4>John's Island Farmer's Market</h4>
                 <h4>Produce Vendor</h4>
                 <ul class="social-buttons" id="demo1">
                     <li>
-                        <a href="#" class="brandico-twitter-bird"></a>
+                        <a href="#" class=""><img id = "twitter" src="/images/twittericon.png" alt="" /></a>
                     </li>
                     <li>
-                        <a href="#" class="brandico-facebook"></a>
+                        <a href="#" class=""><img id = "facebook" src="/images/facebookicon.png" alt="" /></a>
                     </li>
                     <li>
-                        <a href="#" class="brandico-instagram"></a>
+                        <a href="#" class=""><img id = "instagram" src="/images/instagramicon.png" alt="" /></a>
                     </li>
                 </ul>
                 <form class="picUpload" action="add-vendor-photo" method="post" enctype='multipart/form-data'>
@@ -97,16 +99,20 @@
         <h1 class="page-header">Vendor Inventory</h1>
     </div>
 
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="ShopItem in ShopItems">
+    <div id = "shopContainer"class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="ShopItem in ShopItems">
 
         <li class="list-group-item">{{ShopItem.category}}</li>
         <li class="list-group-item">{{ShopItem.price}}</li>
         <li class="list-group-item">{{ShopItem.description}}</li>
         <button ng-click="remove(ShopItem)" type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
+        <button type="button" ng-click="picture=!picture"name="button">add a photo!</button>
+
         <!-- <input type="file" id="picVal" /> -->
         <br/>
         <br/>
         <!-- <div id="itemPicture"></div> -->
+        <div ng-show ="picture" class="pictureContainer">
+
         <form class="picUpload" action="add-item-photo" method="post" enctype='multipart/form-data'>
             <input type="file" name="file" />
             <br/>
@@ -115,6 +121,7 @@
             <input type="hidden" name="id" value="{{ShopItem.id}}">
             <img src="/files/{{ShopItem.filename}}" alt="Don't be a slacker, vendor. Upload an image." height="300px" width="300px" />
         </form>
+       </div>
 
 
     </div>
