@@ -1,3 +1,5 @@
+Users : FarmerJohn, FarmerClyde, ShopperBill
+ALL passwords: "password1"
 User login:
 route = POST, path = "/login" data = User object (contains String username and String password)
 
