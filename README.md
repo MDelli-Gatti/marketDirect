@@ -13,11 +13,14 @@ route = "POST" path = "create-vendor" data = MultipartFile file, String name, St
 Get ALL Vendors:
 route = "GET" path = "get-vendors" (plural)
 
-Get ONE Vendor
+Get ONE Vendor:
 route = "GET" path = "get-vendor" (singular) data = int id
 
+Add Vendor Photo:
+route = "POST" path = "add-vendor-photo" data = MultipartFile file, int id
+
 Edit Vendor:
-route = "POST" path = "edit-vendor" data = MultipartFile file, String name, String phone, String email, String website, String location, String date
+route = "POST" path = "edit-vendor" data = Vendor Object
 
 Delete Vendor:
 route = "POST" path = "delete-vendor" data = int id
