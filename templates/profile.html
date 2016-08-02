@@ -61,13 +61,18 @@
                         <a href="#" class="brandico-instagram"></a>
                     </li>
                 </ul>
-                <input type='file' id='getval' />
+                <form class="picUpload" action="add-vendor-photo" method="post" enctype='multipart/form-data'>
+                    <input type="file" name="file" />
+                    <br/>
+                    <br/>
+                    <input type="submit" name="picSubmit" value="Submit Vendor Photo">
+                    <input type="hidden" name="id" value="{{Vendor.id}}">
+                </form>
                 <br/>
                 <br/>
                 <button type="button" ng-click="showme=!showme" name="button">New Item</button>
                 <div class="addinventory" ng-show="showme">
                     <form id="fileupload" action="/create-item" method="POST" enctype="multipart/form-data">
-
                         <select name="category">
                             <option value="Produce">Produce</option>
                             <option value="Art">Art</option>
