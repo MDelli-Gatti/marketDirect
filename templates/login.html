@@ -1,38 +1,17 @@
-<!-- <div class="LoginContainer">
-
-
-<div id = "loginBox"class="row">
-  <div class="medium-6 medium-centered large-4 large-centered columns">
-
-    <form>
-      <div class="row column log-in-form">
-        <img class = "logo" src="./images/marletdirectlogo.svg" alt="" />
-        <label>Email
-          <input type="text" ng-model="name" placeholder="somebody@example.com">
-        </label>
-        <label>Password
-          <input type="text" ng-model="password" placeholder="Password">
-        </label>
-        <input id="show-password" type="checkbox"><label for="show-password">Show password</label>
-        <p><a type="submit" class="button expanded" class = "bottomButton"ng-click='login()'>Log In</a></p>
-        <button type="button" name="button"><a href="#/newuser">New User? Click here!</a></button>
-      </div>
-    </form>
-
-  </div>
-</div>
-
-
-</div> -->
-
 
 <div class="LoginContainer">
 
 	<form class="form-signin">
+
+
+
+
+
+
     <img class = "logo" src="./images/marletdirectlogo.svg" alt="" />
 		<input type="text" class="form-control" ng-model="name" placeholder="somebody@example.com" required="" autofocus="">
 		<input type="password" class="form-control" ng-model="password" placeholder="Password" required="">
-		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click='login()'>
+		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login() ; menu=!menu">
 			Sign In
 		</button>
     <button class="btn btn-lg btn-primary btn-block" type="button" name="button"><a href="#/newuser" id = "newUser">
