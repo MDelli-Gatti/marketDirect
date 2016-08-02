@@ -39,7 +39,30 @@ module.exports = function(app) {
                 // returnBook: function (book) {
                 //
                 // },
-            }
+            },
+            DeleteSLItems: function(ShopItem) {
+                console.log(ShopItem);
+                var gone = {
+                    id: ShopItem.id,
+                    name: ShopItem.name,
+                    description: ShopItem.description,
+                    category: ShopItem.category,
+                }
+                var itemId = ShopItem.id;
+                console.log("removing from SL:", itemId)
+                return $http({
+                    method: 'POST',
+                    url: 'remove-shopping-list-item/' + itemId
+                    // data: {
+                    //     id: itemId
+                    // }
+                }).then(function(res) {
+                    console.log("removing from SL pt2");
+                }).catch(function(response) {
+                    console.log('should be completely removed',
+                        response);
+                })
+            },
         };
     }]);
 };

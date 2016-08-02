@@ -5,6 +5,12 @@ module.exports = function (app) {
          console.log(items.data);
          $scope.ShopItems = items.data;
        });
+       $scope.check = function(ShopItem) {
+           shoppingListService.DeleteSLItems(ShopItem)
+           console.log(ShopItem);
+           var index = $scope.ShopItem.indexOf(ShopItem);
+           $scope.ShopItem.splice(index, 1);
+       }
     }]);
 
 
