@@ -1,4 +1,3 @@
-
 <!-- Navigation -->
 <nav id = "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
    <div class="container">
@@ -35,12 +34,15 @@
    </div>
 </nav>
 
-
-    <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="art in arts">
-
-        <li class="list-group-item">{{art.category}}</li>
-        <li class="list-group-item">{{art.price}}</li>
-        <li class="list-group-item">{{art.description}}</li>
-        <!-- <button  type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button> -->
-        <img src="/files/{{art.filename}}" alt="" />
-    </div>
+<!-- Item Template -->
+<div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="art in arts">
+    <a href="#" class="desc_ImageOverlay" style="background-image: url(/files/{{art.filename}});">
+        <div class="desc">
+            <h2>{{art.name}}</h2>
+            <h4>{{art.description}}</h4>
+            <li class="list-group-item">Price: ${{art.price}}</li>
+            <li class="list-group-item">Quantity: {{art.quantity}}</li>
+        </div>
+    </a>
+</div>
+<!-- End Item Template -->
