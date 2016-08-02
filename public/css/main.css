@@ -381,3 +381,6 @@ footer {
 
 .desc_ImageOverlay:hover h2 h4 {
   visibility: hidden; }
+
+.desc_ImageOverlay:hover .desc button {
+  color: black; }
