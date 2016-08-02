@@ -1,8 +1,19 @@
-<div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="misc in misc">
+<!-- <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="misc in misc">
 
       <li class="list-group-item">{{misc.category}}</li>
       <li class="list-group-item">{{misc.price}}</li>
       <li class="list-group-item">{{misc.description}}</li>
       <!-- <button  type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button> -->
-      <img src="/files/{{misc.filename}}" alt="" />
+      <!-- <img src="/files/{{misc.filename}}" alt="" /> -->
+  <!-- </div> --> -->
+
+  <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="misc in misc">
+      <a href="#" class="desc_ImageOverlay" style="background-image: url(/files/{{misc.filename}});">
+          <div class="desc">
+              <h2>{{misc.name}}</h2>
+              <h4>{{misc.description}}</h4>
+              <li class="list-group-item">Price: ${{misc.price}}</li>
+              <li class="list-group-item">Quantity: {{misc.quantity}}</li>
+          </div>
+      </a>
   </div>
