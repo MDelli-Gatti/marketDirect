@@ -61,7 +61,10 @@ module.exports = function (app) {
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
             loginService.userLogin($scope.name, $scope.password, "/explore");
+<<<<<<< HEAD
 
+=======
+>>>>>>> edba7b79deb44b24d5c9883477e5efa9bcd9fd6e
             // $location.path('/explore');
         };
     }]);
@@ -272,6 +275,8 @@ require('./services/newItem.js')(app);
 require('./services/getItems.js')(app);
 
 
+
+// item pics
 document.getElementById('picVal').addEventListener('change', readURL, true);
 function readURL(){
     var file = document.getElementById("picVal").files[0];
@@ -284,21 +289,21 @@ function readURL(){
     }else{
     }
 }
+//end item pics
 
 
-
-document.getElementById('getval').addEventListener('change', readURL, true);
-function readURL(){
-    var file = document.getElementById("getval").files[0];
-    var reader = new FileReader();
-    reader.onloadend = function(){
-        document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
-    }
-    if(file){
-        reader.readAsDataURL(file);
-    }else{
-    }
-}
+// document.getElementById('getval').addEventListener('change', readURL, true);
+// function readURL(){
+//     var file = document.getElementById("getval").files[0];
+//     var reader = new FileReader();
+//     reader.onloadend = function(){
+//         document.getElementById('clock').style.backgroundImage = "url(" + reader.result + ")";
+//     }
+//     if(file){
+//         reader.readAsDataURL(file);
+//     }else{
+//     }
+// }
 
 
 

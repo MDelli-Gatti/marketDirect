@@ -49,6 +49,9 @@ route = "GET" path = "items-hand-crafted"
 Get Misc Items
 route = "GET" path = "items-misc"
 
+Get Item Images
+route = "GET" path = "get-item-images" data = Vendor object
+
 Edit Item
 route = "POST" path = "edit-item" data = Item object with an id
 
@@ -65,10 +68,10 @@ Search By Vendor Name:
 route = "GET" path = "search-vendor" data = "String search"
 
 Add Shopping List Item:
-route = "POST" path = "add-shopping-list-item" data = int id (of the item)
+route = "POST" path = "add-shopping-list-item" data = Item object with an id
 
 Remove Shopping List Item:
-route = "POST" path = "remove-shopping-list-item" data = int id (of the item)
+route = "POST" path = "remove-shopping-list-item" data = Item object with an id
 
 Get Shopping List
 route = "GET" path = "get-shopping-list"

@@ -153,8 +153,8 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/add-item-photo", method = RequestMethod.POST)
-    public void addPicture(@RequestBody Item i, HttpSession session, MultipartFile file, HttpServletResponse response) throws Exception {
-        Item item = items.findOne(i.getId());
+    public void addPicture(int id, HttpSession session, MultipartFile file, HttpServletResponse response) throws Exception {
+        Item item = items.findOne(id);
 
         String username = (String) session.getAttribute("username");
         if (username == null) {
@@ -182,6 +182,7 @@ public class MarketDirectController {
 
         item.setFilename(uploadedFile.getName());
         items.save(item);
+        response.sendRedirect("/#/profile");
     }
 
     @RequestMapping(path = "/get-items", method = RequestMethod.GET)
@@ -212,6 +213,17 @@ public class MarketDirectController {
         }
 
         return items.findOne(i.getId());
+    }
+
+    @RequestMapping(path = "/get-item-images", method = RequestMethod.GET)
+    public ArrayList<String> getItemImages(@RequestBody Vendor v){
+        List<Item> itemList = (List<Item>) items.findByVendor(v);
+        ArrayList<String> shit = new ArrayList<>();
+        for (Item item : itemList){
+            String fileName = item.getFilename();
+            shit.add(fileName);
+        }
+        return shit;
     }
 
     @RequestMapping(path = "/items-by-category", method = RequestMethod.GET)
@@ -470,7 +482,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/add-shopping-list-item", method = RequestMethod.POST)
-    public void createShoppingList(HttpSession session, int id) throws Exception {
+    public void createShoppingList(HttpSession session, @RequestBody Item i) throws Exception {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
@@ -481,7 +493,7 @@ public class MarketDirectController {
             throw new Exception("User not in database!");
         }
         List<Item> sl = user.getShoppingList();
-        sl.add(items.findOne(id));
+        sl.add(items.findOne(i.getId()));
         user.setShoppingList(sl);
         users.save(user);
     }
