@@ -1,38 +1,37 @@
-
 <!-- Navigation -->
-<nav id = "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-   <div class="container">
-       <!-- Brand and toggle get grouped for better mobile display -->
-       <div class = "topnav"class="navbar-header">
-           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-               <span class="sr-only">Toggle navigation</span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-               <span class="icon-bar"></span>
-           </button>
-           <a class="navbar-brand" href="#">
-           </a>
-       </div>
-       <img id = "navicon" src="/images/navbaricon.svg" alt="" />
+<nav id="nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="topnav" class="navbar-header">
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="#">
+            </a>
+        </div>
+        <img id="navicon" src="/images/navbaricon.svg" alt="" />
 
-       <!-- Collect the nav links, forms, and other content for toggling -->
-       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-           <ul class="nav navbar-nav">
-               <li>
-                   <a href="#profile" ng-click="myStyle={background:'red'}">profile</a>
-               </li>
-               <li>
-                   <a href="#explore">explore</a>
-               </li>
-               <li>
-                   <a href="#shoppinglist">shopping list</a>
-               </li>
-               <li>
-                   <a href="#login">logout</a>
-               </li>
-           </ul>
-       </div>
-   </div>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li>
+                    <a href="#profile" ng-click="myStyle={background:'red'}">profile</a>
+                </li>
+                <li>
+                    <a href="#explore">explore</a>
+                </li>
+                <li>
+                    <a href="#shoppinglist">shopping list</a>
+                </li>
+                <li>
+                    <a href="#login">logout</a>
+                </li>
+            </ul>
+        </div>
+    </div>
 </nav>
 
 
@@ -48,12 +47,6 @@
                 <img class="media-object dp img-circle" src="http://www-tc.pbs.org/independentlens/realdirt/images/home_rt.jpg" style="width: 300px;height:300px;">
             </a>
             <div class="media-body">
-<<<<<<< HEAD
-                <h3>Farmer John</h3>
-                <h6>John's Island Farmer's Market</h6>
-                <h6>Produce Vendor</h6>
-                <h6>*Social Media links need to go here*</h6>
-=======
                 <h2>Farmer John</h2>
                 <h4>John's Island Farmer's Market</h4>
                 <h4>Produce Vendor</h4>
@@ -68,7 +61,6 @@
                         <a href="#" class="brandico-instagram"></a>
                     </li>
                 </ul>
->>>>>>> edba7b79deb44b24d5c9883477e5efa9bcd9fd6e
                 <input type='file' id='getval' />
                 <br/>
                 <br/>
@@ -105,22 +97,19 @@
         <li class="list-group-item">{{ShopItem.price}}</li>
         <li class="list-group-item">{{ShopItem.description}}</li>
         <button ng-click="remove(ShopItem)" type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button>
-<<<<<<< HEAD
-        <!-- <input type="file" id="picVal" /><br/><br/> -->
-        <!-- <div id="itemPicture"></div>
-
-    </div> -->
-  </div>
-=======
+        <!-- <input type="file" id="picVal" /> -->
+        <br/>
+        <br/>
+        <!-- <div id="itemPicture"></div> -->
         <form class="picUpload" action="add-item-photo" method="post" enctype='multipart/form-data'>
             <input type="file" name="file" />
             <br/>
             <br/>
             <input type="submit" name="picSubmit" value="Submit Item Photo">
             <input type="hidden" name="id" value="{{ShopItem.id}}">
-            <img src="/files/{{ShopItem.filename}}" alt="" />
+            <img src="/files/{{ShopItem.filename}}" alt="Don't be a slacker, vendor. Upload an image." height="300px" width="300px" />
         </form>
 
 
     </div>
->>>>>>> edba7b79deb44b24d5c9883477e5efa9bcd9fd6e
+</div>

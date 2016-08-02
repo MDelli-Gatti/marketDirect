@@ -1,5 +1,4 @@
 
-
 <!-- Navigation -->
 <nav id = "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
    <div class="container">
@@ -36,12 +35,15 @@
    </div>
 </nav>
 
-
-  <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="produce in produces">
-
-        <li class="list-group-item">{{produce.category}}</li>
-        <li class="list-group-item">{{produce.price}}</li>
-        <li class="list-group-item">{{produce.description}}</li>
-        <!-- <button  type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button> -->
-        <img src="/files/{{produce.filename}}" alt="" />
+<!-- Item template -->
+    <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="produce in produces">
+        <a href="#" class="desc_ImageOverlay" style="background-image: url(/files/{{produce.filename}});">
+            <div class="desc">
+                <h2>{{produce.name}}</h2>
+                <h4>{{produce.description}}</h4>
+                <li class="list-group-item">Price: ${{produce.price}}</li>
+                <li class="list-group-item">Quantity: {{produce.quantity}}</li>
+            </div>
+        </a>
     </div>
+<!-- End Item Template -->

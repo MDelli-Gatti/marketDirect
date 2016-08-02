@@ -35,12 +35,15 @@
    </div>
 </nav>
 
-
+<!-- Item Template -->
 <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="handcraft in handcrafts">
-
-    <li class="list-group-item">{{handcraft.category}}</li>
-    <li class="list-group-item">{{handcraft.price}}</li>
-    <li class="list-group-item">{{handcraft.description}}</li>
-    <!-- <button  type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button> -->
-    <img src="/files/{{handcraft.filename}}" alt="" />
+    <a href="#" class="desc_ImageOverlay" style="background-image: url(/files/{{handcraft.filename}});">
+        <div class="desc">
+            <h2>{{handcraft.name}}</h2>
+            <h4>{{handcraft.description}}</h4>
+            <li class="list-group-item">Price: ${{handcraft.price}}</li>
+            <li class="list-group-item">Quantity: {{handcraft.quantity}}</li>
+        </div>
+    </a>
 </div>
+<!-- End Item Template -->

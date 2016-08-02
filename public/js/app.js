@@ -61,10 +61,7 @@ module.exports = function (app) {
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
             loginService.userLogin($scope.name, $scope.password, "/explore");
-<<<<<<< HEAD
 
-=======
->>>>>>> edba7b79deb44b24d5c9883477e5efa9bcd9fd6e
             // $location.path('/explore');
         };
     }]);
