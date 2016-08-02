@@ -18,11 +18,11 @@ app.factory('shoppingListService', ['$http', function ($http) {
         //
         //     return promise;
         // },
-        postToSL: function (target) {
+        postToSL: function (Item) {
          console.log("borrowing diz")
          $http({
            method: "POST",
-           url: "add-shopping-list-item" + target.id
+           url: "add-shopping-list-item" + Item.id
          }).then(function(response){
            console.log(response)
            angular.copy(response.data.books,allBooks);
@@ -30,13 +30,13 @@ app.factory('shoppingListService', ['$http', function ($http) {
          })
 
         /* POST request to update one book */
-        borrowBook: function (book) {
-
-        },
+        // borrowBook: function (book) {
+        //
+        // },
         /* POST request to update one book */
-        returnBook: function (book) {
-
-        },
+        // returnBook: function (book) {
+        //
+        // },
     };
 }]);
 }

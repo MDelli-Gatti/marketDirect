@@ -8,9 +8,9 @@ module.exports = function (app) {
        $scope.arts = art.data;
      });
 
-     $scope.addtoSL = function(target){
-     console.log(target)
-     shoppingListService.postToSL(target)
+     $scope.addtoSL = function(Item){
+     console.log(Item)
+     shoppingListService.postToSL(Item)
    }
     }]);
 }
