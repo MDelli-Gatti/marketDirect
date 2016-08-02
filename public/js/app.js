@@ -14,9 +14,9 @@ module.exports = function (app) {
             //  var index = $scope.art.indexOf(ShopItem);
             //  $scope.art.splice(index, 1);
          },
-      $scope.addtoSL = function(Item){
-      console.log(Item);
-      shoppingListService.postToSL(Item);
+      $scope.addtoSL = function(item){
+      console.log("add to SL is working", item);
+      shoppingListService.postToSL(item);
     };
 
 
@@ -594,14 +594,14 @@ app.factory('shoppingListService', ['$http', function ($http) {
         //
         //     return promise;
         // },
-        postToSL: function (Item) {
-         console.log("borrowing diz")
+        postToSL: function (item) {
+         console.log("post to SL string", item)
          $http({
            method: "POST",
-           url: "add-shopping-list-item" + Item.id
+           url: "add-shopping-list-item/" + item.id
          }).then(function(response){
            console.log(response)
-           angular.copy(response.data.books,allBooks);
+          //  angular.copy(response.data.books,allBooks);
 
          })
 
