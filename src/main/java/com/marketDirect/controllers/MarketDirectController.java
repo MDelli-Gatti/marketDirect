@@ -546,6 +546,10 @@ public class MarketDirectController {
             throw new Exception("Not logged in!");
         }
 
+        if (i == null){
+            throw new Exception("Item does not exist or invalid id");
+        }
+
         User user = users.findByUsername(username);
         if (user == null) {
             throw new Exception("User not in database!");
@@ -562,6 +566,10 @@ public class MarketDirectController {
         String username = (String) session.getAttribute("username");
         if (username == null) {
             throw new Exception("Not logged in!");
+        }
+
+        if (i == null){
+            throw new Exception("Item does not exist or invalid id");
         }
 
         User user = users.findByUsername(username);
