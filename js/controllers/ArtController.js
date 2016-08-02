@@ -1,5 +1,5 @@
 module.exports = function (app) {
-    app.controller('ArtController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
+    app.controller('ArtController', ['$scope', '$http', '$location', 'newItemService', 'shoppingListService' function ($scope, $http, $location, newItemService, shoppingListService) {
      console.log("this is the art page");
      $scope.arts = newItemService.getARTitems();
 
@@ -8,5 +8,9 @@ module.exports = function (app) {
        $scope.arts = art.data;
      });
 
+     $scope.addtoSL = function(Item){
+     console.log(Item)
+     shoppingListService.postToSL(Item)
+   }
     }]);
 }

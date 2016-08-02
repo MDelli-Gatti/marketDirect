@@ -36,13 +36,14 @@
 
 <!-- Item Template -->
 <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="art in arts">
-    <a href="#" class="desc_ImageOverlay" style="background-image: url(/files/{{art.filename}});">
+    <div class="desc_ImageOverlay" style="background-image: url(/files/{{art.filename}});">
         <div class="desc">
             <h2>{{art.name}}</h2>
             <h4>{{art.description}}</h4>
             <li class="list-group-item">Price: ${{art.price}}</li>
             <li class="list-group-item">Quantity: {{art.quantity}}</li>
+            <button type="button" ng-click="addToSL" name="button">Add to Shopping List</button>
         </div>
-    </a>
+    </div>
 </div>
 <!-- End Item Template -->
