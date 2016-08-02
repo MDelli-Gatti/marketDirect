@@ -9,6 +9,10 @@ module.exports = function (app) {
        $scope.arts = art.data;
      });
 
+     $scope.addtoSL = function(target){
+     console.log(target)
+     service.borrowBook(target)
+   }
     }]);
 }
 
@@ -602,7 +606,7 @@ module.exports = function(app) {
 
 },{}],17:[function(require,module,exports){
 module.exports=function(app){
-app.factory('ShoppinglistService', ['$http', function ($http) {
+app.factory('shoppingListService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {

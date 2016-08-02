@@ -383,4 +383,5 @@ footer {
   visibility: hidden; }
 
 .desc_ImageOverlay:hover .desc button {
-  color: black; }
+  color: black;
+  border-radius: 10px; }

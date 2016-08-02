@@ -1,5 +1,5 @@
 module.exports=function(app){
-app.factory('ShoppinglistService', ['$http', function ($http) {
+app.factory('shoppingListService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
@@ -18,25 +18,25 @@ app.factory('ShoppinglistService', ['$http', function ($http) {
         //
         //     return promise;
         // },
-        // borrowBook: function (target) {
-        //  console.log("borrowing diz")
-        //  $http({
-        //    method: "POST",
-        //    url: "http://10.1.10.215:7000/library/borrow/" + target.id
-        //  }).then(function(response){
-        //    console.log(response)
-        //    angular.copy(response.data.books,allBooks);
-        //
-        //  })
+        postToSL: function (target) {
+         console.log("borrowing diz")
+         $http({
+           method: "POST",
+           url: "add-shopping-list-item" + target.id
+         }).then(function(response){
+           console.log(response)
+           angular.copy(response.data.books,allBooks);
 
-        // /* POST request to update one book */
-        // borrowBook: function (book) {
-        //
-        // },
-        // /* POST request to update one book */
-        // returnBook: function (book) {
-        //
-        // },
+         })
+
+        /* POST request to update one book */
+        borrowBook: function (book) {
+
+        },
+        /* POST request to update one book */
+        returnBook: function (book) {
+
+        },
     };
 }]);
 }
