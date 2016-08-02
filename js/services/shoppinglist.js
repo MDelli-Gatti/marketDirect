@@ -18,14 +18,14 @@ app.factory('shoppingListService', ['$http', function ($http) {
         //
         //     return promise;
         // },
-        postToSL: function (Item) {
-         console.log("borrowing diz")
+        postToSL: function (item) {
+         console.log("post to SL string", item)
          $http({
            method: "POST",
-           url: "add-shopping-list-item" + Item.id
+           url: "add-shopping-list-item/" + item.id
          }).then(function(response){
            console.log(response)
-           angular.copy(response.data.books,allBooks);
+          //  angular.copy(response.data.books,allBooks);
 
          })
 

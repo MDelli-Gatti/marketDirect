@@ -13,9 +13,9 @@ module.exports = function (app) {
             //  var index = $scope.art.indexOf(ShopItem);
             //  $scope.art.splice(index, 1);
          },
-      $scope.addtoSL = function(Item){
-      console.log(Item);
-      shoppingListService.postToSL(Item);
+      $scope.addtoSL = function(item){
+      console.log("add to SL is working", item);
+      shoppingListService.postToSL(item);
     };
 
 
