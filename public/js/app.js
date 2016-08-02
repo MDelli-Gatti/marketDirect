@@ -168,12 +168,12 @@ module.exports = function(app) {
 
 },{}],11:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ShoppinglistController', ['$scope', '$http', '$location','ShoppinglistService', function ($scope, $http, $location, ShoppinglistService) {
-  // console.log("hey bro whats up?")
-      //  ShoppinglistService.getSLItems().then(function(items){
-      //    console.log(items.data);
-      //    $scope.ShopItems = items.data;
-      //  });
+    app.controller('ShoppinglistController', ['$scope', '$http', '$location','shoppingListService', function ($scope, $http, $location, shoppingListService) {
+  console.log("hey bro whats up?")
+       shoppingListService.getSLItems().then(function(items){
+         console.log(items.data);
+         $scope.ShopItems = items.data;
+       });
     }]);
 
 
@@ -526,11 +526,11 @@ module.exports = function(app) {
 
                     var promise = $http({
                         method: 'POST',
-                        url: 'add-shopping-list-item/' + Shopitem,
+                        url: 'add-shopping-list-item/' + Shopitem.id,
 
                     }).then(function(res) {
                       console.log(response)
-                    angular.copy(response.data.Shopitem.id);
+                    angular.copy(response.data.Shopitem);
                     });
                     // return promise;
                 },
@@ -579,21 +579,21 @@ app.factory('shoppingListService', ['$http', function ($http) {
     let shoppinglistItems = [];
 
     return {
-        /* GET request for book list */
-        // getSLItems: function () {
-        //   var promise = $http({
-        //         method: 'GET',
-        //         url: 'get-items'
-        //     }).success(function (response) {
-        //         console.log(response);
-        //         return response;
-        //         // angular.copy(response., slItems);
-        //     }).error(function (response) {
-        //        return {"status": false};
-        //     });
-        //
-        //     return promise;
-        // },
+        // /* GET request for book list */
+            getSLItems: function () {
+              var promise = $http({
+                    method: 'GET',
+                    url: 'get-items'
+                }).success(function (response) {
+                    console.log(response);
+                    return response;
+                    // angular.copy(response., slItems);
+                }).error(function (response) {
+                   return {"status": false};
+                });
+
+                 return promise;
+            },
         postToSL: function (item) {
          console.log("post to SL string", item)
          $http({
