@@ -34,6 +34,7 @@ public class User {
         this.username = username;
         this.password = password;
         this.isVendor = isVendor;
+        this.setShoppingList(new ArrayList<>());
     }
 
     public int getId() {

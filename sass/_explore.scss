@@ -59,6 +59,11 @@ margin-left: 44%;
   width: 53%;
   position: relative;
   top: -75px;
+  -webkit-animation: fadein 3s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 3s; /* Firefox < 16 */
+      -ms-animation: fadein 3s; /* Internet Explorer */
+       -o-animation: fadein 3s; /* Opera < 12.1 */
+          animation: fadein 4s;
 }
 
 .artText{
@@ -80,6 +85,11 @@ right: -3%;
       filter: grayscale(100%);
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
+  -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+     -moz-animation: fadein 4s; /* Firefox < 16 */
+      -ms-animation: fadein 4s; /* Internet Explorer */
+       -o-animation: fadein 4s; /* Opera < 12.1 */
+          animation: fadein 4s;
 
 }
 .artbox:hover{
@@ -103,6 +113,11 @@ right: -3%;
       -webkit-filter: grayscale(100%);
       filter: grayscale(100%);
       margin-left: 55px;
+      -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+         -moz-animation: fadein 4s; /* Firefox < 16 */
+          -ms-animation: fadein 4s; /* Internet Explorer */
+           -o-animation: fadein 4s; /* Opera < 12.1 */
+              animation: fadein 4s;
 
 }
 
@@ -130,6 +145,11 @@ filter: grayscale(100%);
 -webkit-filter: grayscale(100%);
 filter: grayscale(100%);
 margin-left: 55px;
+-webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+   -moz-animation: fadein 4s; /* Firefox < 16 */
+    -ms-animation: fadein 4s; /* Internet Explorer */
+     -o-animation: fadein 4s; /* Opera < 12.1 */
+        animation: fadein 4s;
 }
 .handcraftbox:hover{
   filter: grayscale(0%);
@@ -153,6 +173,11 @@ margin-left: 55px;
     -webkit-filter: grayscale(100%);
     filter: grayscale(100%);
     margin-left: 55px;
+    -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 4s; /* Firefox < 16 */
+        -ms-animation: fadein 4s; /* Internet Explorer */
+         -o-animation: fadein 4s; /* Opera < 12.1 */
+            animation: fadein 4s;
 }
 .miscbox:hover{
   filter: grayscale(0%);
@@ -170,7 +195,55 @@ margin-left: 55px;
   width: 315px;
 float: right;
 margin-top: 7%;
+
+    -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
+       -moz-animation: fadein 4s; /* Firefox < 16 */
+        -ms-animation: fadein 4s; /* Internet Explorer */
+         -o-animation: fadein 4s; /* Opera < 12.1 */
+            animation: fadein 4s;
 }
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox < 16 */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Internet Explorer */
+@-ms-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Opera < 12.1 */
+@-o-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -315,38 +315,7 @@ function myFunction() {
 
 
 
-var video, canvas, msg;
-       var load = function () {
-           video  = document.getElementById('video');
-           canvas = document.getElementById('canvas');
-           msg    = document.getElementById('error');
-           if( navigator.getUserMedia ) {
-               video.onclick = function () {
-                   var context = canvas.getContext("2d");
-                   context.drawImage(video, 0, 0, 240, 320);
-                   var image = {"demo" : {
-                       "type"  : "device",
-                       "image" : canvas.toDataURL("image/png")
-                   }};
-               };
 
-               var success = function ( stream ) {
-                   video.src = stream;
-               };
-
-               var error = function ( err ) {
-                   msg.innerHTML = "Error: " + err.code;
-               };
-
-               navigator.getUserMedia('video', success, error);
-
-           } else {
-               msg.innerHTML = "Native web camera not supported :(";
-           }
-
-       };
-
-       window.addEventListener('DOMContentLoaded', load, false);
 
 
 
@@ -605,6 +574,7 @@ module.exports = function(app) {
 }
 
 },{}],17:[function(require,module,exports){
+<<<<<<< HEAD
 module.exports=function(app){
 app.factory('shoppingListService', ['$http', function ($http) {
     let shoppinglistItems = [];
@@ -648,5 +618,50 @@ app.factory('shoppingListService', ['$http', function ($http) {
 }]);
 }
 // testing
+=======
+module.exports = function(app) {
+        app.factory('ShoppinglistService', ['$http',
+                    function($http) {
+                        let shoppinglistItems = [];
+                        return {
+                            /* GET request for book list */
+                            getSLItems: function() {
+                                var promise = $http({
+                                    method: 'GET',
+                                    url: 'get-items'
+                                }).success(function(response) {
+                                    console.log(response);
+                                    return response;
+                                    // angular.copy(response., slItems);
+                                }).error(function(response) {
+                                    return {
+                                        "status": false
+                                    };
+                                });
+                                return promise;
+                            },
+                            // borrowBook: function(target) {
+                            //     console.log("borrowing diz")
+                            //     $http({
+                            //             method: "POST",
+                            //             url: "http://10.1.10.215:7000/library/borrow/" +
+                            //                 target.id
+                            //         }).then(function(response) {
+                            //             console.log(response)
+                            //             angular.copy(response.data.books,
+                            //                 allBooks);
+                            //         })
+                                    /* POST request to update one book */
+                                    //  borrowBook: function (book) {
+                                    //  },
+                                    /* POST request to update one book */
+                                    //  returnBook: function (book) {
+                                    //  },
+                                    // }
+                        };
+                            }]);
+                };
+                // testing
+>>>>>>> f45ba3dfd027de15145778dd5da5d06a0e5da719
 
 },{}]},{},[12])
