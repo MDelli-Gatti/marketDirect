@@ -61,19 +61,8 @@ module.exports = function (app) {
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
             loginService.userLogin($scope.name, $scope.password, "/explore");
-            $location.path('/explore');
 
-            app.directive('iframeDirective', ['$sce', function($sce) {
-                 return {
-                   restrict: 'E',
-                   template: '<iframe src="{{ trustedUrl }}" frameborder="0" allowfullscreen></iframe>',
-                   link: function(scope) {
-                     scope.trustedUrl = $sce.trustAsResourceUrl("");
-                   }
-                 }
-               }]);
-
-
+            // $location.path('/explore');
         };
     }]);
 }
@@ -281,6 +270,20 @@ require('./services/newUser.js')(app);
 require('./services/shoppinglist.js')(app);
 require('./services/newItem.js')(app);
 require('./services/getItems.js')(app);
+
+
+document.getElementById('picVal').addEventListener('change', readURL, true);
+function readURL(){
+    var file = document.getElementById("picVal").files[0];
+    var reader = new FileReader();
+    reader.onloadend = function(){
+        document.getElementById('itemPicture').style.backgroundImage = "url(" + reader.result + ")";
+    }
+    if(file){
+        reader.readAsDataURL(file);
+    }else{
+    }
+}
 
 
 

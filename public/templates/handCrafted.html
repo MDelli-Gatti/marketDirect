@@ -1,71 +1,41 @@
-<<<<<<< HEAD
-<nav  id = "topNav" class="navbar navbar-default" role="navigation">
-<div class="topNavcontainer">
 
-<!-- Brand and toggle get grouped for better mobile display -->
-<div class="navbar-header">
-  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-brand-centered">
-    <span class="sr-only">Toggle navigation</span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-    <span class="icon-bar"></span>
-  </button>
-  <div class="navbar-brand navbar-brand-centered"></div>
+<!-- Navigation -->
+<nav id = "nav" class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+   <div class="container">
+       <!-- Brand and toggle get grouped for better mobile display -->
+       <div class = "topnav"class="navbar-header">
+           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+               <span class="sr-only">Toggle navigation</span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+               <span class="icon-bar"></span>
+           </button>
+           <a class="navbar-brand" href="#">
+           </a>
+       </div>
+       <img id = "navicon" src="/images/navbaricon.svg" alt="" />
 
-</div>
-
-<!-- Collect the nav links, forms, and other content for toggling -->
-<div class="collapse navbar-collapse" id="navbar-brand-centered">
-  <ul class="nav navbar-nav">
-    <a href="#explore"><img id = "navIcon"src="/images/navbaricon.svg" alt="" /></a>
-
-  </ul>
-  <ul class="nav navbar-nav navbar-right">
-
-    <li class="dropdown">
-          <!-- <a href="#login" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a> -->
-          <!-- <ul class="dropdown-menu" role="menu"> -->
-          <li><a href="#profile">Profile</a></li>
-          <li><a href="#shoppinglist">Shopping List</a></li>
-          <li><a href="#explore">Explore</a></li>
-          <!-- <li><a href="#inventory">Inventory</a></li> -->
-          <li><a href="#login">Logout</a></li>
-          <!-- </ul> -->
-        </li>
-  </ul>
-</div><!-- /.navbar-collapse -->
-</div><!-- /.container-fluid -->
+       <!-- Collect the nav links, forms, and other content for toggling -->
+       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+           <ul class="nav navbar-nav">
+               <li>
+                   <a href="#profile">profile</a>
+               </li>
+               <li>
+                   <a href="#explore">explore</a>
+               </li>
+               <li>
+                   <a href="#shoppinglist">shopping list</a>
+               </li>
+               <li>
+                   <a href="#login">logout</a>
+               </li>
+           </ul>
+       </div>
+   </div>
 </nav>
 
 
-
-
-
-  <div class="col-lg-12">
-                  <h1 class="page-header">hnadcrafted</h1>
-              </div>
-
-              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                  <a class="thumbnail" href="#">
-                      <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                  </a>
-              </div>
-              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                  <a class="thumbnail" href="#">
-                      <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                  </a>
-              </div>
-              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                  <a class="thumbnail" href="#">
-                      <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                  </a>
-              </div>
-              <div class="col-lg-3 col-md-4 col-xs-6 thumb">
-                  <a class="thumbnail" href="#">
-                      <img class="img-responsive" src="http://placehold.it/400x300" alt="">
-                  </a>
-              </div>
-=======
 <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="handcraft in handcrafts">
 
     <li class="list-group-item">{{handcraft.category}}</li>
@@ -74,4 +44,3 @@
     <!-- <button  type="button" class="btn btn-warning btn-circle"><i class="glyphicon glyphicon-remove"></i></button> -->
 
 </div>
->>>>>>> 0382a8916bcff071d8ca1398631c96bb6d3327d3
