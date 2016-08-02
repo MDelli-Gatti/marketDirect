@@ -61,6 +61,7 @@ module.exports = function (app) {
         $scope.login = function () {
             console.log(`${$scope.name} in as we speak`);
             loginService.userLogin($scope.name, $scope.password, "/explore");
+
             // $location.path('/explore');
         };
     }]);
@@ -172,7 +173,7 @@ module.exports = function (app) {
 }
 
 },{}],12:[function(require,module,exports){
-let app = angular.module('MarketApp', ['ngRoute', 'MarketControllers', 'MarketServices', 'MarketDirectives']);
+let app = angular.module('MarketApp', ['ngRoute','MarketControllers', 'MarketServices', 'MarketDirectives']);
 angular.module('MarketControllers', []);       // create empty module
 angular.module('MarketServices', []);          // create empty module
 angular.module('MarketDirectives', []);
@@ -342,6 +343,18 @@ var video, canvas, msg;
        };
 
        window.addEventListener('DOMContentLoaded', load, false);
+
+
+
+
+
+
+
+
+//
+// myVideo = {
+//   mp4: public/.mp4,
+// }
 
 },{"./controllers/ArtController.js":1,"./controllers/CraftedController.js":2,"./controllers/ExploreController.js":3,"./controllers/InventoryController.js":4,"./controllers/LoginController.js":5,"./controllers/MiscController.js":6,"./controllers/NewitemController.js":7,"./controllers/NewuserController.js":8,"./controllers/ProduceController.js":9,"./controllers/ProfileController.js":10,"./controllers/ShoppinglistController.js":11,"./services/getItems.js":13,"./services/login.js":14,"./services/newItem.js":15,"./services/newUser.js":16,"./services/shoppinglist.js":17}],13:[function(require,module,exports){
 module.exports = function(app) {

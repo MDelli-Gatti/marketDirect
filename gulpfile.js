@@ -36,9 +36,11 @@ gulp.task('js', function(){
    .pipe(gulp.dest('./public/js'));
 });
 
+
 gulp.task('images', function(){
   gulp.src('./images')
   gulp.src('./images/*.jpg')
+  gulp.src('./images/explorebackground.jpg')
   gulp.src('./images/art.jpg')
   gulp.src('./images/handcrafted.jpg')
   gulp.src('./images/*.svg')
