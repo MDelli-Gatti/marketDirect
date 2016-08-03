@@ -7,7 +7,7 @@ module.exports = function(app) {
             getSLItems: function() {
                 var promise = $http({
                     method: 'GET',
-                    url: 'get-items'
+                    url: 'get-shopping-list'
                 }).success(function(response) {
                     console.log(response);
                     return response;
@@ -41,13 +41,13 @@ module.exports = function(app) {
                 // },
             },
             DeleteSLItems: function(ShopItem) {
-                console.log(ShopItem);
-                var gone = {
-                    id: ShopItem.id,
-                    name: ShopItem.name,
-                    description: ShopItem.description,
-                    category: ShopItem.category,
-                }
+                console.log("this is starting to look great");
+                // var gone = {
+                //     id: ShopItem.id,
+                //     name: ShopItem.name,
+                //     description: ShopItem.description,
+                //     category: ShopItem.category,
+                // }
                 var itemId = ShopItem.id;
                 console.log("removing from SL:", itemId)
                 return $http({

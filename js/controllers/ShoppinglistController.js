@@ -10,8 +10,8 @@ module.exports = function(app) {
         $scope.check = function(ShopItem) {
             shoppingListService.DeleteSLItems(ShopItem)
             console.log(ShopItem);
-            var index = $scope.ShopItem.indexOf(ShopItem);
-            $scope.ShopItem.splice(index, 1);
+            // var index = $scope.ShopItem.indexOf(ShopItem);
+            // $scope.ShopItem.splice(index, 1);
         }
     }]);
 
