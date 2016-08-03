@@ -179,8 +179,8 @@ module.exports = function(app) {
         $scope.check = function(ShopItem) {
             shoppingListService.DeleteSLItems(ShopItem)
             console.log(ShopItem);
-            var index = $scope.ShopItem.indexOf(ShopItem);
-            $scope.ShopItem.splice(index, 1);
+            // var index = $scope.ShopItem.indexOf(ShopItem);
+            // $scope.ShopItem.splice(index, 1);
         }
     }]);
 
@@ -591,7 +591,7 @@ module.exports = function(app) {
             getSLItems: function() {
                 var promise = $http({
                     method: 'GET',
-                    url: 'get-items'
+                    url: 'get-shopping-list'
                 }).success(function(response) {
                     console.log(response);
                     return response;
@@ -625,13 +625,13 @@ module.exports = function(app) {
                 // },
             },
             DeleteSLItems: function(ShopItem) {
-                console.log(ShopItem);
-                var gone = {
-                    id: ShopItem.id,
-                    name: ShopItem.name,
-                    description: ShopItem.description,
-                    category: ShopItem.category,
-                }
+                console.log("this is starting to look great");
+                // var gone = {
+                //     id: ShopItem.id,
+                //     name: ShopItem.name,
+                //     description: ShopItem.description,
+                //     category: ShopItem.category,
+                // }
                 var itemId = ShopItem.id;
                 console.log("removing from SL:", itemId)
                 return $http({
