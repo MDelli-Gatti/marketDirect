@@ -522,7 +522,8 @@ footer {
 .desc_ImageOverlay:hover .desc {
   transform: translateY(0%);
   -webkit-transform: translateY(0%);
-  background: rgba(255, 255, 255, 0.5); }
+  background: rgba(255, 255, 255, 0.5);
+  height: 50%; }
 
 .desc_ImageOverlay:hover .desc li {
   opacity: 1;
