@@ -46,7 +46,7 @@ module.exports = function (app) {
     };
 
     }]);
-}
+};
 
 },{}],3:[function(require,module,exports){
 module.exports = function (app) {
@@ -91,7 +91,7 @@ module.exports = function (app) {
 
 },{}],6:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('MiscController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
+    app.controller('MiscController', ['$scope', '$http', '$location', 'newItemService', 'shoppingListService', function ($scope, $http, $location, newItemService, shoppingListService) {
      console.log("this is the misc page");
      $scope.miscs = newItemService.getMISCSitems();
 
@@ -111,7 +111,7 @@ module.exports = function (app) {
     };
 
     }]);
-}
+};
 
 },{}],7:[function(require,module,exports){
 module.exports = function (app) {
@@ -138,7 +138,7 @@ module.exports = function (app) {
 
 },{}],9:[function(require,module,exports){
 module.exports = function (app) {
-    app.controller('ProduceController', ['$scope', '$http', '$location', 'newItemService', function ($scope, $http, $location, newItemService) {
+    app.controller('ProduceController', ['$scope', '$http', '$location', 'newItemService', 'shoppingListService', function ($scope, $http, $location, newItemService, shoppingListService) {
      console.log("this is the produce page");
      $scope.produces = newItemService.getPRODUCEitems();
 
@@ -158,7 +158,7 @@ module.exports = function (app) {
     };
 
     }]);
-}
+};
 
 },{}],10:[function(require,module,exports){
 module.exports = function(app) {
