@@ -561,7 +561,7 @@ public class MarketDirectController {
     }
 
     @RequestMapping(path = "/remove-shopping-list-item/{id}", method = RequestMethod.POST)
-    public void removeShoppingListItem(HttpSession session, @PathVariable ("id") int id) throws Exception {
+    public void removeShoppingListItem(HttpSession session,HttpServletResponse response, @PathVariable ("id") int id) throws Exception {
         Item i = items.findOne(id);
         String username = (String) session.getAttribute("username");
         if (username == null) {

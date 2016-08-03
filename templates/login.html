@@ -9,13 +9,13 @@
 
 
     <img class = "logo" src="./images/marletdirectlogo.svg" alt="" />
-		<input type="text" class="form-control" ng-model="name" placeholder="somebody@example.com" required="" autofocus="">
-		<input type="password" class="form-control" ng-model="password" placeholder="Password" required="">
-		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login() ; menu=!menu">
+		<input id = "email"type="text" class="form-control" ng-model="name" placeholder="somebody@example.com" required="" autofocus="">
+		<input id = "password"type="password" class="form-control" ng-model="password" placeholder="Password" required="">
+		<button id = "signIn"class="btn btn-lg btn-primary btn-block" type="submit" ng-click="login() ; menu=!menu">
 			Sign In
 		</button>
-    <button class="btn btn-lg btn-primary btn-block" type="button" name="button"><a href="#/newuser" id = "newUser">
-      New User? Click here!</a>
+    <button id = "newUser" class="btn btn-lg btn-primary btn-block" type="submit" name="button">New User? Click here!<a href="#/newuser">
+      </a>
     </button>
 
 	</form>
