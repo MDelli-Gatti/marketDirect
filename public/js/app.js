@@ -167,13 +167,21 @@ module.exports = function(app) {
 };
 
 },{}],11:[function(require,module,exports){
-module.exports = function (app) {
-    app.controller('ShoppinglistController', ['$scope', '$http', '$location','shoppingListService', function ($scope, $http, $location, shoppingListService) {
-  console.log("hey bro whats up?")
-       shoppingListService.getSLItems().then(function(items){
-         console.log(items.data);
-         $scope.ShopItems = items.data;
-       });
+module.exports = function(app) {
+    app.controller('ShoppinglistController', ['$scope', '$http', '$location', 'shoppingListService', function($scope, $http, $location, shoppingListService) {
+        $scope.ShopItems = '';
+
+        console.log("Shopping List Controller is working")
+        shoppingListService.getSLItems().then(function(items) {
+            console.log(items.data);
+            $scope.ShopItems = items.data;
+        });
+        $scope.check = function(ShopItem) {
+            shoppingListService.DeleteSLItems(ShopItem)
+            console.log(ShopItem);
+            // var index = $scope.ShopItem.indexOf(ShopItem);
+            // $scope.ShopItem.splice(index, 1);
+        }
     }]);
 
 
@@ -574,48 +582,73 @@ module.exports = function(app) {
 }
 
 },{}],17:[function(require,module,exports){
-module.exports=function(app){
-app.factory('shoppingListService', ['$http', function ($http) {
-    let shoppinglistItems = [];
+module.exports = function(app) {
+    app.factory('shoppingListService', ['$http', function($http) {
+        let shoppinglistItems = [];
 
-    return {
-        // /* GET request for book list */
-            getSLItems: function () {
-              var promise = $http({
+        return {
+            // /* GET request for book list */
+            getSLItems: function() {
+                var promise = $http({
                     method: 'GET',
-                    url: 'get-items'
-                }).success(function (response) {
+                    url: 'get-shopping-list'
+                }).success(function(response) {
                     console.log(response);
                     return response;
                     // angular.copy(response., slItems);
-                }).error(function (response) {
-                   return {"status": false};
+                }).error(function(response) {
+                    return {
+                        "status": false
+                    };
                 });
 
-                 return promise;
+                return promise;
             },
-        postToSL: function (item) {
-         console.log("post to SL string", item)
-         $http({
-           method: "POST",
-           url: "add-shopping-list-item/" + item.id
-         }).then(function(response){
-           console.log(response)
-          //  angular.copy(response.data.books,allBooks);
+            postToSL: function(item) {
+                console.log("post to SL string", item)
+                $http({
+                    method: "POST",
+                    url: "add-shopping-list-item/" + item.id
+                }).then(function(response) {
+                    console.log(response)
+                        //  angular.copy(response.data.books,allBooks);
 
-         })
+                })
 
-        /* POST request to update one book */
-        // borrowBook: function (book) {
-        //
-        // },
-        /* POST request to update one book */
-        // returnBook: function (book) {
-        //
-        // },
-        }
-    };
-}]);
+                /* POST request to update one book */
+                // borrowBook: function (book) {
+                //
+                // },
+                /* POST request to update one book */
+                // returnBook: function (book) {
+                //
+                // },
+            },
+            DeleteSLItems: function(ShopItem) {
+                console.log("this is starting to look great");
+                // var gone = {
+                //     id: ShopItem.id,
+                //     name: ShopItem.name,
+                //     description: ShopItem.description,
+                //     category: ShopItem.category,
+                // }
+                var itemId = ShopItem.id;
+                console.log("removing from SL:", itemId)
+                return $http({
+                    method: 'POST',
+                    url: 'remove-shopping-list-item/' + itemId
+                    // data: {
+                    //     id: itemId
+                    // }
+                }).then(function(res) {
+                    console.log("removing from SL pt2");
+                }).catch(function(response) {
+                    console.log('should be completely removed',
+                        response);
+                })
+            },
+        };
+    }]);
 };
 // testing
 
