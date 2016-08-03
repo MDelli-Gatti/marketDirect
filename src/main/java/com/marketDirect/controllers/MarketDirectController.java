@@ -577,7 +577,7 @@ public class MarketDirectController {
             throw new Exception("User not in database!");
         }
         List<Item> sl = user.getShoppingList();
-        sl.remove(id);
+        sl.remove(i);
         user.setShoppingList(sl);
         users.save(user);
     }
