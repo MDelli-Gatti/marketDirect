@@ -37,13 +37,14 @@
 
 <!-- Item template -->
   <div class="col-lg-3 col-md-4 col-xs-6 thumb" ng-repeat="misc in misc">
-      <a href="#" class="desc_ImageOverlay" style="background-image: url(/files/{{misc.filename}});">
+      <div class="desc_ImageOverlay" style="background-image: url(/files/{{misc.filename}});">
           <div class="desc">
               <h2>{{misc.name}}</h2>
               <h4>{{misc.description}}</h4>
               <li class="list-group-item">Price: ${{misc.price}}</li>
               <li class="list-group-item">Quantity: {{misc.quantity}}</li>
+              <button type="button" ng-click="addtoSL(misc)" name="button">Add to Shopping List</button>
           </div>
-      </a>
+      </div>
   </div>
 <!-- End Item template -->
