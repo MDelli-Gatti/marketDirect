@@ -641,6 +641,7 @@ module.exports = function(app) {
                     //     id: itemId
                     // }
                 }).then(function(res) {
+                    window.location.reload();
                     console.log("removing from SL pt2");
                 }).catch(function(response) {
                     console.log('should be completely removed',
