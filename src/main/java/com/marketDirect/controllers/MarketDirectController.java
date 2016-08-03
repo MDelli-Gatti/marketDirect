@@ -184,6 +184,9 @@ public class MarketDirectController {
         if (user != vendor.getUser()){
             throw new Exception("vendor creator and logged in user do not match");
         }
+        if (file.getOriginalFilename().contains(" ")){
+            throw new Exception("File name may not contain spaces");
+        }
 
         File f = new File("public/files/" + vendor.getFileName());
         f.delete();
@@ -238,7 +241,9 @@ public class MarketDirectController {
         else if (vendor != item.getVendor()){
             throw new Exception("Logged in user can not edit this!");
         }
-
+        if (file.getOriginalFilename().contains(" ")){
+            throw new Exception("File name may not contain spaces");
+        }
         File dir = new File("public/files");
         dir.mkdirs();
 
@@ -411,6 +416,9 @@ public class MarketDirectController {
         if (!file.getContentType().contains("image")){
                 throw new Exception("Only images allowed!");
             }
+        if (file.getOriginalFilename().contains(" ")){
+            throw new Exception("File name may not contain spaces");
+        }
 
         File f = new File("public/files/" + item.getFilename());
         f.delete();
