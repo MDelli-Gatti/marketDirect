@@ -74,22 +74,22 @@ margin-left: 44%;
 
 .artbox{
   display: inline-block;
-  background-size: 142%;
-background-image: url("/images/divbox.png");
-background-repeat: no-repeat;
-width: 41%;
-height: 416px;
-position: relative;
-right: -3%;
-    top: -198px;
+      background-size: 137%;
+      background-image: url("/images/divbox.png");
+      background-repeat: no-repeat;
+      width: 42%;
+      height: 416px;
+      position: relative;
+      right: -3%;
+      top: -198px;
       filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
-  filter: grayscale(100%);
-  -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
-     -moz-animation: fadein 4s; /* Firefox < 16 */
-      -ms-animation: fadein 4s; /* Internet Explorer */
-       -o-animation: fadein 4s; /* Opera < 12.1 */
-          animation: fadein 4s;
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+      -webkit-animation: fadein 4s;
+      -moz-animation: fadein 4s;
+      -ms-animation: fadein 4s;
+      -o-animation: fadein 4s;
+      animation: fadein 4s;
 
 }
 .artbox:hover{
@@ -100,24 +100,24 @@ right: -3%;
 
 .producebox{
   display: inline-block;
-      background-size: 138%;
-      background-image: url("/images/producebox.png");
-      background-position-x: -22px;
-      background-repeat: no-repeat;
-      width: 36%;
-      height: 416px;
-      position: relative;
-      right: -3%;
-      top: -198px;
-      filter: grayscale(100%);
-      -webkit-filter: grayscale(100%);
-      filter: grayscale(100%);
-      margin-left: 55px;
-      -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
-         -moz-animation: fadein 4s; /* Firefox < 16 */
-          -ms-animation: fadein 4s; /* Internet Explorer */
-           -o-animation: fadein 4s; /* Opera < 12.1 */
-              animation: fadein 4s;
+  background-size: 124%;
+  background-image: url("/images/producebox.png");
+  background-position-x: -22px;
+  background-repeat: no-repeat;
+  width: 36%;
+  height: 416px;
+  position: relative;
+  right: -3%;
+  top: -198px;
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+  filter: grayscale(100%);
+  margin-left: 55px;
+  -webkit-animation: fadein 4s;
+  -moz-animation: fadein 4s;
+  -ms-animation: fadein 4s;
+  -o-animation: fadein 4s;
+  animation: fadein 4s;
 
 }
 
@@ -159,25 +159,25 @@ margin-left: 69px;
 
 .miscbox{
   margin-top: 58px;
-    display: inline-block;
-    background-size: 100%;
-    background-image: url("/images/miscbox.png");
-    background-position-x: -20px;
-    background-repeat: no-repeat;
-    width: 36%;
-    height: 416px;
-    position: relative;
-    right: -11%;
-    top: -198px;
-    filter: grayscale(100%);
-    -webkit-filter: grayscale(100%);
-    filter: grayscale(100%);
-    margin-left: 55px;
-    -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */
-       -moz-animation: fadein 4s; /* Firefox < 16 */
-        -ms-animation: fadein 4s; /* Internet Explorer */
-         -o-animation: fadein 4s; /* Opera < 12.1 */
-            animation: fadein 4s;
+      display: inline-block;
+      background-size: 98%;
+      background-image: url("/images/miscbox.png");
+      background-position-x: -20px;
+      background-repeat: no-repeat;
+      width: 33%;
+      height: 416px;
+      position: relative;
+      right: -13%;
+      top: -198px;
+      filter: grayscale(100%);
+      -webkit-filter: grayscale(100%);
+      filter: grayscale(100%);
+      margin-left: 55px;
+      -webkit-animation: fadein 4s;
+      -moz-animation: fadein 4s;
+      -ms-animation: fadein 4s;
+      -o-animation: fadein 4s;
+      animation: fadein 4s;
 }
 .miscbox:hover{
   filter: grayscale(0%);
@@ -192,8 +192,8 @@ margin-left: 69px;
 //   border: 2px solid white;
 // }
 #basket{
-  width: 315px;
-float: right;
+    width: 40%;
+    float: right;
 margin-top: 7%;
 
     -webkit-animation: fadein 4s; /* Safari, Chrome and Opera > 12.1 */

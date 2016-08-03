@@ -22,7 +22,7 @@ p {
   bottom: -2%; }
 
 .logo {
-  width: 253px;
+  width: 430px;
   -webkit-flex-wrap: wrap; }
 
 .blah {
@@ -31,13 +31,26 @@ p {
 .form-signin {
   max-width: 280px;
   padding: 15px;
-  margin: 0 auto; }
+  margin: 0 auto;
+  position: relative;
+  left: -4%;
+  bottom: -10%; }
 
 .bottomButton {
   background-color: blue; }
 
 #newUser {
-  color: white; }
+  color: white;
+  width: 161%; }
+
+#signIn {
+  width: 161%; }
+
+#password {
+  width: 161%; }
+
+#email {
+  width: 161%; }
 
 #nav {
   background-color: #A1B38E;
@@ -108,10 +121,10 @@ body {
 
 .artbox {
   display: inline-block;
-  background-size: 142%;
+  background-size: 137%;
   background-image: url("/images/divbox.png");
   background-repeat: no-repeat;
-  width: 41%;
+  width: 42%;
   height: 416px;
   position: relative;
   right: -3%;
@@ -120,13 +133,9 @@ body {
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
   -webkit-animation: fadein 4s;
-  /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 4s;
-  /* Firefox < 16 */
   -ms-animation: fadein 4s;
-  /* Internet Explorer */
   -o-animation: fadein 4s;
-  /* Opera < 12.1 */
   animation: fadein 4s; }
 
 .artbox:hover {
@@ -136,7 +145,7 @@ body {
 
 .producebox {
   display: inline-block;
-  background-size: 138%;
+  background-size: 124%;
   background-image: url("/images/producebox.png");
   background-position-x: -22px;
   background-repeat: no-repeat;
@@ -150,13 +159,9 @@ body {
   filter: grayscale(100%);
   margin-left: 55px;
   -webkit-animation: fadein 4s;
-  /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 4s;
-  /* Firefox < 16 */
   -ms-animation: fadein 4s;
-  /* Internet Explorer */
   -o-animation: fadein 4s;
-  /* Opera < 12.1 */
   animation: fadein 4s; }
 
 .producebox:hover {
@@ -199,27 +204,23 @@ body {
 .miscbox {
   margin-top: 58px;
   display: inline-block;
-  background-size: 100%;
+  background-size: 98%;
   background-image: url("/images/miscbox.png");
   background-position-x: -20px;
   background-repeat: no-repeat;
-  width: 36%;
+  width: 33%;
   height: 416px;
   position: relative;
-  right: -11%;
+  right: -13%;
   top: -198px;
   filter: grayscale(100%);
   -webkit-filter: grayscale(100%);
   filter: grayscale(100%);
   margin-left: 55px;
   -webkit-animation: fadein 4s;
-  /* Safari, Chrome and Opera > 12.1 */
   -moz-animation: fadein 4s;
-  /* Firefox < 16 */
   -ms-animation: fadein 4s;
-  /* Internet Explorer */
   -o-animation: fadein 4s;
-  /* Opera < 12.1 */
   animation: fadein 4s; }
 
 .miscbox:hover {
@@ -228,7 +229,7 @@ body {
   filter: grayscale(0%); }
 
 #basket {
-  width: 315px;
+  width: 40%;
   float: right;
   margin-top: 7%;
   -webkit-animation: fadein 4s;
@@ -530,3 +531,6 @@ footer {
 .desc_ImageOverlay:hover .desc button {
   color: black;
   border-radius: 10px; }
+
+.empty {
+  height: 114px; }

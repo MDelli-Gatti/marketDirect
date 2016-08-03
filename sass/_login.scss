@@ -22,8 +22,8 @@ font-family: 'Lato', sans-serif;
   bottom: -2%;
 }
 .logo{
-  width: 253px;
-      -webkit-flex-wrap: wrap;
+    width: 430px;
+   -webkit-flex-wrap: wrap;
 
 }
 .blah {
@@ -34,10 +34,24 @@ font-family: 'Lato', sans-serif;
     max-width: 280px;
     padding: 15px;
     margin: 0 auto;
+    position: relative;
+left: -4%;
+bottom: -10%;
   }
 .bottomButton{
   background-color: blue;
 }
 #newUser{
   color: white;
+  width: 161%;
+
+}
+#signIn{
+      width: 161%;
+}
+#password{
+      width: 161%;
+}
+#email {
+      width: 161%;
 }
