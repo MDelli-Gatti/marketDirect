@@ -167,13 +167,21 @@ module.exports = function(app) {
 };
 
 },{}],11:[function(require,module,exports){
-module.exports = function (app) {
-    app.controller('ShoppinglistController', ['$scope', '$http', '$location','shoppingListService', function ($scope, $http, $location, shoppingListService) {
-  console.log("hey bro whats up?")
-       shoppingListService.getSLItems().then(function(items){
-         console.log(items.data);
-         $scope.ShopItems = items.data;
-       });
+module.exports = function(app) {
+    app.controller('ShoppinglistController', ['$scope', '$http', '$location', 'shoppingListService', function($scope, $http, $location, shoppingListService) {
+        $scope.ShopItems = '';
+
+        console.log("Shopping List Controller is working")
+        shoppingListService.getSLItems().then(function(items) {
+            console.log(items.data);
+            $scope.ShopItems = items.data;
+        });
+        $scope.check = function(ShopItem) {
+            shoppingListService.DeleteSLItems(ShopItem)
+            console.log(ShopItem);
+            var index = $scope.ShopItem.indexOf(ShopItem);
+            $scope.ShopItem.splice(index, 1);
+        }
     }]);
 
 
@@ -615,7 +623,30 @@ module.exports = function(app) {
                 // returnBook: function (book) {
                 //
                 // },
-            }
+            },
+            DeleteSLItems: function(ShopItem) {
+                console.log(ShopItem);
+                var gone = {
+                    id: ShopItem.id,
+                    name: ShopItem.name,
+                    description: ShopItem.description,
+                    category: ShopItem.category,
+                }
+                var itemId = ShopItem.id;
+                console.log("removing from SL:", itemId)
+                return $http({
+                    method: 'POST',
+                    url: 'remove-shopping-list-item/' + itemId
+                    // data: {
+                    //     id: itemId
+                    // }
+                }).then(function(res) {
+                    console.log("removing from SL pt2");
+                }).catch(function(response) {
+                    console.log('should be completely removed',
+                        response);
+                })
+            },
         };
     }]);
 };
