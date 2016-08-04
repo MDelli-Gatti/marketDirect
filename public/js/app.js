@@ -489,6 +489,7 @@ module.exports = function(app) {
                             id: itemId
                         }
                     }).then(function(res) {
+                      window.location.reload();
                         console.log("phase two");
                     }).catch(function(response) {
                         console.log('the end of delete',
