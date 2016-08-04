@@ -533,8 +533,7 @@ footer {
   visibility: hidden; }
 
 .desc_ImageOverlay:hover .desc button {
-  color: black;
-  border-radius: 10px; }
+  color: black; }
 
 .empty {
   height: 114px; }
