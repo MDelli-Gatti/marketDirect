@@ -1,5 +1,8 @@
 Users : FarmerJohn
 password: "password1"
+site: Localhost:4321
+database: localhost 1337
+
 User login:
 route = POST, path = "/login" data = User object (contains String username and String password)
 
